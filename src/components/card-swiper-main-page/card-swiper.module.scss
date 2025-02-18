@@ -1,0 +1,31 @@
+.swiper__item {
+  margin: 0 auto;
+  width: 100%;
+  height: 601px;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  .swiper__content {
+    max-width: 1268px;
+    margin: 333px auto 0;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    h3 {
+      font-size: 56px;
+      font-weight: 400;
+      color: #ffffff;
+      span {
+        font-weight: 900;
+      }
+    }
+    p {
+      color: #ffffff;
+      width: 80%;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}
