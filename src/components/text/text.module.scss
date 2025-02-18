@@ -1,0 +1,25 @@
+$font-sizes: (
+  small: 12px,
+  base: 16px,
+  large: 20px,
+  xl: 24px
+);
+
+$font-weights: (
+  light: 300,
+  normal: 400,
+  medium: 500,
+  bold: 700
+);
+
+@each $size, $value in $font-sizes {
+  .text-#{$size} {
+    font-size: $value;
+  }
+}
+
+@each $weight, $value in $font-weights {
+  .font-#{$weight} {
+    font-weight: $value;
+  }
+}
