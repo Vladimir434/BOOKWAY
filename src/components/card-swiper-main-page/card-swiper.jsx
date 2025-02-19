@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
-import s from "./card-swiper.module.scss";
+import s from "./card-swiper.module.css";
 
-const CardSwiper = ({ img, title, titleSpan, subTitle }) => {
+const CardSwiper = ({ img }) => {
   return (
     <div className={s.swiper__item} style={{ backgroundImage: `url(${img})` }}>
-      <div className={s.swiper__content}>
-        <h3>{title} <br /><span>{titleSpan}</span></h3>
-        <p>{subTitle}</p>
+      <div className={s.swiper__ten}>
       </div>
     </div>
   );
