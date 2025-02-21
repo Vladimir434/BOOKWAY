@@ -11,6 +11,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CardSwiper from "../../card-swiper-main-page/card-swiper";
 import PromoCard from "../../promo-card/promo-card";
+import Footer from "../../footer/footer";
+import Reviews from "../../Reviews/reviews";
 
 const MainPage = () => {
   const images = [
@@ -131,6 +133,8 @@ const MainPage = () => {
           <button>Подробнее &gt;</button>
         </div>
       </div>
+      <Reviews/>
+      <Footer/>
     </main>
   );
 };
