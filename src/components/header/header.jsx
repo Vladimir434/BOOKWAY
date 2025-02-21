@@ -1,4 +1,4 @@
-import s from "./header.module.scss";
+import s from "./header.module.css";
 import Logo from "../../assets/icon/logo-header.svg";
 import Search from "../../assets/icon/search.svg";
 import UserAuth from "../../assets/icon/user.svg";
