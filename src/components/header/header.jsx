@@ -1,41 +1,33 @@
-import Logo from "../../assets/логотип.svg";
-import Search from "../../assets/search.svg";
-import User from "../../assets/user.svg";
-import Basket from "../../assets/basket.svg";
-
-const header = () => {
+import s from "./header.module.scss";
+import Logo from "../../assets/icon/logo-header.svg";
+import Search from "../../assets/icon/search.svg";
+import UserAuth from "../../assets/icon/user.svg";
+import Frame from "../../assets/icon/Frame.svg";
+const Header = () => {
   return (
-    <div className="header">
-      <div className="header__wrapper">
-        <div className="header__section">
-          <div className="header__section__innet">
-            <div className="hesder__logo">
-              <img src={Logo} alt="Логотип" />
-            </div>
-            <div className="header__search">
-              <input type="text" placeholder="Поиск по сайту..." />
-              <img src={Search} alt="поиск" />
-            </div>
-          </div>
-          <div className="header__cabinet">
-            <img src={User} alt="Личный кабинет" />
-            <h3>Личный кабинет</h3>
-          </div>
+    <div className={s.header__wrapper}>
+      <div className={s.header__top}>
+        <img className={s.header__logo} src={Logo} alt="логотип" />
+        <div className={s.search__bar}>
+          <input type="text" placeholder="Поиск по сайту..." />
+          <img src={Search} alt="поиск" />
         </div>
-        <div className="header__section">
-          <nav className="header__nav">
-            <a href="#" className="header__nav__link">
-              Акции
-            </a>
-            <a href="#" className="header__nav__link">
-              Категории
-            </a>
-            <a href="#" className="header__nav__link">
-              О нас
-            </a>
+        <div className={s.auth__block}>
+          <img src={UserAuth} alt="пользователь" />
+          <h3>Личный кабинет</h3>
+        </div>
+      </div>
+      <div className={s.header__bottom}>
+        <div className={s.header__bottom_content}>
+          <nav className={s.nav}>
+            <ul>
+              <li>Акции</li>
+              <li>Категории</li>
+              <li>О нас</li>
+            </ul>
           </nav>
-          <div className="header__basket">
-            <img src={Basket} alt="Корзина" />
+          <div className={s.frame}>
+            <img src={Frame} alt="корзина" />
             <h3>Корзина</h3>
           </div>
         </div>
@@ -44,4 +36,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
