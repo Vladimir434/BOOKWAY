@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
 const firebaseConfig = {
   apiKey: "AIzaSyApeYx5YmUlw9n4jhwjMD8cMXA1vA06K1s",
   authDomain: "bookway-107db.firebaseapp.com",
@@ -12,6 +12,7 @@ const firebaseConfig = {
   measurementId: "G-3RQH3SCYGQ",
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+// const analytics = getAnalytics(app);

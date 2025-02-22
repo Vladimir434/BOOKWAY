@@ -1,0 +1,58 @@
+@import '../../styles/varible.css';
+*{
+  font-family:var(--font-family-inter) ;
+}
+.promo__card{
+  display: flex;
+  flex-direction: column;
+  max-width: 416px;
+  width: 100%;
+  height: auto;
+}
+.promo__image{
+  border-radius: 10px;
+  overflow: hidden;
+  height: 216px;
+}
+.promo__image img{
+  width: 100%;
+}
+.promo__date{
+  font-size: 14px;
+  font-weight: 400;
+  color: #7F8295;
+  margin: 15px 0 10px;
+}
+.promo__title {
+  color: #664935;
+  font-size: 18px;
+  font-weight: 500; 
+}
+.promo__description{
+  width: 80%;
+  color: #4D526C;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  margin: 15px 0;
+}
+.promo__button__container{
+  width: fit-content;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.promo__button{
+  color: #664935;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #664935;
+}
+.promo__arrow{
+  width: 6px;
+  height: auto;
+}
