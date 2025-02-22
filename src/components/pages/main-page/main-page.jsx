@@ -10,10 +10,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import CardSwiper from "../../card-swiper-main-page/card-swiper";
+import Header from "../../header/header";
 
 const MainPage = () => {
   return (
     <>
+    <Header/>
       <Swiper
         className="mySwiper"
         loop={true}
