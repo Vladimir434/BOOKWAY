@@ -1,12 +1,14 @@
-.main {
+
+body{
   background-image: url("../../../assets/image/main-image-1.svg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+.main {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -15,6 +17,8 @@
 }
 
 .main__wrapper{
+  position: absolute;
+  z-index: 20;
   width: 100%;
   height: 100%;
   background-color: #000;
@@ -22,13 +26,16 @@
 }
 
 .main__form {
-  position: absolute;
-  z-index: 30;
+  position: relative;
+  z-index: 77;
   background-color: #fff;
   padding: 0 90px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   width: 60%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  max-height: 947px;
 }
 
 .main__form__title {
