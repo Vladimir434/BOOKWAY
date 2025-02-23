@@ -3,6 +3,7 @@ import Logo from "../../assets/icon/logo-header.svg";
 import Search from "../../assets/icon/search.svg";
 import UserAuth from "../../assets/icon/user.svg";
 import Frame from "../../assets/icon/Frame.svg";
+import FrameTwo from '../../assets/icon/Frame2.svg'
 const Header = () => {
   return (
     <div className={s.header__wrapper}>
@@ -16,6 +17,15 @@ const Header = () => {
           <img src={UserAuth} alt="пользователь" />
           <h3>Личный кабинет</h3>
         </div>
+      <div className={s.burder__menu}>
+        <div className={s.burger__manu_item}><img src={UserAuth} alt="user" /></div>
+        <div className={s.burger__manu_item}><img src={FrameTwo} alt="frame" /></div>
+        <div className={s.burger__manu_item_cross}>
+          <div className={s.burger__manu_item_cross_alem}></div>
+          <div className={s.burger__manu_item_cross_alem}></div>
+          <div className={s.burger__manu_item_cross_alem}></div>
+        </div>
+      </div>
       </div>
       <div className={s.header__bottom}>
         <div className={s.header__bottom_content}>
