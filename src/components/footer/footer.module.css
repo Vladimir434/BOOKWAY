@@ -19,6 +19,9 @@
   display: flex;
   flex-direction: column;
 }
+.footer__logo img{
+  width: 100%;
+}
 .footer__button{
   width: 217px;
   height: 60px;

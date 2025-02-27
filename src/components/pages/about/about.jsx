@@ -18,10 +18,10 @@ import Footer from "../../footer/footer";
 
 const About = () => {
   const images = [
-    ImgSwiper1,
     ImgSwiper2,
     ImgSwiper3,
     ImgSwiper4,
+    ImgSwiper1,
     ImgSwiper5,
     ImgSwiper6,
   ];

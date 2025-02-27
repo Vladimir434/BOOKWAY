@@ -2,7 +2,7 @@
 * {
   font-family: var(--font-family-inter);
 }
-main {
+.main {
   background-color: var(--bg-color);
   color: #4d526c;
   padding-bottom: 60px;
@@ -40,10 +40,6 @@ main {
   position: relative;
 }
 
-.main__about__first__fon {
-  width: 616px;
-  height: 491px;
-}
 .main__about__first__fon {
   width: 616px;
   height: 491px;
@@ -520,10 +516,6 @@ main {
   .main__about__first__logo img {
     width: 155px;
     height: 140px;
-  }
-  .main__about__last__title {
-    margin-top: 20px;
-    font-size: 28px;
   }
   .main__about__3__first img{
     width: 325px;

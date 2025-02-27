@@ -6,15 +6,23 @@ import Frame from "../../assets/icon/Frame.svg";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  return (   
+  return (
     <div className={s.header__wrapper}>
       <div className={s.header__top}>
-        <img className={s.header__logo} src={Logo} alt="логотип" />
+        <Link to="/">
+          <img className={s.header__logo} src={Logo} alt="логотип" />
+        </Link>
         <div className={s.search__bar}>
           <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
-        <Link to="/login" onClick={() => {localStorage.removeItem('token')}} className={s.auth__block}>
+        <Link
+          to="/login"
+          onClick={() => {
+            localStorage.removeItem("token");
+          }}
+          className={s.auth__block}
+        >
           <img src={UserAuth} alt="пользователь" />
           <h3>Личный кабинет</h3>
         </Link>
