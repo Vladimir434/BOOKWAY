@@ -22,10 +22,10 @@ const Header = () => {
       <div className={s.header__bottom}>
         <div className={s.header__bottom_content}>
           <nav className={s.nav}>
-            <ul>
+            <ul className={s.nav__ul}>
               <li>Акции</li>
               <li>Категории</li>
-              <li>О нас</li>
+              <Link to="/about">О нас</Link>
             </ul>
           </nav>
           <div className={s.frame}>

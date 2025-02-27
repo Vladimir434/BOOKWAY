@@ -88,3 +88,11 @@
   font-size: 15px;
   font-weight: 400;
 }
+
+.nav :link{
+  text-decoration: none;
+}
+
+.nav__ul a{
+  color: white;
+}

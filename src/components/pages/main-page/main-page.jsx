@@ -14,6 +14,7 @@ import PromoCard from "../../promo-card/promo-card";
 import Footer from "../../footer/footer";
 import Reviews from "../../Reviews/reviews";
 import Header from "../../header/header";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const images = [
@@ -132,7 +133,7 @@ const MainPage = () => {
               наслаждаемся тем, что можем служить вам!
             </p>
           </div>
-          <button>Подробнее &gt;</button>
+          <Link to="/about">Подробнее &gt;</Link>
         </div>
       </div>
       <Reviews/>

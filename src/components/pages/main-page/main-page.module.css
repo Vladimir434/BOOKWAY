@@ -4,6 +4,7 @@
 }
 main {
   background-color: var(--bg-color);
+  color: #4D526C;
 }
 .wrapper__swiper {
   position: relative;
@@ -181,14 +182,18 @@ main {
   font-weight: 400;
   line-height: 27px;
 }
-.about__Us__last button {
+.about__Us__last :link {
   width: 149px;
   height: 60px;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
   background-color: var(--button-bg-color-normal);
   border: none;
   border-radius: 50px;
+}
+
+.about__Us__last a{
+  color: #fff;
 }
