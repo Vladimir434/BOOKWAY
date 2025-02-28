@@ -18,16 +18,22 @@ const Footer = () => {
           <p className={s.footer__info_item}>Акции</p>
           <p className={s.footer__info_item}>Обмен </p>
           <p className={s.footer__info_item}>Личный кабинет|регистрация</p>
-          <Link to="/about" className={s.footer__info_item}>О нас</Link>
+          <Link to="/about" className={s.footer__info_item}>
+            О нас
+          </Link>
         </div>
         <div className={s.footer__contacts}>
-          <a href="#" className={s.footer__contacts_tel}>
+          <a href="tel:+996107436" className={s.footer__contacts_tel}>
             + 996 - 708 - 107 - 436
           </a>
           <p className={s.footer__contacts_item}>Наш instagram и whatsapp</p>
           <div className={s.footer__contacts_images}>
-            <img src={Instagrsm} alt="instagram" />
-            <img src={WhatsApp} alt="whatsApp" />
+            <a href="https://www.instagram.com/_libangl?igsh=MXJwdWppNHBsYXRicg==">
+              <img src={Instagrsm} alt="instagram" />
+            </a>
+            <a href="http://wa.me/996708107436">
+              <img src={WhatsApp} alt="whatsApp" />
+            </a>
           </div>
         </div>
       </div>

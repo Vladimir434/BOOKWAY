@@ -5,6 +5,7 @@
 .header__wrapper {
   width: 100%;
   height: auto;
+  background-color: #fff;
 }
 .header__top {
   display: flex;

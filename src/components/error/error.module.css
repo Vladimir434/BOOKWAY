@@ -1,0 +1,26 @@
+.main {
+  margin: 8% auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.main__img {
+  margin: 0px auto;
+}
+@media screen and (max-width: 900px) {
+  .main h1 {
+    font-size: 22px;
+  }
+  .main__img {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main {
+    margin: 11%;
+  }
+  .main h1 {
+    font-size: 18px;
+  }
+}
