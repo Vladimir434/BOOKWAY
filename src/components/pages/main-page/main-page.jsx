@@ -13,6 +13,7 @@ import CardSwiper from "../../card-swiper-main-page/card-swiper";
 import PromoCard from "../../promo-card/promo-card";
 import Footer from "../../footer/footer";
 import Reviews from "../../Reviews/reviews";
+import Header from "../../header/header";
 
 const MainPage = () => {
   const images = [
@@ -24,6 +25,8 @@ const MainPage = () => {
     ImgSwiper6,
   ];
   return (
+    <>
+    <Header/>
     <main>
       <div className={s.wrapper__swiper}>
         <Swiper
@@ -53,7 +56,6 @@ const MainPage = () => {
           </p>
         </div>
       </div>
-
       <div className={s.Container__categories}>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
@@ -136,6 +138,7 @@ const MainPage = () => {
       <Reviews/>
       <Footer/>
     </main>
+    </>
   );
 };
 
