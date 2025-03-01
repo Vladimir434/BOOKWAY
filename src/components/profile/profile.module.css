@@ -1,0 +1,22 @@
+.profile__wrapper{
+  display: flex;
+  max-width: 1296px;
+  width: 100%;
+  margin: 0 auto;
+}
+.profile__title{
+  max-width: 1296px;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 48px;
+  font-weight: 500;
+  color: #664935;
+  margin-bottom: 28px;
+}
+.profile__nav_button{
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  border: none;
+  background-color: #fff;
+}

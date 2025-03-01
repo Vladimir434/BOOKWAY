@@ -3,11 +3,22 @@ import Logo from "../../assets/icon/logo-header.svg";
 import Search from "../../assets/icon/search.svg";
 import UserAuth from "../../assets/icon/user.svg";
 import Frame from "../../assets/icon/Frame.svg";
+import Frame2 from "../../assets/icon/Frame2.svg";
 import { Link } from "react-router-dom";
-
-import FrameTwo from '../../assets/icon/Frame2.svg'
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../utils/firebase/firebase-config";
 const Header = () => {
-  return (   
+  const [user,setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  },[]);
+
+  return (
     <div className={s.header__wrapper}>
       <div className={s.header__top}>
         <img className={s.header__logo} src={Logo} alt="логотип" />
@@ -15,20 +26,23 @@ const Header = () => {
           <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
-        <Link to="/login" onClick={() => {localStorage.removeItem('token')}} className={s.auth__block}>
+        <Link to={user ? '/profile' : '/login'} className={s.auth__block}>
           <img src={UserAuth} alt="пользователь" />
-          <h3>Личный кабинет</h3>
-        </div>
-      <div className={s.burder__menu}>
-        <div className={s.burger__manu_item}><img src={UserAuth} alt="user" /></div>
-        <div className={s.burger__manu_item}><img src={FrameTwo} alt="frame" /></div>
-        <div className={s.burger__manu_item_cross}>
-          <div className={s.burger__manu_item_cross_alem}></div>
-          <div className={s.burger__manu_item_cross_alem}></div>
-          <div className={s.burger__manu_item_cross_alem}></div>
-        </div>
-      </div>
+          <h3>{user ? 'Личный кабинет' : 'Войти' }</h3>
         </Link>
+        <div className={s.burger__menu}>
+          <div className={s.burger__manu_item}>
+            <img src={UserAuth} alt="user" />
+          </div>
+          <div className={s.burger__manu_item}>
+            <img src={Frame2} alt="frame" />
+          </div>
+          <div className={s.burger__manu_item_cross}>
+            <div className={s.cross__elem}></div>
+            <div className={s.cross__elem}></div>
+            <div className={s.cross__elem}></div>
+          </div>
+        </div>
       </div>
       <div className={s.header__bottom}>
         <div className={s.header__bottom_content}>

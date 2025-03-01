@@ -7,6 +7,7 @@
 .header__wrapper {
   width: 100%;
   height: auto;
+  background-color: #FFFFFF;
 }
 
 .header__top {
@@ -16,6 +17,7 @@
   max-width: 1268px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .search__bar {
@@ -109,9 +111,9 @@
   background-color: #F3F5F7;
   border-radius: 50%;
 }
-.burder__menu{
+.burger__menu{
   display: flex;
-
+  display: none;
 }
 .burger__manu_item_cross{
   width: 50px;
@@ -124,8 +126,14 @@
   align-items: center;
   background-color: var(--button-bg-color-normal);
 }
-.burger__manu_item_cross_alem{
+.cross__elem{
   width: 20px;
   height: 2px;
   background-color: #FFFFFF;
+}
+
+@media (max-width:760px) {
+  .burger__menu{
+    display: block;
+  }
 }
