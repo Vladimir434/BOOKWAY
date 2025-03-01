@@ -16,6 +16,7 @@
 }
 .promo__image img{
   width: 100%;
+  height: 200px;
 }
 .promo__date{
   font-size: 14px;

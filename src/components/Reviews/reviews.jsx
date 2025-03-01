@@ -3,10 +3,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-
+import Bgimage from '../../assets/image/main-image-1.svg'
 const Reviews = () => {
   return (
-    <div className={s.reviews__wrapper}>
+    <div style={{backgroundImage:`url(${Bgimage})`}} className={s.reviews__wrapper}>
+      <div className={s.blur}></div>
       <div className={s.reviews}>
         <h2 className={s.reviews__title}>Отзывы</h2>
         <div className={s.reviews__swiper}>

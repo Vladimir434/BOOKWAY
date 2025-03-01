@@ -5,7 +5,7 @@ import ImgSwiper3 from "../../../assets/image/main-image-3.svg";
 import ImgSwiper4 from "../../../assets/image/main-image-4.svg";
 import ImgSwiper5 from "../../../assets/image/main-image-5.svg";
 import ImgSwiper6 from "../../../assets/image/main-image-6.svg";
-import ImageLogo from "../../../assets/icon/logo-header.svg";
+// import ImageLogo from "../../../assets/icon/logo-header.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -56,7 +56,7 @@ const MainPage = () => {
           </p>
         </div>
       </div>
-      <div className={s.Container__categories}>
+      <div className={s.container__categories}>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Фантастика</h2>
@@ -99,7 +99,7 @@ const MainPage = () => {
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         </div>
       </div>
-      <div className={s.about__Us}>
+      {/* <div className={s.about__Us}>
         <div className={s.about__Us__first}>
           <div className={s.about__Us__first__logo}>
             <img src={ImageLogo} alt="логотип" />
@@ -134,7 +134,7 @@ const MainPage = () => {
           </div>
           <button>Подробнее &gt;</button>
         </div>
-      </div>
+      </div> */}
       <Reviews/>
       <Footer/>
     </main>

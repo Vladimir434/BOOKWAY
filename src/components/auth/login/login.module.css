@@ -1,13 +1,9 @@
 
-body{
-  background-image: url("../../../assets/image/main-image-1.svg");
+.main {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;  
   position: relative;
-
-}
-.main {
   display: flex;
   justify-content: center;
   margin: 0;

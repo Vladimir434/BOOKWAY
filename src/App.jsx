@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import Profile from "./components/profile/profile";
 
 const Login = lazy(() => import("./components/auth/login/login"));
 const MainPage = lazy(() => import("./components/pages/main-page/main-page"));
@@ -14,27 +15,10 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registr" element={<Registr />} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
     </>
   );
 }
 
 export default App
-
-
-
-// import './App.css'
-// import Header from './components/header/header'
-// import MainPage from './components/pages/main-page/main-page'
-
-// function App() {
-
-//   return (
-//     <>
-//       <Header/>
-//       <MainPage/>
-//     </>
-//   )
-// }
-
-// export default App
