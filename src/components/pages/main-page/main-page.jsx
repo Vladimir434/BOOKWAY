@@ -5,15 +5,16 @@ import ImgSwiper3 from "../../../assets/image/main-image-3.svg";
 import ImgSwiper4 from "../../../assets/image/main-image-4.svg";
 import ImgSwiper5 from "../../../assets/image/main-image-5.svg";
 import ImgSwiper6 from "../../../assets/image/main-image-6.svg";
-// import ImageLogo from "../../../assets/icon/logo-header.svg";
+import ImageLogo from "../../../assets/icon/logo-header.svg";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import { Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import CardSwiper from "../../card-swiper-main-page/card-swiper";
 import PromoCard from "../../promo-card/promo-card";
 import Footer from "../../footer/footer";
 import Reviews from "../../Reviews/reviews";
 import Header from "../../header/header";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const images = [
@@ -27,13 +28,13 @@ const MainPage = () => {
   return (
     <>
     <Header/>
-    <main>
+    <main className={s.main}>
       <div className={s.wrapper__swiper}>
         <Swiper
           className="mySwiper"
           loop={true}
-          // autoplay={{ delay: 3000, disableOnInteraction: false }}
-          // modules={[Autoplay]}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          modules={[Autoplay]}
         >
           {images.map((img, index) => (
             <SwiperSlide key={index}>
@@ -99,42 +100,40 @@ const MainPage = () => {
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         </div>
       </div>
-      {/* <div className={s.about__Us}>
-        <div className={s.about__Us__first}>
-          <div className={s.about__Us__first__logo}>
+      <div className={s.about__Us}>
+          <div className={s.main__about__first__logo}>
             <img src={ImageLogo} alt="логотип" />
           </div>
-          <img src={ImgSwiper1} alt="Обложка книги" />
-        </div>
-        <div className={s.about__Us__last}>
-          <h1 className={s.about__Us__last__title}>О нас</h1>
-          <div className={s.about__Us__last__sub__title}>
-            <p>
-              Добро пожаловать в наш интернет-магазин, где качество встречается
-              с стилем! Мы с гордостью представляем широкий ассортимент товаров,
-              созданных с вниманием к каждой детали
-            </p>
-            <p>
-              С момента нашего основания мы стремимся к тому, чтобы каждый
-              клиент чувствовал себя особенным. Мы тщательно подбираем товары,
-              сотрудничая с проверенными производителями и следя за последними
-              трендами.
-            </p>
-            <p>
-              Мы понимаем, что в современном мире время — на вес золота. Поэтому
-              мы создали интуитивно понятный интерфейс, позволяющий вам легко
-              находить нужные вещи и совершать покупки всего в несколько кликов.
-            </p>
-            <p>
-              Мы ценим вашу лояльность и готовы предложить специальные акции и
-              скидки для постоянных клиентов. Благодарим вас за то, что
-              выбираете нас! Надеемся, вы наслаждаетесь шопингом так же, как мы
-              наслаждаемся тем, что можем служить вам!
-            </p>
-          </div>
-          <button>Подробнее &gt;</button>
-        </div>
-      </div> */}
+          <img
+            className={s.main__about__first__fon}
+            src={ImgSwiper1}
+            alt="Обложка книги"
+          />
+          <h1 className={s.main__about__last__title}>О нас</h1>
+          <p>
+            Добро пожаловать в наш интернет-магазин, где качество встречается с
+            стилем! Мы с гордостью представляем широкий ассортимент товаров,
+            созданных с вниманием к каждой детали
+          </p>
+          <p>
+            С момента нашего основания мы стремимся к тому, чтобы каждый клиент
+            чувствовал себя особенным. Мы тщательно подбираем товары,
+            сотрудничая с проверенными производителями и следя за последними
+            трендами.
+          </p>
+          <p>
+            Мы понимаем, что в современном мире время — на вес золота. Поэтому
+            мы создали интуитивно понятный интерфейс, позволяющий вам легко
+            находить нужные вещи и совершать покупки всего в несколько кликов.
+          </p>
+          <p>
+            Мы ценим вашу лояльность и готовы предложить специальные акции и
+            скидки для постоянных клиентов. Благодарим вас за то, что выбираете
+            нас! Надеемся, вы наслаждаетесь шопингом так же, как мы наслаждаемся
+            тем, что можем служить вам!
+          </p>
+          <Link to="/about">Подробнее &gt;</Link>
+      </div>
       <Reviews/>
       <Footer/>
     </main>

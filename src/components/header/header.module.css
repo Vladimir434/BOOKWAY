@@ -102,6 +102,14 @@
   font-size: 15px;
   font-weight: 400;
 }
+
+.nav :link{
+  text-decoration: none;
+}
+
+.nav__ul a{
+  color: white;
+}
 .burger__manu_item{
   width: 50px;
   height: 50px;

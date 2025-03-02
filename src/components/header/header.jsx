@@ -21,7 +21,9 @@ const Header = () => {
   return (
     <div className={s.header__wrapper}>
       <div className={s.header__top}>
-        <img className={s.header__logo} src={Logo} alt="логотип" />
+        <Link to="/">
+          <img className={s.header__logo} src={Logo} alt="логотип" />
+        </Link>
         <div className={s.search__bar}>
           <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
@@ -47,10 +49,10 @@ const Header = () => {
       <div className={s.header__bottom}>
         <div className={s.header__bottom_content}>
           <nav className={s.nav}>
-            <ul>
+            <ul className={s.nav__ul}>
               <li>Акции</li>
               <li>Категории</li>
-              <li>О нас</li>
+              <Link to="/about">О нас</Link>
             </ul>
           </nav>
           <div className={s.frame}>
