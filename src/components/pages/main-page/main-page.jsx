@@ -57,7 +57,7 @@ const MainPage = () => {
           </p>
         </div>
       </div>
-      <div className={s.Container__categories}>
+      <div className={s.container__categories}>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Фантастика</h2>

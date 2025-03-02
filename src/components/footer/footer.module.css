@@ -14,6 +14,7 @@
   margin: 0 auto;
   display: flex;
   column-gap: 24%;
+  padding: 0 20px;
 }
 .footer__logo{
   display: flex;
