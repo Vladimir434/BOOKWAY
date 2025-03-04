@@ -15,9 +15,9 @@ const Footer = () => {
         </div>
         <div className={s.footer__info}>
           <h4 className={s.footer__info_title}>Для клиента</h4>
-          <p className={s.footer__info_item}>Акции</p>
-          <p className={s.footer__info_item}>Обмен </p>
-          <p className={s.footer__info_item}>Личный кабинет|регистрация</p>
+          <a className={s.footer__info_item}>Акции</a>
+          <a className={s.footer__info_item}>Обмен </a>
+          <a className={s.footer__info_item}>Личный кабинет|регистрация</a>
           <Link to="/about" className={s.footer__info_item}>
             О нас
           </Link>

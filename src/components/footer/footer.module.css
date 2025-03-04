@@ -1,65 +1,136 @@
-.footer__wrapper{
+.footer__wrapper {
   width: 100%;
   height: 414px;
   background-color: #fff;
   display: flex;
   align-items: center;
+  color: #4d526c;
 }
 .footer__wrapper a {
+  color: #664935;
   text-decoration: none;
 }
-.footer{
-  max-width: 1296px;
-  width: 100%;
+.footer {
+  width: 90%;
   margin: 0 auto;
   display: flex;
-  column-gap: 24%;
-  padding: 0 20px;
+  justify-content: space-between;
 }
-.footer__logo{
+.footer__logo {
   display: flex;
   flex-direction: column;
 }
-.footer__logo img{
+.footer__logo img {
   width: 100%;
 }
-.footer__button{
+.footer__button {
   width: 217px;
   height: 60px;
-  border: 1px solid #E5E9EC;
+  border: 1px solid #e5e9ec;
   border-radius: 50px;
-  background-color: #F3F5F7;
+  background-color: #f3f5f7;
   font-size: 14px;
   font-weight: 500;
   color: #664935;
 }
-.footer__info{
+.footer__info {
+  max-width: 17%;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
-.footer__info_title{
-  color:#664935;
+.footer__info_title {
+  color: #664935;
   font-size: 18px;
   font-weight: 600;
 }
-.footer__info_item{
+.footer__info_item {
   color: #664935;
   font-size: 15px;
   font-weight: 400;
 }
-.footer__contacts{
+.footer__contacts {
+  max-width: 40%;
   display: flex;
   flex-direction: column;
   row-gap: 12px;
 }
-.footer__contacts_tel{
+.footer__contacts_tel {
   color: #664935;
   font-size: 29px;
   font-weight: 600;
 }
-.footer__contacts_item{
+.footer__contacts_item {
   font-size: 18px;
   font-weight: 400;
-  color: #4D526C;
+  color: #4d526c;
+}
+@media screen and (max-width: 1400px) {
+  .footer__contacts_tel {
+    font-size: 20px;
+  }
+  .footer__contacts_item {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 703px) {
+  .footer__button {
+    width: 157px;
+  }
+  .footer__contacts_images img {
+    width: 44px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    height: 95%;
+    flex-direction: column;
+  }
+  .footer__wrapper {
+    height: 700px;
+  }
+  .footer__button {
+    width: 40%;
+  }
+  .footer__logo img {
+    width: 40%;
+  }
+  .footer__info{
+    max-width: 30%;
+  }
+  .footer__contacts{
+   max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer__button {
+    width: 50%;
+  }
+  .footer__logo img {
+    width: 50%;
+  }
+  .footer__info{
+    max-width: 45%;
+  }
+  .footer__contacts{
+   max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .footer__button {
+    width: 65%;
+  }
+  .footer__logo img {
+    width: 65%;
+  }
+  .footer__info{
+    max-width: 55%;
+  }
+  .footer__contacts{
+   max-width: 100%;
+  }
 }
