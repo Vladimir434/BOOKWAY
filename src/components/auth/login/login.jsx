@@ -6,23 +6,18 @@ import { toast } from "react-toastify";
 import BgImage from "../../../assets/image/main-image-1.svg";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../utils/firebase/firebase-config";
+
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [isCheck, setisCheck] = useState(false);
-  const { loginUser } = userAuth();
+  const { loginUser, isFetch } = userAuth();
   const nav = useNavigate();
+
   const onHandleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
       loginUser(email, password, nav, isCheck);
-      if(isCheck) {
-        localStorage.setItem('email', email);
-        localStorage.setItem('password', password)
-      } else {
-        localStorage.removeItem('email')
-        localStorage.removeItem('password')
-      }
       setEmail("");
       setPassword("");
     } else {
@@ -35,7 +30,7 @@ const Login = () => {
       toast("Введите email для смены пароля");
       return;
     }
-  
+
     sendPasswordResetEmail(auth, email)
       .then(() => {
         toast("Если такой email существует, ссылка для сброса пароля отправлена.");
@@ -45,57 +40,61 @@ const Login = () => {
         toast("Ошибка при отправке письма. Попробуйте позже.");
       });
   };
-  
+
   return (
     <main style={{ backgroundImage: `url(${BgImage})` }} className={s.main}>
       <div className={s.main__wrapper}></div>
-      <form onSubmit={onHandleSubmit} className={s.main__form}>
-        <h1 className={s.main__form__title}>Вход в аккаунт</h1>
-        <div className={s.main__form__inner}>
-          <div className={s.form__inner}>
-            <label>Почта</label>
-            <input
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              required
-              placeholder="Введите вашу почту"
-            />
+      {isFetch ? (
+        <h1>Loading...</h1>
+      ) : (
+        <form onSubmit={onHandleSubmit} className={s.main__form}>
+          <h1 className={s.main__form__title}>Вход в аккаунт</h1>
+          <div className={s.main__form__inner}>
+            <div className={s.form__inner}>
+              <label>Почта</label>
+              <input
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                required
+                placeholder="Введите вашу почту"
+              />
+            </div>
+            <div className={s.form__inner}>
+              <label>Пароль</label>
+              <input
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                required
+                placeholder="Введите ваш пароль"
+              />
+            </div>
           </div>
-          <div className={s.form__inner}>
-            <label>Пароль</label>
+          <label className={s.main__form__remember}>
             <input
-              autoComplete="new-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              required
-              placeholder="Введите ваш пароль"
+              type="checkbox"
+              onChange={(e) => setisCheck(e.target.checked)}
+              checked={isCheck}
             />
+            Запомнить меня
+          </label>
+          <div className={s.main__form__btn}>
+            <button>
+              <div className={s.main__form__btn__link}> Войти</div>
+            </button>
           </div>
-        </div>
-        <label className={s.main__form__remember}>
-          <input
-            type="checkbox"
-            onChange={(e) => setisCheck(e.target.checked)}
-            checked={isCheck}
-          />
-          Запомнить меня
-        </label>
-        <div className={s.main__form__btn}>
-          <button>
-            <div className={s.main__form__btn__link}> Войти</div>
-          </button>
-        </div>
-        <div className={s.main__form__button}>
-          Нет аккаунта?
-          <Link className={s.main__form__button__link} to="/registr">
-            Создать
-          </Link>
-          <h2 onClick={handleResetPassword}>Забыли пароль</h2>
-        </div>
-      </form>
+          <div className={s.main__form__button}>
+            Нет аккаунта?
+            <Link className={s.main__form__button__link} to="/registr">
+              Создать
+            </Link>
+            <h2 onClick={handleResetPassword}>Забыли пароль</h2>
+          </div>
+        </form>
+      )}
     </main>
   );
 };

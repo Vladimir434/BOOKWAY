@@ -10,14 +10,14 @@ import { toast } from "react-toastify";
 export const userAuth = create((set) => ({
   isFetch: false,
 
-  async registrUser(email, password, nav, isRememberMe) {
+  async registerUser(email, password, nav, isRememberMe) {
     set({ isFetch: true });
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
 
       if (isRememberMe) {
         localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
+        // localStorage.setItem("password", password);
       }
 
       console.log(user);
@@ -25,7 +25,7 @@ export const userAuth = create((set) => ({
       toast.success("Вы успешно зарегистрировались 👍");
     } catch (error) {
       console.error(error);
-      toast.error("Ошибка при регистрации!");
+      toast.error("Ошибка при регистрации: " + error.message);
     } finally {
       set({ isFetch: false });
     }
@@ -38,10 +38,10 @@ export const userAuth = create((set) => ({
 
       if (isRememberMe) {
         localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
+        // localStorage.setItem("password", password);
       } else {
         localStorage.removeItem("email");
-        localStorage.removeItem("password");
+        // localStorage.removeItem("password");
       }
 
       console.log(userCredentials);
@@ -49,7 +49,7 @@ export const userAuth = create((set) => ({
       toast.success("Вы вошли в аккаунт");
     } catch (error) {
       console.error(error);
-      toast.error("Проверьте Email или пароль");
+      toast.error("Проверьте Email или пароль: " + error.message);
     } finally {
       set({ isFetch: false });
     }
@@ -60,12 +60,12 @@ export const userAuth = create((set) => ({
     try {
       await signOut(auth);
       localStorage.removeItem("email");
-      localStorage.removeItem("password");
+      // localStorage.removeItem("password");
       toast.info("Вы вышли из аккаунта");
       nav("/");
     } catch (error) {
       console.error(error);
-      toast.error("Ошибка при выходе!");
+      toast.error("Ошибка при выходе: " + error.message);
     } finally {
       set({ isFetch: false });
     }
