@@ -17,7 +17,6 @@ const Footer = () => {
           <h4 className={s.footer__info_title}>Для клиента</h4>
           <a className={s.footer__info_item}>Акции</a>
           <a className={s.footer__info_item}>Обмен </a>
-          <a className={s.footer__info_item}>Личный кабинет|регистрация</a>
           <Link to="/about" className={s.footer__info_item}>
             О нас
           </Link>
