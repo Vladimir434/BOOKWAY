@@ -1,0 +1,31 @@
+
+@import "../../../styles/varible.css";
+
+* {
+  font-family: var(--font-family-inter);
+}
+.main {
+  background-color: var(--bg-color);
+  color: #4d526c;
+  padding: 95px 0px 145px;
+}
+.main__wrapper{
+  max-width: 1296px;
+  margin: 0px auto;
+}
+.main__product__info{
+  height: 637px;
+}
+.main__product__info__swiper{
+  width: 32%;
+}
+.img{
+  object-position: center center;
+  object-fit: contain ;
+  max-height: 526px;
+  max-width: 526px;
+}
+.img2{
+  max-width: 96px;
+  max-height: 96px;
+}
