@@ -15,6 +15,7 @@ import CardSwiper from "../../card-swiper-main-page/card-swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
+import ChatIcon from "../chat.icon/chat.icon";
 
 const About = () => {
   const images = [
@@ -27,6 +28,7 @@ const About = () => {
   ];
   return (
     <>
+      <ChatIcon/>
       <Header />
       <main className={s.main}>
         <div className={s.main__wrapper__swiper}>

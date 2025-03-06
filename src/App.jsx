@@ -10,6 +10,7 @@ const MainPage = lazy(() => import("./components/pages/main-page/main-page"));
 const Registr = lazy(() => import("./components/auth/registr/registr"));
 const About = lazy(() => import("./components/pages/about/about"));
 const Error = lazy(() => import("./components/error/error"));
+const Chat = lazy(() => import("./components/pages/chat-page/chat-page"));
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/products" element={<Products/>} />
+        <Route path="/chat" element={<Chat/>} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>
