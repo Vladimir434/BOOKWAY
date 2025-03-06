@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import ScrollToTop from "./components/skroltop/skroltop";
 import Profile from "./components/profile/profile";
+import Products from "./components/pages/products/products";
 
 const Login = lazy(() => import("./components/auth/login/login"));
 const MainPage = lazy(() => import("./components/pages/main-page/main-page"));
@@ -22,6 +23,7 @@ function App() {
         <Route path="/registr" element={<Registr />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile/>} />
+        <Route path="/products" element={<Products/>} />
         <Route path="/chat" element={<Chat/>} />
         <Route path="*" element={<Error />} />
       </Routes>
