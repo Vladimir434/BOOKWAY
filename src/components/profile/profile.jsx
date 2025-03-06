@@ -8,6 +8,7 @@ import SignOut from "../../assets/icon/signOut.svg";
 import Exchange from "../../assets/icon/exchange.svg";
 import { useNavigate } from "react-router-dom";
 import { userAuth } from "../../store/auth-slice/auth-slice";
+import ChatIcon from "../pages/chat.icon/chat.icon";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Profile = () => {
   };
   return (
     <>
+      <ChatIcon/>
       <Header />
       <h2 className={s.profile__title}>Личный кабинет</h2>
       <div className={s.profile__wrapper}>

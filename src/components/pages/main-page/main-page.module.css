@@ -41,14 +41,15 @@
   font-weight: 400;
 }
 
-.Container__categories {
+.container__categories {
   max-width: 1296px;
-  width: 100%;
+  width: 97%;
   height: 644px;
   margin: 80px auto 80px;
   display: grid;
-  grid-template: repeat(2, 50%) / repeat(4, 1fr);
+  grid-template: repeat(1, 1fr) / repeat(4, 1fr);
   gap: 24px;
+  grid-auto-rows: 1fr;
 }
 
 .categories__item {
@@ -72,17 +73,6 @@
   font-weight: 400;
 }
 
-.categories__item_text h3 {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: #000;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.4;
-}
 
 .categories__item:nth-child(2) {
   grid-column: span 2;
@@ -100,7 +90,6 @@
 .promo {
   max-width: 1460px;
   width: 100%;
-  height: 680px;
   margin: 0 auto;
   background-color: #fff;
   padding: 60px 80px;
@@ -129,8 +118,10 @@
 }
 .promo__cards {
   display: grid;
-  grid-template: repeat(1, 1fr) / repeat(3, 30%);
+  grid-template: repeat(1, 1fr) / repeat(3, 1fr);
   justify-content: space-between;
+  row-gap: 32px;
+  column-gap: 12px;
 }
 
 .about__Us {
@@ -236,7 +227,17 @@
     margin: 0px auto 0px;
   }
 }
-
+@media (max-width:1200px) {
+  .container__categories {
+    grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+  }
+  .categories__item:nth-child(3){
+    order: 6;
+    grid-column: span 3;
+    width: 100%;
+    grid-row: auto;
+  }
+}
 @media screen and (max-width: 1120px) {
   .about__Us {
     max-width: 1000px;
@@ -276,13 +277,17 @@
     left: 80%;
   }
 }
-
+@media (max-width:1100px) {
+  .promo{
+    padding: 28px 38px;
+  }
+  
+}
 @media screen and (max-width: 950px) {
   .swiper__content {
     max-width: 97%;
     left: 1%;
   }
-
   .swiper__content p {
     width: 100%;
   }
@@ -303,9 +308,25 @@
   .main__about__last__title {
     font-size: 36px;
   }
+  .promo__cards{
+    grid-template: repeat(1, 1fr) / repeat(2, 1fr);
+    column-gap: 30px;
+  }
 }
 
 @media screen and (max-width: 750px) {
+  .container__categories {
+    height: 878px;
+    grid-template: repeat(2, 1fr) / repeat(1, 1fr);
+  }
+  .categories__item:nth-child(2),
+  .categories__item:nth-child(4),
+  .categories__item:nth-child(3) {
+    grid-column: auto;
+  }
+  .promo__title{
+    font-size: 37px;
+  }
   .about__Us {
     max-width: 600px;
   }
@@ -323,6 +344,14 @@
   .about__Us a {
     left: 70%;
   }
+}
+
+@media (max-width: 650px) {
+  .promo__cards{
+    grid-template: repeat(1, 1fr) / repeat(1, 1fr);
+    column-gap: 0;
+  }
+  
 }
 
 @media screen and (max-width: 620px) {

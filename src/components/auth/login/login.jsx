@@ -89,10 +89,10 @@ const Login = () => {
           <div className={s.main__form__button}>
             Нет аккаунта?
             <Link className={s.main__form__button__link} to="/registr">
-              Создать
+              Создать.
             </Link>
-            <h2 onClick={handleResetPassword}>Забыли пароль</h2>
           </div>
+            <h2 className={s.main__form__pasword} onClick={handleResetPassword}>Забыли пароль ?</h2>
         </form>
       )}
     </main>

@@ -15,6 +15,7 @@ import Footer from "../../footer/footer";
 import Reviews from "../../Reviews/reviews";
 import Header from "../../header/header";
 import { Link } from "react-router-dom";
+import ChatIcon from "../chat.icon/chat.icon";
 
 const MainPage = () => {
   const images = [
@@ -27,6 +28,7 @@ const MainPage = () => {
   ];
   return (
     <>
+    <ChatIcon/>
     <Header/>
     <main className={s.main}>
       <div className={s.wrapper__swiper}>
@@ -61,31 +63,26 @@ const MainPage = () => {
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Фантастика</h2>
-            <h3>&gt;</h3>
           </div>
         </div>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Психология и саморозвитие</h2>
-            <h3>&gt;</h3>
           </div>
         </div>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Художественная литература</h2>
-            <h3>&gt;</h3>
           </div>
         </div>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Филосифия</h2>
-            <h3>&gt;</h3>
           </div>
         </div>
         <div className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>IT</h2>
-            <h3>&gt;</h3>
           </div>
         </div>
       </div>
@@ -97,6 +94,9 @@ const MainPage = () => {
         <div className={s.promo__cards}>
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb"}/>
+        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
+        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
+        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         </div>
       </div>
