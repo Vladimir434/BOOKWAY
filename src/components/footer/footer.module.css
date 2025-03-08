@@ -83,29 +83,15 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  .footer {
-    height: 95%;
-    flex-direction: column;
-  }
-  .footer__wrapper {
-    height: 700px;
-  }
-  .footer__button {
-    width: 40%;
-  }
-  .footer__logo img {
-    width: 40%;
-  }
-  .footer__info{
-    max-width: 30%;
-  }
-  .footer__contacts{
-   max-width: 100%;
-  }
-}
 
 @media screen and (max-width: 600px) {
+.footer__wrapper {
+  height: 700px;
+}
+  .footer {
+    height: 80%;
+    flex-direction: column;
+  }
   .footer__button {
     width: 50%;
   }

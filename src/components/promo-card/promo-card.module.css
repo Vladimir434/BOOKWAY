@@ -5,18 +5,17 @@
 .promo__card{
   display: flex;
   flex-direction: column;
-  max-width: 416px;
   width: 100%;
   height: auto;
 }
 .promo__image{
   border-radius: 10px;
   overflow: hidden;
-  height: 216px;
+  height: 200px;
 }
 .promo__image img{
   width: 100%;
-  height: 200px;
+  height: auto;
 }
 .promo__date{
   font-size: 14px;
@@ -56,4 +55,15 @@
 .promo__arrow{
   width: 6px;
   height: auto;
+}
+
+@media (max-width:800px) {
+  .promo__description{
+    width: 95%;
+  }
+}
+@media (max-width:700px) {
+  .promo__image{
+    height: 175px;
+  }  
 }
