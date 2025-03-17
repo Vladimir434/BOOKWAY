@@ -10,7 +10,9 @@ const MainPage = lazy(() => import("./components/pages/main-page/main-page"));
 const Registr = lazy(() => import("./components/auth/registr/registr"));
 const About = lazy(() => import("./components/pages/about/about"));
 const Error = lazy(() => import("./components/error/error"));
+const Product = lazy(() => import("./components/pages/product/product"));
 const Chat = lazy(() => import("./components/pages/chat-page/chat-page"));
+const Straight = lazy(() => import("./components/pages/straight/straight"));
 
 function App() {
   return (
@@ -24,7 +26,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/products" element={<Products/>} />
+        <Route path="/products/:id" element={<Product/>} />
         <Route path="/chat" element={<Chat/>} />
+        <Route path="/straight" element={<Straight/>} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>

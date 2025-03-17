@@ -33,9 +33,9 @@ const Header = () => {
           <h3>{user ? 'Личный кабинет' : 'Войти' }</h3>
         </Link>
         <div className={s.burger__menu}>
-          <div className={s.burger__manu_item}>
+          <Link to="/profile" className={s.burger__manu_item}>
             <img src={UserAuth} alt="user" />
-          </div>
+          </Link>
           <div className={s.burger__manu_item}>
             <img src={Frame2} alt="frame" />
           </div>
@@ -51,7 +51,7 @@ const Header = () => {
           <nav className={s.nav}>
             <ul className={s.nav__ul}>
               <li>Акции</li>
-              <li>Категории</li>
+              <Link to="/products">Категории</Link>
               <Link to="/about">О нас</Link>
             </ul>
           </nav>
