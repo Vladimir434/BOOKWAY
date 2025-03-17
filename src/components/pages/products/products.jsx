@@ -1,20 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../header/header";
 import s from "./products.module.css";
 import Arrow from "../../../assets/icon/arrow.svg";
 import CardProducts from "../../card-products/card-products";
-
+import { useRroductsStore } from "../../../store/products-store/products-store";
+import { motion } from "framer-motion";
 const Products = () => {
-  const [visibleLists, setVisibleLists] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [visibleLists, setVisibleLists] = useState(Array(8).fill(false));
+  const [activePanel, setActivePanel] = useState(null)
+  const { product, isFetch, getAllProducts } = useRroductsStore();
 
   const toggleListVisibility = (index) => {
     setVisibleLists((prev) => {
@@ -23,6 +17,20 @@ const Products = () => {
       return newVisibleLists;
     });
   };
+  useEffect(() => {
+    getAllProducts();
+  }, [getAllProducts])
+
+  useEffect(() => {
+    if (activePanel !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [activePanel])
 
   return (
     <>
@@ -136,7 +144,7 @@ const Products = () => {
                       <div className={s.filter__item__block_input}>
                         <input type="number" placeholder="От" />
                         <div className={s.hyphen}></div>
-                        <input type="numder" placeholder="До" />
+                        <input type="number" placeholder="До" />
                       </div>
                       <button>Применить</button>
                     </>
@@ -218,18 +226,85 @@ const Products = () => {
               )}
             </div>
           </div>
-          <div className={s.container__products}>
-            <CardProducts />
-            <CardProducts />
-            <CardProducts />
-            <CardProducts />
-            <CardProducts />
-            <CardProducts />
-            <CardProducts />
-            <CardProducts />
+          <div className={s.container__products_wrapper}>
+            <div className={s.container__filters}>
+              <button onClick={() => setActivePanel(activePanel === 'panel1' ? false : 'panel1')} >Категория</button>
+              <button onClick={() => setActivePanel(activePanel === 'panel2' ? false : 'panel2')}>Фильтры</button>
+              <motion.div
+                initial={{ x: '200%' }}
+                animate={{ x: activePanel === 'panel1' ? 0 : '200%' }}
+                transition={{ duration: 0.3 }}
+                className={s.active__panel}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button onClick={() => setActivePanel(null)}>Close</button>
+                <h1>Список</h1>
+                <ul>
+                  <li>Элемент 1</li>
+                  <li>Элемент 2</li>
+                  <li>Элемент 3</li>
+                </ul>
+              </motion.div>
+              <motion.div
+                initial={{ x: '200%' }}
+                animate={{ x: activePanel === 'panel2' ? 0 : '200%' }}
+                transition={{ duration: 0.3 }}
+                className={s.active__panel}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button type="button" onClick={() => setActivePanel(null)}>Close</button>
+                <h1>Список</h1>
+                <ul>
+                  <li>Элемент 4</li>
+                  <li>Элемент 5</li>
+                  <li>Элемент 6</li>
+                </ul>
+              </motion.div>
+              {activePanel && (
+                <div
+                  onClick={() => setActivePanel(false)}
+                  className={s.blur_body}
+                ></div>
+              )}
+              <select className={s.select}>
+                <option value="#">Сортировка</option>
+                <option value="#">По возрастанию цен</option>
+                <option value="#">По убыванию цен</option>
+                <option value="#">Новые</option>
+                <option value="#">По названию</option>
+              </select>
+            </div>
+            <div className={s.container__products}>
+              {/* {Array(6).fill(
+              <CardProducts
+                autor={'Vladimir'}
+                img={Arrow}
+                presence={'не в наличии'}
+                description={'loiuy ksdin isdnfijsn isdnfisjnf'}
+                price={'1345'}
+                article={'ASLOT2AS'}
+              />
+            )} */}
+              {isFetch ? (
+                <h2 className={s.loading}>Loading...</h2>
+              ) : product.length > 0 ? (
+                product.map((item) => (
+                  <CardProducts
+                    key={item.id}
+                    img={item.image}
+                    isAvialiable={item.isAvialiable}
+                    article={item.article}
+                    autor={item.autor}
+                    description={item.descr}
+                    price={item.age} />
+                ))
+              ) : (
+                <h1 className={s.loading}>тут нет товаров</h1>
+              )}
+            </div>
           </div>
         </div>
-      </main>
+      </main >
     </>
   );
 };
