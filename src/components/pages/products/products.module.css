@@ -153,6 +153,7 @@ body {
   grid-auto-rows: 1fr;
   row-gap: 33px;
   min-height: 150px;
+  column-gap: 10px;
 }
 
 .container__products_wrapper {
@@ -175,6 +176,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 18px;
 }
 
 .container__filters button {
@@ -211,12 +213,19 @@ body {
   padding: 20px;
   overflow: auto;
 }
+.active__panel .block_cross {
+  width: 100%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: flex-end;
+}
 .blur_body {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 32;
 }
@@ -239,6 +248,9 @@ body {
   }
   .select{
     width: 117px;
+  }
+  .container__products{
+    column-gap: 29px;
   }
 }
 

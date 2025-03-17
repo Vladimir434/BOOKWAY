@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
 import Header from "../../header/header";
 import s from "./products.module.css";
 import Arrow from "../../../assets/icon/arrow.svg";
+import FistCross from '../../../assets/icon/fist-cross.svg'
 import CardProducts from "../../card-products/card-products";
 import { useRroductsStore } from "../../../store/products-store/products-store";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
 const Products = () => {
   const [visibleLists, setVisibleLists] = useState(Array(8).fill(false));
   const [activePanel, setActivePanel] = useState(null)
@@ -237,13 +239,104 @@ const Products = () => {
                 className={s.active__panel}
                 onClick={(event) => event.stopPropagation()}
               >
-                <button onClick={() => setActivePanel(null)}>Close</button>
-                <h1>Список</h1>
-                <ul>
-                  <li>Элемент 1</li>
-                  <li>Элемент 2</li>
-                  <li>Элемент 3</li>
-                </ul>
+                <div className={s.block_cross}>
+                  <img src={FistCross} alt="cross" className={s.panel_cross} onClick={() => setActivePanel(null)} />
+                </div>
+                <div className={s.categories__container}>
+                  <div className={s.categories__item}>
+                    <h3
+                      className={s.categories__title}
+                      onClick={() => toggleListVisibility(0)}
+                    >
+                      Нон - фикшен
+                      <img
+                        src={Arrow}
+                        alt="arrow"
+                        className={visibleLists[0] ? s.rotate : ""}
+                      />
+                    </h3>
+                    {visibleLists[0] && (
+                      <ul>
+                        <li>Психология и саморазвитие</li>
+                        <li>Нунчпон</li>
+                        <li>Красота и здоровье</li>
+                        <li>История</li>
+                        <li>Публицистика</li>
+                        <li>Философия</li>
+                        <li>IT</li>
+                        <li>Биографии и мемуары</li>
+                        <li>Искусство и культура</li>
+                      </ul>
+                    )}
+                  </div>
+                  <div className={s.categories__item}>
+                    <h3
+                      className={s.categories__title}
+                      onClick={() => toggleListVisibility(1)}
+                    >
+                      Детям и родителям
+                      <img
+                        src={Arrow}
+                        alt="arrow"
+                        className={visibleLists[1] ? s.rotate : ""}
+                      />
+                    </h3>
+                    {visibleLists[1] && (
+                      <ul>
+                        <li>Позновательная литература</li>
+                        <li>Художественная литература</li>
+                        <li>Воспитание детей</li>
+                        <li>Здоровье детей</li>
+                      </ul>
+                    )}
+                  </div>
+                  <div className={s.categories__item}>
+                    <h3
+                      className={s.categories__title}
+                      onClick={() => toggleListVisibility(2)}
+                    >
+                      Художесвенная литература
+                      <img
+                        src={Arrow}
+                        alt="arrow"
+                        className={visibleLists[2] ? s.rotate : ""}
+                      />
+                    </h3>
+                    {visibleLists[2] && (
+                      <ul>
+                        <li>Проза</li>
+                        <li>Комиксы и манга</li>
+                        <li>Фонтастика</li>
+                        <li>Поэзия</li>
+                        <li>Детиктивы и триллеры</li>
+                        <li>Мистика</li>
+                      </ul>
+                    )}
+                  </div>
+                  <div className={s.categories__item}>
+                    <h3
+                      className={s.categories__title}
+                      onClick={() => toggleListVisibility(3)}
+                    >
+                      Бизнес литература
+                      <img
+                        src={Arrow}
+                        alt="arrow"
+                        className={visibleLists[3] ? s.rotate : ""}
+                      />
+                    </h3>
+                    {visibleLists[3] && (
+                      <ul>
+                        <li>Биографии и истории успеха</li>
+                        <li>Менеджмент и управление</li>
+                        <li>Маркетинг и продажи</li>
+                        <li>Экономика</li>
+                        <li>Финансы и инвестиция</li>
+                        <li>Переговоры и публичные выступления</li>
+                      </ul>
+                    )}
+                  </div>
+                </div>
               </motion.div>
               <motion.div
                 initial={{ x: '200%' }}
@@ -252,13 +345,97 @@ const Products = () => {
                 className={s.active__panel}
                 onClick={(event) => event.stopPropagation()}
               >
-                <button type="button" onClick={() => setActivePanel(null)}>Close</button>
-                <h1>Список</h1>
-                <ul>
-                  <li>Элемент 4</li>
-                  <li>Элемент 5</li>
-                  <li>Элемент 6</li>
-                </ul>
+                <div className={s.block_cross}>
+                  <img src={FistCross} alt="cross" className={s.panel_cross} onClick={() => setActivePanel(null)} />
+                </div>
+                <div className={s.filter_containet}>
+                    <>
+                      <div className={s.filter__item}>
+                        <h4 className={s.filter__item__title}>Цена</h4>
+                        <>
+                          <div className={s.filter__item__block_input}>
+                            <input type="number" placeholder="От" />
+                            <div className={s.hyphen}></div>
+                            <input type="number" placeholder="До" />
+                          </div>
+                          <button>Применить</button>
+                        </>
+                      </div>
+                      <div className={s.filter__item}>
+                        <h4
+                          onClick={() => toggleListVisibility(5)}
+                          className={s.filter__item__title}
+                        >
+                          Издательство
+                          <img
+                            src={Arrow}
+                            alt="arrow"
+                            className={visibleLists[5] ? s.rotate : ""}
+                          />
+                        </h4>
+                        {visibleLists[5] && (
+                          <ul>
+                            <li>АСТ</li>
+                            <li>Эскимо</li>
+                            <li>Комильфо</li>
+                            <li>Мохаон</li>
+                            <li>Азбука</li>
+                            <li>Бомбора</li>
+                            <li>Монн , Иванов и Фербер</li>
+                          </ul>
+                        )}
+                      </div>
+                      <div className={s.filter__item}>
+                        <h4
+                          onClick={() => toggleListVisibility(6)}
+                          className={s.filter__item__title}
+                        >
+                          Тип обложки
+                          <img
+                            src={Arrow}
+                            alt="arrow"
+                            className={visibleLists[6] ? s.rotate : ""}
+                          />
+                        </h4>
+                        {visibleLists[6] && (
+                          <ul>
+                            <li>Твердый переплет</li>
+                            <li>Мягкая обложка</li>
+                          </ul>
+                        )}
+                      </div>
+                      <div className={s.filter__item}>
+                        <h4
+                          onClick={() => toggleListVisibility(7)}
+                          className={s.filter__item__title}
+                        >
+                          Автор
+                          <img
+                            src={Arrow}
+                            alt="arrow"
+                            className={visibleLists[7] ? s.rotate : ""}
+                          />
+                        </h4>
+                        {visibleLists[7] && (
+                          <ul>
+                            <li>Джо Наверро</li>
+                            <li>Джейн Остин</li>
+                            <li>Кори Альтхофф</li>
+                            <li>Брюс Тулгон</li>
+                            <li>Аристотель</li>
+                            <li>Дин Кунц</li>
+                            <li>Дж. К. Роулинг</li>
+                            <li>Мосян Тунсю</li>
+                            <li>Колин Маккалоу</li>
+                            <li>Дэшнур Джеймс</li>
+                            <li>Санто Версаче</li>
+                            <li>Ульям Шекспир</li>
+                          </ul>
+                        )}
+                      </div>
+
+                    </>
+                </div>
               </motion.div>
               {activePanel && (
                 <div
@@ -275,16 +452,6 @@ const Products = () => {
               </select>
             </div>
             <div className={s.container__products}>
-              {/* {Array(6).fill(
-              <CardProducts
-                autor={'Vladimir'}
-                img={Arrow}
-                presence={'не в наличии'}
-                description={'loiuy ksdin isdnfijsn isdnfisjnf'}
-                price={'1345'}
-                article={'ASLOT2AS'}
-              />
-            )} */}
               {isFetch ? (
                 <h2 className={s.loading}>Loading...</h2>
               ) : product.length > 0 ? (
