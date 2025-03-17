@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import BgImage from "../../../assets/image/main-image-1.svg";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../utils/firebase/firebase-config";
-
+import { motion } from "framer-motion";
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +47,11 @@ const Login = () => {
       {isFetch ? (
         <h1>Loading...</h1>
       ) : (
-        <form onSubmit={onHandleSubmit} className={s.main__form}>
+        <motion.form
+        initial={{opacity: 0, y:"-1000px"}}
+        animate={{opacity: 1, y:0}}
+        transition={{ease: "easeOut", duration: 1}}
+        onSubmit={onHandleSubmit} className={s.main__form}>
           <h1 className={s.main__form__title}>Вход в аккаунт</h1>
           <div className={s.main__form__inner}>
             <div className={s.form__inner}>
@@ -93,7 +97,7 @@ const Login = () => {
             </Link>
           </div>
             <h2 className={s.main__form__pasword} onClick={handleResetPassword}>Забыли пароль ?</h2>
-        </form>
+        </motion.form>
       )}
     </main>
   );

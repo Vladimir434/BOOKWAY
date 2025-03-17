@@ -13,7 +13,6 @@ import ChatIcon from "../pages/chat.icon/chat.icon";
 const Profile = () => {
   const navigate = useNavigate();
   const {logoutUser} = userAuth()
-
   const handleLogout = () => {
     logoutUser(navigate)
   };
