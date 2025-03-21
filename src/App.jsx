@@ -22,9 +22,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registr" element={<Registr />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/products" element={<Products/>} />
-        <Route path="/chat" element={<Chat/>} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>
