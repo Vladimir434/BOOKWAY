@@ -1,0 +1,234 @@
+.main {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  position: relative;
+  font-size: 20px;
+  color: #797d91;
+}
+.main__wrapper {
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 50%;
+}
+.main__form__wrapper {
+  position: relative;
+  z-index: 77;
+  background-color: #fff;
+  padding: 60px 0px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 75%;
+  min-height: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.main__form__title {
+  font-size: 30px;
+  margin-bottom: 45px;
+  color: black;
+}
+.main__form__inner {
+  width: 80%;
+  margin: 0px auto 33px;
+  display: flex;
+  justify-content: space-between;
+}
+.form__inner__img__wrapper {
+  width: 36%;
+}
+.main__form__inner__img {
+  max-width: 344px;
+  max-height: 356px;
+}
+.main__form__description {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  row-gap: 37px;
+  width: 53%;
+}
+.product__description__art {
+  display: flex;
+  justify-content: space-between;
+}
+.product__description__art__title {
+  color: #11d25e;
+}
+.main__form__description__section1 {
+  font-size: 24px;
+  color: #664935;
+  font-weight: 450;
+}
+.main__form__description__section2 {
+  font-size: 20px;
+  margin-bottom: 80px;
+}
+.main__form__price {
+  display: flex;
+}
+.main__form__price__quantity {
+  background-color: #664935;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  column-gap: 22px;
+  width: 49%;
+  font-size: 24px;
+  padding: 15px 0px;
+  border-radius: 50px;
+}
+.main__form__price__button {
+  border: none;
+  font-size: 24px;
+  background-color: #664935;
+  color: #fff;
+}
+.main__form__price__price {
+  width: 49%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #664935;
+}
+.main__form {
+  width: 85%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 17px;
+}
+.main__form__section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+}
+.main__form__section h4 {
+  text-align: start;
+  font-size: 20px;
+}
+.main__form__section__input {
+  padding: 12px 0px 12px 23px;
+  font-size: 20px;
+  border: solid 0.5px #664935;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+.main__form :link {
+  text-decoration: none;
+  font-size: 20px;
+}
+.main__form__button__link {
+  margin-top: 40px;
+  padding: 18px 0px;
+  width: 100%;
+  border-radius: 11px;
+  color: #fff;
+  background-color: #664935;
+}
+
+@media screen and (max-width: 1200px) {
+  .main__form__wrapper {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .main__form__wrapper {
+    width: 95%;
+  }
+
+  .main__form__inner {
+    width: 90%;
+  }
+  .main__form__price {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .main__form__description__section2 {
+    margin-bottom: 30px;
+  }
+  .product__description__art,
+  .main__form__description__section1,
+  .main__form__description__section2 {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .main__form__wrapper {
+    padding: 40px 0px;
+  }
+  .main__form__inner__img {
+    max-width: 244px;
+    max-height: 256px;
+  }
+  .main__form__description {
+    row-gap: 27px;
+    width: 63%;
+  }
+  .main__form__price__quantity {
+    padding: 5px 0px;
+  }
+
+  .main__form__price__button {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 560px) {
+  .main__form__inner {
+    flex-direction: column;
+  }
+  .form__inner__img__wrapper {
+    width: 80%;
+    margin: 0px auto 20px;
+  }
+
+  .main__form__description {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .main__form__title {
+    font-size: 22px;
+    margin-bottom: 35px;
+  }
+  .product__description__art,
+  .main__form__description__section1,
+  .main__form__description__section2 {
+    font-size: 16px;
+  }
+  .main__form__price {
+    flex-direction: row;
+    row-gap: 10px;
+  }
+  .main__form__price__price{
+    font-size: 24px;
+  }
+  .main__form__price__quantity{
+    font-size: 18px;
+  }
+  .main__form__section h4,
+  .main__form__section__input{
+    font-size: 18px;
+  }
+  .main__form__section__input{
+    padding: 10px 0px 10px 10px;
+  }
+  .main__form :link{
+    font-size: 18px;
+  }
+}
