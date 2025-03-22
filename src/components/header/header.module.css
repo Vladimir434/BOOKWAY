@@ -90,8 +90,8 @@
   font-size: 15px;
   font-weight: 500;
 }
-
 .frame {
+  padding: 12px;
   display: flex;
   align-items: center;
 }
@@ -101,12 +101,11 @@
   font-size: 15px;
   font-weight: 400;
 }
-
-.nav :link{
+.header__bottom_content :link{
   text-decoration: none;
 }
 
-.nav__ul a{
+.header__bottom_content a{
   color: white;
 }
 .burger__manu_item{
@@ -137,6 +136,7 @@
   height: 2px;
   background-color: #FFFFFF;
 }
+
 
 @media (max-width:760px) {
   .burger__menu{
