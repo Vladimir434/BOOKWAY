@@ -6,9 +6,11 @@ import Profile from "./components/profile/profile";
 import Products from "./components/pages/products/products";
 
 const Login = lazy(() => import("./components/auth/login/login"));
+const Basket = lazy(() => import("./components/pages/basket/basket"));
 const MainPage = lazy(() => import("./components/pages/main-page/main-page"));
 const Registr = lazy(() => import("./components/auth/registr/registr"));
 const About = lazy(() => import("./components/pages/about/about"));
+const Order = lazy(() => import("./components/pages/order/order"));
 const Error = lazy(() => import("./components/error/error"));
 const Product = lazy(() => import("./components/pages/product/product"));
 const Chat = lazy(() => import("./components/pages/chat-page/chat-page"));
@@ -24,6 +26,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registr" element={<Registr />} />
         <Route path="/about" element={<About />} />
+        <Route path="/basket" element={<Basket />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/products" element={<Products/>} />
         <Route path="/products/:id" element={<Product/>} />

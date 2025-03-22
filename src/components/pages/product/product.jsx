@@ -3,7 +3,7 @@ import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
 import Art from "../../../assets/image/art.svg";
-import ChatIvon from "../chat.icon/chat.icon"
+import ChatIvon from "../chat.icon/chat.icon";
 import { useState } from "react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Img1 from "../../../assets/image/1.webp";
@@ -17,7 +17,7 @@ const Product = () => {
 
   return (
     <>
-      <ChatIvon/>
+      <ChatIvon />
       <Header />
       <main className={s.main}>
         <div className={s.main__wrapper}>
@@ -121,7 +121,10 @@ const Product = () => {
                 <button className={s.product__price__btn__section1}>
                   В корзину
                 </button>
-                <Link to="/straight" className={s.product__price__btn__section2}>
+                <Link
+                  to="/straight"
+                  className={s.product__price__btn__section2}
+                >
                   Купить в 1 клик
                 </Link>
               </div>
@@ -140,10 +143,10 @@ const Product = () => {
               расчете, благоразумии и безрассудстве, гордости и предубеждении...
             </p>
           </div>
-          <div className={s.main__similar}>
+          {/* <div className={s.main__similar}>
             <h2 className={s.main__similar__title}>Книги из этой же категории</h2>
             <div className={s.main__similar__content}></div>
-          </div>
+          </div> */}
         </div>
       </main>
       <Reviews />

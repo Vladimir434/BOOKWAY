@@ -55,10 +55,10 @@ const Header = () => {
               <Link to="/about">О нас</Link>
             </ul>
           </nav>
-          <div className={s.frame}>
+          <Link to="/basket" className={s.frame}>
             <img src={Frame} alt="корзина" />
             <h3>Корзина</h3>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
