@@ -6,16 +6,6 @@
   padding: 0 20px;
   column-gap: 43px;
 }
-/* .story_active{
-  display: flex;
-  flex-direction: column;
-  max-width: 1268px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-  column-gap: 43px;
-} */
-
 .profile__title_block{
   display: flex;
   align-items: center;
@@ -36,6 +26,10 @@
   color: #664935;
   font-size: 20px;
   font-weight: 400;
+}
+.active__tab{
+  color: #664935;
+  text-decoration: underline;
 }
 .profile__nav{
   max-width: 295px; 

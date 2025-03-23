@@ -11,50 +11,91 @@ import Exchange from "../../assets/icon/exchange.svg";
 import { userAuth } from "../../store/auth-slice/auth-slice";
 import ProfileInfo from "../profile-info/profile-info";
 import ProfileStory from "../frofile-story/profile-story";
+import ProfileAds from "../prifile-ads/profile-ads";
+import ProfileAddAds from "../profile-add-ads/profile-add-ads";
 
 const Profile = () => {
   const navigate = useNavigate();
   const { logoutUser } = userAuth();
   const [activeTab, setActiveTab] = useState("aboutMe");
-  // const [exchange, setAxchange] = useState("placeAd")
+  const [exchange, setAxchange] = useState("placeAd");
 
   const handleLogout = () => {
     logoutUser(navigate);
   };
-
   return (
     <>
       <Header />
       <div className={s.profile__title_block}>
         <h2 className={s.profile__title}>
-          {activeTab === "exchange" ? 'Обмен' : "Личный кабинет"}
+          {activeTab === "exchange" ? "Обмен" : "Личный кабинет"}
         </h2>
         {activeTab === "exchange" && (
           <>
-            <h3 className={s.profile__title_render}>Поместить объявление</h3>
-            <h3 className={s.profile__title_render}>Другие объявления</h3>
+            <h3
+              className={`${s.profile__title_render} ${
+                exchange === "placeAd" ? s.active__tab : ""
+              }`}
+              onClick={() => setAxchange("placeAd")}
+            >
+              Поместить объявление
+            </h3>
+            <h3
+              className={`${s.profile__title_render} ${
+                exchange === "otherAds" ? s.active__tab : ""
+              }`}
+              onClick={() => setAxchange("otherAds")}
+            >
+              Другие объявления
+            </h3>
           </>
         )}
       </div>
-      <div className={`${s.profile__wrapper} ${activeTab === 'story' ? s.story_active : ''} ${activeTab === 'aboutMe' ? s.active__aboutMe : ''}`}>
+      <div
+        className={`${s.profile__wrapper} 
+      ${activeTab === "story" ? s.story_active : ""} 
+      ${activeTab === "aboutMe" ? s.active__aboutMe : ""}
+      `}
+      >
         <div className={s.profile__nav}>
           <div className={s.profile__nav_item}>
-            <div className={`${s.active__indicator} ${activeTab === "story" ? "" : s.hidden}`}></div>
-            <button className={s.profile__nav_button} onClick={() => setActiveTab("story")}>
+            <div
+              className={`${s.active__indicator} ${
+                activeTab === "story" ? "" : s.hidden
+              }`}
+            ></div>
+            <button
+              className={s.profile__nav_button}
+              onClick={() => setActiveTab("story")}
+            >
               <img src={Story} alt="story" />
               История заказов
             </button>
           </div>
           <div className={s.profile__nav_item}>
-            <div className={`${s.active__indicator} ${activeTab === "aboutMe" ? "" : s.hidden}`}></div>
-            <button className={s.profile__nav_button} onClick={() => setActiveTab("aboutMe")}>
+            <div
+              className={`${s.active__indicator} ${
+                activeTab === "aboutMe" ? "" : s.hidden
+              }`}
+            ></div>
+            <button
+              className={s.profile__nav_button}
+              onClick={() => setActiveTab("aboutMe")}
+            >
               <img src={AboutMe} alt="about me" />
               Информация обо мне
             </button>
           </div>
           <div className={s.profile__nav_item}>
-            <div className={`${s.active__indicator} ${activeTab === "exchange" ? "" : s.hidden}`}></div>
-            <button className={s.profile__nav_button} onClick={() => setActiveTab("exchange")}>
+            <div
+              className={`${s.active__indicator} ${
+                activeTab === "exchange" ? "" : s.hidden
+              }`}
+            ></div>
+            <button
+              className={s.profile__nav_button}
+              onClick={() => setActiveTab("exchange")}
+            >
               <img src={Exchange} alt="exchange" />
               Обмен
             </button>
@@ -70,7 +111,12 @@ const Profile = () => {
         <div className={s.profile__components}>
           {activeTab === "aboutMe" && <ProfileInfo />}
           {activeTab === "story" && <ProfileStory />}
-          {activeTab === "exchange" && <h1></h1>}
+          {activeTab === "exchange" && (
+            <>
+              {exchange === "placeAd" && <ProfileAddAds/>}
+              {exchange === "otherAds" && <ProfileAds/>}
+            </>
+          )}
         </div>
       </div>
       <Reviews />
