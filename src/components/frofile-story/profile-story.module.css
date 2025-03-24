@@ -75,6 +75,7 @@ font-weight: 600;
 .content__info_block {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 12px;
 }
 .content__info_block_items{
   display: flex;
@@ -85,6 +86,11 @@ font-weight: 600;
   color: #664935;
   font-size: 14px;
   font-weight: 400;
+}
+.content__cards{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
 .delivery{
   background-color: #F3F5F7;

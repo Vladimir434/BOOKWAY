@@ -1,5 +1,12 @@
+import { useEffect } from 'react'
+import { useRroductsStore } from '../../store/products-store/products-store'
+import OrderContentsCard from '../order-contents-card/order-contents-card'
 import s from './profile-story.module.css'
 const ProfileStory = () => {
+  const {getAllProducts, product} = useRroductsStore()
+  useEffect(() => {
+    getAllProducts()
+  },[getAllProducts])
   return (
     <main className={s.main}>
       <div className={s.story__wrapper}>
@@ -81,6 +88,42 @@ const ProfileStory = () => {
                     <p>Стоимость</p>
                   </div>
                 </div>
+                  <div className={s.content__cards}>
+                    {product.map((item, index) => (
+                      <>
+                    <OrderContentsCard 
+                    key={index}
+                    img={item.image}
+                    article={'2343242'} 
+                    autor={item.autor} 
+                    price={item.price}
+                    quantity={'4'}
+                    result={3456}
+                    title={item.name}  
+                    />
+                    <OrderContentsCard 
+                    key={index}
+                    img={item.image}
+                    article={'2343242'} 
+                    autor={item.autor} 
+                    price={item.price}
+                    quantity={'4'}
+                    result={3456}
+                    title={item.name}  
+                    />
+                    <OrderContentsCard 
+                    key={index}
+                    img={item.image}
+                    article={'2343242'} 
+                    autor={item.autor} 
+                    price={item.price}
+                    quantity={'4'}
+                    result={3456}
+                    title={item.name}  
+                    />
+                    </>
+                    ))}
+                  </div>
               </div>
             </div>
           <div className={s.delivery}>
