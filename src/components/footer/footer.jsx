@@ -17,8 +17,8 @@ const Footer = () => {
         </div>
         <div className={s.footer__info}>
           <h4 className={s.footer__info_title}>Для клиента</h4>
-          <a className={s.footer__info_item}>Акции</a>
-          <a className={s.footer__info_item}>Обмен </a>
+          {/* <a className={s.footer__info_item}>Акции</a> */}
+          <Link to='/profile' className={s.footer__info_item}>Обмен </Link>
           <Link to="/about" className={s.footer__info_item}>
             О нас
           </Link>

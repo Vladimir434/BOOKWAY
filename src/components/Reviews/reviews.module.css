@@ -15,10 +15,8 @@
 }
 
 .reviews{
-  max-width: 1296px;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
-  padding: 0 20px;
 }
 .reviews__title{
   position: relative;
@@ -64,6 +62,11 @@
 @media (max-width:930px) {
   .mySwiper{
     width: 88%;
+  }
+}
+@media (max-width:850px) {
+  .reviews{
+    width: 95%;
   }
 }
 @media (max-width:690px) {
