@@ -95,6 +95,7 @@ button {
 }
 .main__order {
   max-width: 30%;
+  height: 190px;
   background-color: #fff;
   padding: 15px;
   border-radius: 20px;
