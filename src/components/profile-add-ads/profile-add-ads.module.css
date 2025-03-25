@@ -71,3 +71,27 @@
   width: 1px;
   visibility: hidden;
 }
+
+
+@media screen and (max-width: 1000px) {
+  .form__block_wrapper{
+    column-gap: 25px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .form__block_wrapper{
+    column-gap: 15px;
+  }
+}
+
+
+@media screen and (max-width: 676px) {
+  .form__block_wrapper{
+    flex-direction: column;
+    row-gap: 35px;
+  }
+  .block__fail{
+    column-gap: 15px;
+  }
+}

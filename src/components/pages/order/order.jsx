@@ -110,7 +110,7 @@ const Order = () => {
                     <img
                       src={Arrow}
                       alt="arrow"
-                      className={visibleLists[0] ? s.rotate : ""}
+                      className={visibleLists[0] ? s.rotate : s.noyrotate}
                     />
                   </p>
 

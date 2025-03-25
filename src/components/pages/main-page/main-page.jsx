@@ -15,7 +15,6 @@ import Footer from "../../footer/footer";
 import Reviews from "../../Reviews/reviews";
 import Header from "../../header/header";
 import { Link } from "react-router-dom";
-import ChatIcon from "../chat.icon/chat.icon";
 
 const MainPage = () => {
   const images = [
@@ -28,7 +27,6 @@ const MainPage = () => {
   ];
   return (
     <>
-    <ChatIcon/>
     <Header/>
     <main className={s.main}>
       <div className={s.wrapper__swiper}>

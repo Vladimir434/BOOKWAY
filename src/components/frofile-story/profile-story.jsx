@@ -1,21 +1,31 @@
-import { useEffect } from 'react'
+import { useEffect , useState} from 'react'
 import { useRroductsStore } from '../../store/products-store/products-store'
 import OrderContentsCard from '../order-contents-card/order-contents-card'
 import s from './profile-story.module.css'
+import Arrow from "../../assets/icon/arrow.svg";
+
 const ProfileStory = () => {
   const {getAllProducts, product} = useRroductsStore()
   useEffect(() => {
     getAllProducts()
   },[getAllProducts])
+
+  const [visibleLists, setVisibleLists] = useState(Array(1).fill(false));
+  const toggleListVisibility = (index) => {
+    setVisibleLists((prev) => {
+      const newVisibleLists = [...prev];
+      newVisibleLists[index] = !newVisibleLists[index];
+      return newVisibleLists;
+    });
+  };
+
   return (
+    <>
+    
     <main className={s.main}>
       <div className={s.story__wrapper}>
         <div className={s.story__info}>
           <div className={s.stoey__info_text_info}>
-            <div className={s.stoey__info_text}>
-              <p>Дата:</p>
-              <h4>34567890-</h4>
-            </div>
             <div className={s.stoey__info_text}>
               <p>Дата:</p>
               <h4>34567890-</h4>
@@ -34,13 +44,14 @@ const ProfileStory = () => {
             </div>
             <div className={s.stoey__info_text}>
               <p>Статус:</p>
-              <h4>Доставка</h4>
+              <h4>Получен</h4>
             </div>
-            <div className={s.stoey__info_text}>
-              <h4>0</h4>
+            <div className={s.stoey__info_text}  onClick={() => toggleListVisibility(0)}>
+              <img src={Arrow} className={visibleLists[0] ? s.rotate : s.noyrotate}/>
             </div>
           </div>
-          <div className={s.story__data}>
+          {visibleLists[0] && (
+            <div className={s.story__data}>
             <div className={s.story__info_order}>
               <div className={s.information}>
                 <h3 className={s.information__title}>Информация о заказе</h3>
@@ -130,11 +141,16 @@ const ProfileStory = () => {
             <h4>Доставка</h4>
             <h4>160 сом</h4>
           </div>
+          <div className={s.delivery}>
+            <h4>Статус заказа</h4>
+            <h4>Получен</h4>
           </div>
+          </div>
+          )}
         </div>
       </div>
-    </main>
+     </main>
+   </>
   )
 }
-
 export default ProfileStory
