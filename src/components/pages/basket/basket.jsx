@@ -18,6 +18,7 @@ const Basket = () => {
       author: "Джейн Остин",
       price: 240,
       quantity: 1,
+      image: Img,
     },
     {
       id: 2,
@@ -25,6 +26,7 @@ const Basket = () => {
       author: "Джейн Остин",
       price: 240,
       quantity: 1,
+      image: Img,
     },
     {
       id: 3,
@@ -32,6 +34,7 @@ const Basket = () => {
       author: "Джейн Остин",
       price: 480,
       quantity: 2,
+      image: Img,
     },
   ];
   const [clickedItems, setClickedItems] = useState({});
@@ -62,7 +65,7 @@ const Basket = () => {
                     <img src={Delete} alt="удалить товар" />
                   </button>
                   <div className={s.carts__item__info}>
-                    <img src={Img} alt="картинка товара" />
+                    <img src={item.image} alt="картинка товара" />
                     <div className={s.carts__item__info__text}>
                       <label className={s.item__info__text__title}>
                         {item.title}

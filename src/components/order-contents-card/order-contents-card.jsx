@@ -12,9 +12,9 @@ const OrderContentsCard = ({ img, title, article, autor, price, quantity, result
         <p>Артикул:{article}</p>
       </div>
       <div className={s.main__block__price}>
-        <h2 className={s.price}>{price}</h2>
-        <h3 className={s.price}>{quantity}</h3>
-        <h2 className={s.price}>{result}</h2>
+        <h2 className={s.price}><p className={s.main__block__price__text}>Цена</p>{price}</h2>
+        <h3 className={s.price}><p className={s.main__block__price__text}>Количество</p>{quantity}</h3>
+        <h2 className={s.price}><p className={s.main__block__price__text}>Стоимость</p>{result}</h2>
       </div>
     </main>
   )

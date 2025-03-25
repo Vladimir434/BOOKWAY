@@ -31,7 +31,7 @@ const Profile = () => {
           {activeTab === "exchange" ? "Обмен" : "Личный кабинет"}
         </h2>
         {activeTab === "exchange" && (
-          <>
+          <div className={s.profile__title_render_wrapper}>
             <h3
               className={`${s.profile__title_render} ${
                 exchange === "placeAd" ? s.active__tab : ""
@@ -48,7 +48,12 @@ const Profile = () => {
             >
               Другие объявления
             </h3>
-          </>
+            <h3
+              className={s.profile__title_render}
+            >
+              Ваши объявления
+            </h3>
+          </div>
         )}
       </div>
       <div

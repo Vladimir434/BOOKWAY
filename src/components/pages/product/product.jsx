@@ -3,7 +3,6 @@ import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
 import Art from "../../../assets/image/art.svg";
-import ChatIvon from "../chat.icon/chat.icon";
 import { useState } from "react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Img1 from "../../../assets/image/1.webp";
