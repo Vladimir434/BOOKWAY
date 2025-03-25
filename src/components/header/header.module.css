@@ -14,10 +14,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1268px;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .search__bar {
@@ -51,12 +49,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.5s;
+}
+.auth__block:hover{
+  background-color: #502323;
 }
 
 .auth__block h3 {
   color: #a17c62;
   font-size: 15px;
   font-weight: 500;
+  transition: 0.3s;
+}
+.auth__block h3:hover{
+  color: #A17C62;
 }
 
 .header__top :link{
@@ -69,14 +75,12 @@
 }
 
 .header__bottom_content {
-  max-width: 1268px;
-  width: 100%;
+  width: 90%;
   height: 50px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
 }
 .header__bottom_content .nav ul {
   list-style-type: none;
@@ -137,6 +141,14 @@
   background-color: #FFFFFF;
 }
 
+@media (max-width:850px) {
+  .header__top{
+    width: 95%;
+  }
+  .header__bottom_content{
+    width: 95%;
+  }
+}
 
 @media (max-width:760px) {
   .burger__menu{
