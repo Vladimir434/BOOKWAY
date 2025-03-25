@@ -166,7 +166,7 @@
   margin-bottom: 27px;
 }
 
-.about__Us :link {
+.about__us_link  {
   width: 149px;
   height: 60px;
   text-decoration: none;
@@ -177,11 +177,14 @@
   background-color: var(--button-bg-color-normal);
   border: none;
   border-radius: 50px;
+  transition: 0.3s;
+}
+.about__us_link:hover {
+  background-color: #502323;
 }
 
 .about__Us a {
   left: 90%;
-  position: absolute;
   color: #fff;
 }
 

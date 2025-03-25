@@ -84,7 +84,7 @@ const MainPage = () => {
           </div>
         </div>
       </div>
-      <div className={s.promo}>
+      {/* <div className={s.promo}>
         <div className={s.promo__header}>
           <h2 className={s.promo__title}>Актуальные акции</h2>
           <button className={s.promo__button}>Все акции &gt;</button>
@@ -93,11 +93,8 @@ const MainPage = () => {
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb"}/>
         <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
-        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
-        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
-        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
         </div>
-      </div>
+      </div> */}
       <div className={s.about__Us}>
           <div className={s.main__about__first__logo}>
             <img src={ImageLogo} alt="логотип" />
@@ -130,7 +127,7 @@ const MainPage = () => {
             нас! Надеемся, вы наслаждаетесь шопингом так же, как мы наслаждаемся
             тем, что можем служить вам!
           </p>
-          <Link to="/about">Подробнее &gt;</Link>
+          <Link to="/about" className={s.about__us_link}>Подробнее &gt;</Link>
       </div>
       <Reviews/>
       <Footer/>

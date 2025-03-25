@@ -32,6 +32,10 @@
   font-size: 14px;
   font-weight: 500;
   color: #664935;
+  transition: 0.3s;
+}
+.footer__button:hover{
+  background-color: #E5E9EC;
 }
 .footer__info {
   max-width: 17%;
@@ -59,6 +63,10 @@
   color: #664935;
   font-size: 29px;
   font-weight: 600;
+  transition: 0.3s;
+}
+.footer__contacts_tel:hover {
+  color: #502323;
 }
 .footer__contacts_item {
   font-size: 18px;
