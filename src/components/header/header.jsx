@@ -33,7 +33,7 @@ const Header = () => {
           <h3>{user ? 'Личный кабинет' : 'Войти' }</h3>
         </Link>
         <div className={s.burger__menu}>
-          <Link to="/profile" className={s.burger__manu_item}>
+          <Link to={user ? '/profile' : '/login'} className={s.burger__manu_item}>
             <img src={UserAuth} alt="user" />
           </Link>
           <div className={s.burger__manu_item}>

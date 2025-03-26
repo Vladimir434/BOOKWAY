@@ -8,8 +8,8 @@ import CardProducts from "../../card-products/card-products";
 import { useRroductsStore } from "../../../store/products-store/products-store";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import SkeletonCard from "../../skeleton/skeleton";
 
-// Данные для категорий
 const CATEGORIES_DATA = [
   {
     title: "Нон-фикшен",
@@ -58,7 +58,6 @@ const CATEGORIES_DATA = [
   }
 ];
 
-// Данные для фильтров
 const FILTERS_DATA = [
   {
     title: "Цена",
@@ -72,7 +71,7 @@ const FILTERS_DATA = [
     title: "Издательство",
     type: "list",
     items: [
-      "АСТ", "Эскимо", "Комильфо", "Мохаон", 
+      "АСТ", "Эскимо", "Комильфо", "Мохаон",
       "Азбука", "Бомбора", "Монн , Иванов и Фербер"
     ]
   },
@@ -80,7 +79,7 @@ const FILTERS_DATA = [
     title: "Тип обложки",
     type: "list",
     items: [
-      "Твердый переплет", 
+      "Твердый переплет",
       "Мягкая обложка"
     ]
   },
@@ -101,17 +100,15 @@ const Products = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { product, isFetch, getAllProducts } = useRroductsStore();
 
-  // Фильтрация продуктов
   const filteredProducts = selectedCategories.length > 0
-    ? product.filter(item => 
-        item.category && 
-        item.category.some(cat => selectedCategories.includes(cat))
-      )
+    ? product.filter(item =>
+      item.category &&
+      item.category.some(cat => selectedCategories.includes(cat))
+    )
     : product;
 
-  // Обработчик выбора категории
   const handleCategorySelect = (category) => {
-    setSelectedCategories(prev => 
+    setSelectedCategories(prev =>
       prev.includes(category)
         ? prev.filter(c => c !== category)
         : [...prev, category]
@@ -141,7 +138,6 @@ const Products = () => {
     };
   }, [activePanel]);
 
-  // Рендер категорий
   const renderCategories = (categories, offset = 0) => (
     <div className={s.categories__container}>
       {categories.map((category, index) => (
@@ -175,7 +171,6 @@ const Products = () => {
     </div>
   );
 
-  // Рендер фильтров
   const renderFilters = (filters, offset = 4) => (
     <>
       {filters.map((filter, index) => (
@@ -220,19 +215,16 @@ const Products = () => {
       <main className={s.main__container}>
         <h1 className={s.main__title}>Категории</h1>
         {selectedCategories.length > 0 && (
-          <button 
-          onClick={() => setSelectedCategories([])}
-          className={s.resetButton}
-        >
-          Сбросить все категории
-        </button>
+          <button
+            onClick={() => setSelectedCategories([])}
+            className={s.resetButton}
+          >
+            Сбросить все категории
+          </button>
         )}
         <div className={s.wrapper__categories__products}>
           <div className={s.container__categories__filters}>
-            {/* Основные категории */}
             {renderCategories(CATEGORIES_DATA)}
-            
-            {/* Фильтры */}
             <div className={s.filter_containet}>
               <h3
                 className={s.filter__title}
@@ -266,7 +258,6 @@ const Products = () => {
                 Фильтры
               </button>
 
-              {/* Мобильная панель категорий */}
               <motion.div
                 initial={{ x: "200%" }}
                 animate={{ x: activePanel === "panel1" ? 0 : "200%" }}
@@ -285,7 +276,6 @@ const Products = () => {
                 {renderCategories(CATEGORIES_DATA)}
               </motion.div>
 
-              {/* Мобильная панель фильтров */}
               <motion.div
                 initial={{ x: "200%" }}
                 animate={{ x: activePanel === "panel2" ? 0 : "200%" }}
@@ -324,7 +314,9 @@ const Products = () => {
 
             <div className={s.container__products}>
               {isFetch ? (
-                <h2 className={s.loading}>Loading...</h2>
+                Array(8)
+                .fill(null)
+                .map((_, index) => <SkeletonCard key={index}/>)
               ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
                   <CardProducts
@@ -339,8 +331,8 @@ const Products = () => {
                 ))
               ) : (
                 <h1 className={s.loading}>
-                  {selectedCategories.length > 0 
-                    ? "Товаров по выбранным категориям не найдено" 
+                  {selectedCategories.length > 0
+                    ? "Товаров по выбранным категориям не найдено"
                     : "Тут нет товаров"}
                 </h1>
               )}
