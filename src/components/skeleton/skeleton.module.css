@@ -1,0 +1,29 @@
+.card__container {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.card__img {
+  width: 100%;
+  margin-bottom: 15px;
+  height: 226px;
+}
+
+.skeletonImage {
+object-fit: cover; 
+border-radius: 10px;
+}
+
+
+.availability {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.block__btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
