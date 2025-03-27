@@ -20,6 +20,9 @@ body {
   padding-bottom: 20px;
   margin-top: 15px;
 }
+.container__products :link{
+  text-decoration: none;
+}
 
 .rotate {
   transform: rotate(90deg);

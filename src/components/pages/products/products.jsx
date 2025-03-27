@@ -8,6 +8,7 @@ import CardProducts from "../../card-products/card-products";
 import { useRroductsStore } from "../../../store/products-store/products-store";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Данные для категорий
 const CATEGORIES_DATA = [
@@ -327,15 +328,15 @@ const Products = () => {
                 <h2 className={s.loading}>Loading...</h2>
               ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
+                  <Link to={`/products/${item.id}`} key={item.id}>
                   <CardProducts
-                    key={item.id}
                     img={item.image}
                     isAvialiable={item.isAvialiable}
                     article={item.article}
                     autor={item.autor}
                     description={item.descr}
                     price={item.age}
-                  />
+                  /></Link>
                 ))
               ) : (
                 <h1 className={s.loading}>
