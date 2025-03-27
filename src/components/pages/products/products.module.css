@@ -278,15 +278,27 @@ body {
   .container__products{
     column-gap: 29px;
   }
+  .container__products {
+    grid-template: repeat(1, 1fr) / repeat(3, 1fr);
+  }
 }
 @media (max-width:850px) {
   .main__container{
     width: 95%;
   }
 }
-
+@media (max-width:800px) {
+  .container__products {
+    grid-template: repeat(1, 1fr) / repeat(2, 1fr);
+  }
+}
 @media (max-width:520px) {
   .main__container {
     padding: 0 5px;
+  }
+}
+@media (max-width:460px) {
+  .container__products{
+    column-gap: 14px;
   }
 }
