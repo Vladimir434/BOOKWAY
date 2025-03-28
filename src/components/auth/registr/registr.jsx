@@ -13,12 +13,13 @@ const Registr = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [isCheck, setIsCheck] = useState(false);
+
   const { registerUser, isFetch } = userAuth();
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      registerUser(email, password, nav, isCheck);
+      registerUser(email, password, name, lastName, nav, isCheck);
       setEmail("");
       setPassword("");
     } else {

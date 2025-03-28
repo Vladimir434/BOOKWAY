@@ -12,6 +12,7 @@
 }
 .footer {
   width: 90%;
+  max-width: 1500px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -19,6 +20,8 @@
 .footer__logo {
   display: flex;
   flex-direction: column;
+  max-width: 165px;
+  width: 100%;
 }
 .footer__logo img {
   width: 100%;
@@ -94,7 +97,7 @@
 
 @media screen and (max-width: 600px) {
 .footer__wrapper {
-  height: 700px;
+  height: 570px;
 }
   .footer {
     height: 80%;

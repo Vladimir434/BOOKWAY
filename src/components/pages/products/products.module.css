@@ -10,6 +10,7 @@ body {
 
 .main__container {
   width: 90%;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
@@ -60,6 +61,7 @@ body {
   max-width: 264px;
   width: 100%;
   padding: 15px 5px;
+  transition: 0.4s;
 }
 
 .filter__title {
