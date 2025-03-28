@@ -10,7 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../utils/firebase/firebase-config";
 const Header = () => {
   const [user,setUser] = useState(null);
-  const [role, setRole] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(null);
 
   
   useEffect(() => {
@@ -34,12 +34,12 @@ const Header = () => {
           <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
-        <Link to={ "/admin-panel"}  className={s.auth__block}>
+        <Link to={ isAdmin === true ? "/admin-panel" : user ? "/profile" : "/login"}  className={s.auth__block}>
           <img src={UserAuth} alt="пользователь" />
-          <h3>{user ? (role === "admin" ? "Админ-панель" : "Личный кабинет") : "Войти"}</h3>
+          <h3>{user ? (isAdmin === true ? "Админ-панель" : "Личный кабинет") : "Войти"}</h3>
         </Link>
         <div className={s.burger__menu}>
-          <Link to={role === "admin" ? "/admin-panel" : user ? "/profile" : "/login"} className={s.burger__manu_item}>
+          <Link to={ user ? "/profile" : "/login"} className={s.burger__manu_item}>
             <img src={UserAuth} alt="user" />
           </Link>
           <div className={s.burger__manu_item}>
