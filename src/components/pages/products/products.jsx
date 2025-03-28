@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import SkeletonCard from "../../skeleton/skeleton";
 
 const CATEGORIES_DATA = [
+  
   {
     title: "Нон-фикшен",
     items: [
@@ -60,6 +61,7 @@ const CATEGORIES_DATA = [
 ];
 
 const FILTERS_DATA = [
+  
   {
     title: "Цена",
     type: "range",

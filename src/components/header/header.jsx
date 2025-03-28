@@ -10,13 +10,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../utils/firebase/firebase-config";
 const Header = () => {
   const [user,setUser] = useState(null);
+  const [role, setRole] = useState(null);
 
+  
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        const userRole = await getUserRole(currentUser.uid);
+        setRole(userRole);
+      }
     });
     return () => unsubscribe();
-  },[]);
+  }, []);
 
   return (
     <div className={s.header__wrapper}>
@@ -28,12 +34,12 @@ const Header = () => {
           <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
-        <Link to={user ? '/profile' : '/login'} className={s.auth__block}>
+        <Link to={ "/admin-panel"}  className={s.auth__block}>
           <img src={UserAuth} alt="пользователь" />
-          <h3>{user ? 'Личный кабинет' : 'Войти' }</h3>
+          <h3>{user ? (role === "admin" ? "Админ-панель" : "Личный кабинет") : "Войти"}</h3>
         </Link>
         <div className={s.burger__menu}>
-          <Link to={user ? '/profile' : '/login'} className={s.burger__manu_item}>
+          <Link to={role === "admin" ? "/admin-panel" : user ? "/profile" : "/login"} className={s.burger__manu_item}>
             <img src={UserAuth} alt="user" />
           </Link>
           <div className={s.burger__manu_item}>
