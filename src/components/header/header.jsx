@@ -68,7 +68,7 @@ const Header = () => {
       <div className={s.header__bottom}>
         <div className={s.header__bottom_content}>
           <nav className={s.nav}>
-            <Link to="/products"><h5>Категории</h5></Link>
+            <Link to="/products"><h5>Товары</h5></Link>
             <Link to="/about"><h5>О нас</h5></Link>
           </nav>
           <Link to={user ? './basket' : './login'} className={s.frame}>
