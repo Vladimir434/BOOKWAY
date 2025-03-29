@@ -1,0 +1,32 @@
+.main__content {
+  display: flex;
+  row-gap: 35px;
+  column-gap: 3%;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.main__content__item {
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  width: 48%;
+  align-items: center;
+  column-gap: 20%;
+}
+.carts__item__delete {
+  background-color: #fff;
+}
+.item__info__text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  font-size: 17px;
+  color: #664935;
+}
+@media screen and (max-width: 900px) {
+  .main__content__item{
+    width: 100%;
+  }
+}

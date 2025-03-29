@@ -1,47 +1,89 @@
 import s from "./admin-products.module.css";
-import SkeletonCard from "../../skeleton/skeleton";
-import { useState } from "react";
-import CardProducts from "../../card-products/card-products";
-import { Link } from "react-router-dom";
+import Delete from "../../../assets/icon/close cross.svg";
 
 const AdminProducts = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const { product, isFetch } = useProductsStore(); 
-
-  const filteredProducts =
-    selectedCategories.length > 0
-      ? product.filter(
-          (item) =>
-            Array.isArray(item.category) &&
-            item.category.some((cat) => selectedCategories.includes(cat))
-        )
-      : product;
-
   return (
-    <div className={s.container__products}>
-      {isFetch ? (
-        Array.from({ length: 8 }).map((_, index) => <SkeletonCard key={index} />)
-      ) : filteredProducts.length > 0 ? (
-        filteredProducts.map((item) => (
-          <Link to={`/products/${item.id}`} key={item.id}>
-            <CardProducts
-              img={item.image}
-              isAvialiable={item.isAvialiable}
-              article={item.article}
-              autor={item.autor}
-              description={item.descr}
-              price={item.age} 
-            />
-          </Link>
-        ))
-      ) : (
-        <h1 className={s.loading}>
-          {selectedCategories.length > 0
-            ? "Товаров по выбранным категориям не найдено"
-            : "Тут нет товаров"}
-        </h1>
-      )}
-    </div>
+    <>
+      <main className={s.main}>
+        <div className={s.main__content}>
+          <div className={s.main__content__item}>
+            <button className={s.carts__item__delete}>
+              <img src={Delete} alt="удалить товар" />
+            </button>
+            <div className={s.item__info__text}>
+              <label className={s.item__info__text__title}>Гордость и предубеждения</label>
+              <label className={s.item__info__text__autor}>
+                Автор : Джейн Остин
+              </label>
+              <label className={s.item__info__text__presence}>
+                 Артикуль : 1GE25HH
+              </label>
+            </div>
+            <div className={s.presence}>
+              <label className={s.presence__blok}>В наличии: 
+              <div>
+                  <label>Да</label>
+                  <input type="radio" value="eys" name="question"/>
+                </div> <div >
+                  <label>Нет</label>
+                  <input type="radio" value="now" name="question"/>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div className={s.main__content__item}>
+            <button className={s.carts__item__delete}>
+              <img src={Delete} alt="удалить товар" />
+            </button>
+            <div className={s.item__info__text}>
+              <label className={s.item__info__text__title}>Гордость и предубеждения</label>
+              <label className={s.item__info__text__autor}>
+                Автор : Джейн Остин
+              </label>
+              <label className={s.item__info__text__presence}>
+                 Артикуль : 1GE25HH
+              </label>
+            </div>
+            <div className={s.presence}>
+              <label >В наличии: 
+              <div >
+                  <label>Да</label>
+                  <input type="radio" value="eys" name="question"/>
+                </div> <div >
+                  <label>Нет</label>
+                  <input type="radio" value="now" name="question"/>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div className={s.main__content__item}>
+            <button className={s.carts__item__delete}>
+              <img src={Delete} alt="удалить товар" />
+            </button>
+            <div className={s.item__info__text}>
+              <label className={s.item__info__text__title}>Гордость и предубеждения</label>
+              <label className={s.item__info__text__autor}>
+                Автор : Джейн Остин
+              </label>
+              <label className={s.item__info__text__presence}>
+                 Артикуль : 1GE25HH
+              </label>
+            </div>
+            <div className={s.presence}>
+              <label >В наличии: 
+              <div >
+                  <label>Да</label>
+                  <input type="radio" value="eys" name="question"/>
+                </div> <div >
+                  <label>Нет</label>
+                  <input type="radio" value="now" name="question"/>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
 };
 

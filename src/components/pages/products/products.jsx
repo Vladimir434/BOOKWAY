@@ -325,11 +325,11 @@ const Products = () => {
                   <Link to={`/products/${item.id}`} key={item.id}>
                   <CardProducts
                     img={item.image}
-                    isAvialiable={item.isAvialiable}
+                    presence={item.presence}
                     article={item.article}
                     autor={item.autor}
-                    description={item.descr}
-                    price={item.age}
+                    name={item.name}
+                    price={item.price}
                   /></Link>
                 ))
               ) : (
