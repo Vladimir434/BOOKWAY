@@ -4,22 +4,35 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../../utils/firebase/firebase-config";
+import { auth, db } from "../../utils/firebase/firebase-config";
 import { toast } from "react-toastify";
+import { collection, doc, setDoc } from "firebase/firestore";
+
+const userCollactionRef = collection(db, 'users')
 
 export const userAuth = create((set) => ({
   isFetch: false,
 
-  async registerUser(email, password, nav, isRememberMe) {
+  async registerUser(email, password, name, lastName, nav, isRememberMe) {
     set({ isFetch: true });
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
-
+      if (user.user.uid) {
+        const userDoc = doc(userCollactionRef, user.user.uid);
+        await setDoc(userDoc,{
+          name:name,
+          lastName:lastName,
+          email:email,
+          isAdmin:false,
+          cards:[],
+          orders:[],
+          comments:[],
+        });
+      }
       if (isRememberMe) {
         localStorage.setItem("email", email);
         // localStorage.setItem("password", password);
       }
-
       console.log(user);
       nav("/");
       toast.success("Вы успешно зарегистрировались 👍");
