@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import CardSwiper from "../../card-swiper-main-page/card-swiper";
-import PromoCard from "../../promo-card/promo-card";
 import Footer from "../../footer/footer";
 import Reviews from "../../Reviews/reviews";
 import Header from "../../header/header";
@@ -58,43 +57,32 @@ const MainPage = () => {
         </div>
       </div>
       <div className={s.container__categories}>
-        <div className={s.categories__item}>
+        <Link to="/products" className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Фантастика</h2>
           </div>
-        </div>
-        <div className={s.categories__item}>
+        </Link>
+        <Link to="/products" className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Психология и саморозвитие</h2>
           </div>
-        </div>
-        <div className={s.categories__item}>
+        </Link>
+        <Link to="/products" className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Художественная литература</h2>
           </div>
-        </div>
-        <div className={s.categories__item}>
+        </Link>
+        <Link to="/products" className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>Филосифия</h2>
           </div>
-        </div>
-        <div className={s.categories__item}>
+        </Link>
+        <Link to="/products" className={s.categories__item}>
           <div className={s.categories__item_text}>
             <h2>IT</h2>
           </div>
-        </div>
+        </Link>
       </div>
-      {/* <div className={s.promo}>
-        <div className={s.promo__header}>
-          <h2 className={s.promo__title}>Актуальные акции</h2>
-          <button className={s.promo__button}>Все акции &gt;</button>
-        </div>
-        <div className={s.promo__cards}>
-        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
-        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb"}/>
-        <PromoCard img={ImgSwiper1} date={"действует до 30.03.26"} title={'lorem lorem lorem lorem'} description={"dsjkf  najsb dvha sbdkhv baskhb vfkhasb dvkbd kfjvbdjbv fjhbdfjvbdjv bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb bfjdbvfjbjb"}/>
-        </div>
-      </div> */}
       <div className={s.about__Us}>
           <div className={s.main__about__first__logo}>
             <img src={ImageLogo} alt="логотип" />

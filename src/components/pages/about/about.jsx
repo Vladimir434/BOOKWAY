@@ -159,9 +159,9 @@ const About = () => {
 
           <div className={s.main__about__3__first}>
             <h2 className={s.main__about__3__first__title}>Наши основатели</h2>
-            <img className={s.about__3_img} src />
+            <img className={s.about__3_img} src="https://static.findanime.net/uploads/pics/00/23/156.jpg" />
             <div className={s.main__about__3__first__img}>
-              <img src />
+              <img src="https://esports.ru/wp-content/uploads/2024/09/1526635995_preview_maxresdefault-1080x638.jpg" />
             </div>
           </div>
         </div>

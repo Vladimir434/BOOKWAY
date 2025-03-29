@@ -322,7 +322,7 @@ const Products = () => {
                 .map((_, index) => <SkeletonCard key={index}/>)
               ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
-                  <Link to={`/products/${item.id}`} key={item.id}>
+                  <Link to={`/products/1`} key={item.id}>
                   <CardProducts
                     img={item.image}
                     presence={item.presence}

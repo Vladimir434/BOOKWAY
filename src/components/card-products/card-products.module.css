@@ -7,6 +7,8 @@
   border-radius: 10px;
   background-color: #fff;
   border-radius: 10px;
+  height: 100%;
+
 }
 .card__img{
   width: 100%;
@@ -81,6 +83,7 @@
   color: #664935;
   background-color: #E5E9EC;  
 }
+
 
 @media (max-width:1250px) {
   .description{

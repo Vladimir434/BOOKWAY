@@ -51,9 +51,12 @@
   gap: 24px;
   grid-auto-rows: 1fr;
 }
+.container__categories :link {
+  text-decoration: none;
+}
 
 .categories__item {
-  background-color: #6b6b6bd9;
+  background-color: #664935;
   border-radius: 10px;
   padding: 30px 40px;
   display: flex;
