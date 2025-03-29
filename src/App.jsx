@@ -4,6 +4,7 @@ import { Suspense, lazy } from "react";
 import ScrollToTop from "./components/skroltop/skroltop";
 import Profile from "./components/profile/profile";
 import Products from "./components/pages/products/products";
+import Comments from "./components/comments-page/comments-page";
 
 const Login = lazy(() => import("./components/auth/login/login"));
 const Basket = lazy(() => import("./components/pages/basket/basket"));
@@ -31,6 +32,7 @@ function App() {
         <Route path="/products" element={<Products/>} />
         <Route path="/products/:id" element={<Product/>} />
         <Route path="/straight" element={<Straight/>} />
+        <Route path="/comments" element={<Comments/>} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>
