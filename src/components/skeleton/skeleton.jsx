@@ -1,4 +1,4 @@
-import s from './skeleton.module.css';  // Импорт стилей
+import s from './skeleton.module.css';
 import { Skeleton } from 'antd';
 
 const SkeletonCard = () => {
