@@ -8,11 +8,13 @@ import CardProducts from "../../card-products/card-products";
 import { useRroductsStore } from "../../../store/products-store/products-store";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import SkeletonCard from "../../skeleton/skeleton";
 
 const CATEGORIES_DATA = [
+  
   {
-    title: "Нон-фикшен",
+    name: "Нон-фикшен",
     items: [
       "Психология и саморазвитие",
       "Нунчпон",
@@ -26,7 +28,7 @@ const CATEGORIES_DATA = [
     ]
   },
   {
-    title: "Детям и родителям",
+    name: "Детям и родителям",
     items: [
       "Познавательная литература",
       "Художественная литература",
@@ -35,7 +37,7 @@ const CATEGORIES_DATA = [
     ]
   },
   {
-    title: "Художественная литература",
+    name: "Художественная литература",
     items: [
       "Проза",
       "Комиксы и манга",
@@ -46,7 +48,7 @@ const CATEGORIES_DATA = [
     ]
   },
   {
-    title: "Бизнес литература",
+    name: "Бизнес литература",
     items: [
       "Биографии и истории успеха",
       "Менеджмент и управление",
@@ -59,8 +61,9 @@ const CATEGORIES_DATA = [
 ];
 
 const FILTERS_DATA = [
+  
   {
-    title: "Цена",
+    name: "Цена",
     type: "range",
     inputs: [
       { placeholder: "От" },
@@ -68,7 +71,7 @@ const FILTERS_DATA = [
     ]
   },
   {
-    title: "Издательство",
+    name: "Издательство",
     type: "list",
     items: [
       "АСТ", "Эскимо", "Комильфо", "Мохаон",
@@ -76,7 +79,7 @@ const FILTERS_DATA = [
     ]
   },
   {
-    title: "Тип обложки",
+    name: "Тип обложки",
     type: "list",
     items: [
       "Твердый переплет",
@@ -84,7 +87,7 @@ const FILTERS_DATA = [
     ]
   },
   {
-    title: "Автор",
+    name: "Автор",
     type: "list",
     items: [
       "Джо Наверро", "Джейн Остин", "Кори Альтхофф", "Брюс Тулгон",
@@ -141,12 +144,12 @@ const Products = () => {
   const renderCategories = (categories, offset = 0) => (
     <div className={s.categories__container}>
       {categories.map((category, index) => (
-        <div key={category.title} className={s.categories__item}>
+        <div key={category.name} className={s.categories__item}>
           <h3
             className={s.categories__title}
             onClick={() => toggleListVisibility(index + offset)}
           >
-            {category.title}
+            {category.name}
             <img
               src={Arrow}
               alt="arrow"
@@ -174,12 +177,12 @@ const Products = () => {
   const renderFilters = (filters, offset = 4) => (
     <>
       {filters.map((filter, index) => (
-        <div key={filter.title} className={s.filter__item}>
+        <div key={filter.name} className={s.filter__item}>
           <h4
             onClick={() => toggleListVisibility(index + offset)}
             className={s.filter__item__title}
           >
-            {filter.title}
+            {filter.name}
             <img
               src={Arrow}
               alt="arrow"
@@ -319,15 +322,15 @@ const Products = () => {
                 .map((_, index) => <SkeletonCard key={index}/>)
               ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
+                  <Link to={`/products/1`} key={item.id}>
                   <CardProducts
-                    key={item.id}
                     img={item.image}
-                    isAvialiable={item.isAvialiable}
+                    presence={item.presence}
                     article={item.article}
                     autor={item.autor}
-                    description={item.descr}
-                    price={item.age}
-                  />
+                    name={item.name}
+                    price={item.price}
+                  /></Link>
                 ))
               ) : (
                 <h1 className={s.loading}>

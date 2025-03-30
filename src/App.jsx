@@ -15,6 +15,7 @@ const Order = lazy(() => import("./components/pages/order/order"));
 const Error = lazy(() => import("./components/error/error"));
 const Product = lazy(() => import("./components/pages/product/product"));
 const Straight = lazy(() => import("./components/pages/straight/straight"));
+const AdminPanel = lazy(() => import("./components/admin/admin-panel"));
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/products" element={<Products/>} />
         <Route path="/products/:id" element={<Product/>} />
         <Route path="/straight" element={<Straight/>} />
+        <Route path="/admin-panel" element={<AdminPanel/>} />
         <Route path="/comments" element={<Comments/>} />
         <Route path="*" element={<Error />} />
       </Routes>

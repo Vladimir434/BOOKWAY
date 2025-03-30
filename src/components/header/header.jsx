@@ -10,7 +10,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-const Header = () => {
+const Header = () => { 
+  const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
   const [hidden, setHidden] = useState(false)
   const [activePanel, setActivePanel] = useState(false)
@@ -29,8 +30,25 @@ const Header = () => {
   }, [activePanel])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const handleScroll = () => {
+      setHidden(window.scrollY > 150);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = activePanel ? "hidden" : "";
+  }, [activePanel]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        const isAdmin = await getUserRole(currentUser.uid);
+        setIsAdmin(isAdmin === "admin"); 
+      }
     });
     return () => unsubscribe();
   }, []);
@@ -53,7 +71,7 @@ const Header = () => {
           <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
-        <Link to={user ? '/profile' : '/login'} className={s.auth__block}>
+        <Link to={isAdmin === true ? "/admin-panel" : user ? "/profile" : "/login"} className={s.auth__block}>
           <img src={UserAuth} alt="пользователь" />
           <h3>{user ? 'Личный кабинет' : 'Войти'}</h3>
         </Link>

@@ -48,11 +48,6 @@ const Profile = () => {
             >
               Другие объявления
             </h3>
-            <h3
-              className={s.profile__title_render}
-            >
-              Ваши объявления
-            </h3>
           </div>
         )}
       </div>

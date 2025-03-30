@@ -1,0 +1,42 @@
+.main__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+}
+
+.main__content__item {
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.carts__item__delete {
+  background-color: #fff;
+}
+.item__info__text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  font-size: 17px;
+  color: #664935;
+}
+.presence {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.presence__blok {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+@media screen and (max-width: 500px) {
+  .main__content__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 15px;
+  }
+}
