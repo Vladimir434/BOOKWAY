@@ -10,7 +10,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-const Header = () => {
+const Header = () => { 
+  const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
   const [hidden, setHidden] = useState(false)
   const [activePanel, setActivePanel] = useState(false)
