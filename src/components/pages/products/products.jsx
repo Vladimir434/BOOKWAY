@@ -322,7 +322,7 @@ const Products = () => {
                 .map((_, index) => <SkeletonCard key={index}/>)
               ) : filteredProducts.length > 0 ? (
                 filteredProducts.map((item) => (
-                  <Link to={`/products/1`} key={item.id}>
+                  <Link to={`/products/${item.id}`} key={item.id}>
                   <CardProducts
                     img={item.image}
                     presence={item.presence}
@@ -333,11 +333,11 @@ const Products = () => {
                   /></Link>
                 ))
               ) : (
-                <h1 className={s.loading}>
+                <h2 className={s.loading}>
                   {selectedCategories.length > 0
                     ? "Товаров по выбранным категориям не найдено"
                     : "Тут нет товаров"}
-                </h1>
+                </h2>
               )}
             </div>
           </div>
