@@ -102,7 +102,8 @@ const Products = () => {
   const [activePanel, setActivePanel] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { product, isFetch, getAllProducts } = useRroductsStore();
-
+  console.log(product);
+  
   const filteredProducts = selectedCategories.length > 0
     ? product.filter(item =>
       item.category &&
@@ -324,7 +325,7 @@ const Products = () => {
                 filteredProducts.map((item) => (
                   <Link to={`/products/${item.id}`} key={item.id}>
                   <CardProducts
-                    img={item.image}
+                    img={item.images[0].img}
                     presence={item.presence}
                     article={item.article}
                     autor={item.autor}
