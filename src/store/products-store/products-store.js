@@ -10,9 +10,7 @@ export const useRroductsStore = create((set) => ({
   async getAllProducts() {
     try {
       set({ isFetch: true });
-      const querySnapshot = await getDocs(productsCollectionRef);
-      console.log(querySnapshot);
-      
+      const querySnapshot = await getDocs(productsCollectionRef);      
       const producrsData = querySnapshot.docs.map((doc) => {
         return{
           id: doc.id,
