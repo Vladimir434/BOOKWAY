@@ -44,9 +44,9 @@ const Product = () => {
                   thumbs={{ swiper: thumbsSwiper }}
                   modules={[FreeMode, Navigation, Thumbs]}
                 >
-                  {images.map((img, index) => (
+                  {product?.images.map((img, index) => (
                     <SwiperSlide className={s.img__wrapper} key={index}>
-                      <img className={s.img} src={img} alt="no img" />
+                      <img className={s.img} src={img.img} alt="no img" />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -59,9 +59,9 @@ const Product = () => {
                   watchSlidesProgress={true}
                   modules={[FreeMode, Navigation, Thumbs]}
                 >
-                  {images.map((img, index) => (
+                  {product?.images.map((img, index) => (
                     <SwiperSlide className={s.img2__wrapper} key={index}>
-                      <img src={img} className={s.img2} alt="no img" />
+                      <img src={img.img} className={s.img2} alt="no img" />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -69,13 +69,13 @@ const Product = () => {
             </div>
             <div className={s.main__product__description}>
               <h2 className={s.product__description__title}>
-                Гордость и предубеждение.
+                {product?.name}
               </h2>
               <div className={s.product__description__art}>
                 <label className={s.product__description__art__title}>
                   <img src={Art} /> В наличии
                 </label>
-                <label>Артикул: A102B</label>
+                <label>Артикул: {product?.article}</label>
               </div>
               <div className={s.product__description__characteristics}>
                 <h2 className={s.product__description__characteristics__title}>
@@ -83,12 +83,12 @@ const Product = () => {
                 </h2>
                 <div className={s.product__description__characteristics__item}>
                   <h3>Автор</h3>
-                  <p>Джейн Остен</p>
+                  <p>{product?.autor}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Издательство</h3>
-                  <p>АСТ</p>
+                  <p>{product?.publishing}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
@@ -103,7 +103,7 @@ const Product = () => {
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Тип обложки</h3>
-                  <p>Мягкая обложка</p>
+                  <p>{product?.binding}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
@@ -113,7 +113,7 @@ const Product = () => {
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Возраст</h3>
-                  <p>16+</p>
+                  <p>{product?.age}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
@@ -124,7 +124,7 @@ const Product = () => {
               </div>
             </div>
             <div className={s.main__product__price}>
-              <h4 className={s.product__price__title}>290 сом</h4>
+              <h4 className={s.product__price__title}>{product?.price} сом</h4>
               <div className={s.product__price__btn}>
                 <button className={s.product__price__btn__section1}>
                   В корзину
@@ -137,16 +137,7 @@ const Product = () => {
           </div>
           <div className={s.main__description}>
             <h2 className={s.main__description__title}>Описание</h2>
-            <p className={s.main__description__text}>
-              «Гордость и предубеждение», один из самых известных английских
-              романов, сначала назывался «Первые впечатления». Он был написан в
-              1796–1797 гг., но отклонен издателем. Спустя годы, когда другой ее
-              роман «Чувство и чувствительность» завоевал любовь читателей,
-              Остен переработала старую рукопись и опубликовала в 1813 г. Это
-              история о том, как сестры из обедневшего благородного семейства
-              пытаются найти выгодные партии для брака, история о любви и
-              расчете, благоразумии и безрассудстве, гордости и предубеждении...
-            </p>
+            <p className={s.main__description__text}>{product?.description}</p>
           </div>
         </div>
       </main>
