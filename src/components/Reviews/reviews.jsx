@@ -9,14 +9,12 @@ import Bgimage from '../../assets/image/main-image-1.svg';
 import { Link } from 'react-router-dom';
 
 const Reviews = () => {
-  const comments = useStore((state) => state.comments); // Получаем комментарии
-  const loadComments = useStore((state) => state.loadComments); // Загружаем комментарии
+  const comments = useStore((state) => state.comments);
+  const loadComments = useStore((state) => state.loadComments);
 
   useEffect(() => {
     loadComments();
   }, [loadComments]);
-
-  console.log('Comments:', comments); // Проверяем, что данные подгрузились
 
   return (
     <div style={{ backgroundImage: `url(${Bgimage})` }} className={s.reviews__wrapper}>

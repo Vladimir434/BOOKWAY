@@ -3,14 +3,24 @@ import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
 import Art from "../../../assets/image/art.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Img1 from "../../../assets/image/1.webp";
 import Img2 from "../../../assets/image/2.webp";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { productDetails } from "../../../store/product-details/product-details";
 
 const Product = () => {
+  const {id} = useParams()
+  const {product, getDefineProduct} = productDetails()
+
+  useEffect(() => {
+    getDefineProduct(id)
+  },[id,getDefineProduct])
+  console.log(product);
+  
+
   const images = [Img1, Img2];
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
