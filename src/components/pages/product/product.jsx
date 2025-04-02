@@ -13,7 +13,7 @@ import { productDetails } from "../../../store/product-details/product-details";
 
 const Product = () => {
   const {id} = useParams()
-  const {product, getDefineProduct} = productDetails()
+  const {product, getDefineProduct, setSelectedProduct} = productDetails()
 
   useEffect(() => {
     getDefineProduct(id)
@@ -126,10 +126,10 @@ const Product = () => {
             <div className={s.main__product__price}>
               <h4 className={s.product__price__title}>{product?.price} сом</h4>
               <div className={s.product__price__btn}>
-                <button className={s.product__price__btn__section1}>
+                <button onClick={localStorage.removeItem('selectedProduct')} className={s.product__price__btn__section1}>
                   В корзину
                 </button>
-                <Link to="/straight" className={s.product__price__btn__section2}>
+                <Link to="/straight" onClick={() => setSelectedProduct(product)} className={s.product__price__btn__section2}>
                   Купить в 1 клик
                 </Link>
               </div>
