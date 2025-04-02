@@ -126,7 +126,7 @@ const Product = () => {
             <div className={s.main__product__price}>
               <h4 className={s.product__price__title}>{product?.price} сом</h4>
               <div className={s.product__price__btn}>
-                <button onClick={localStorage.removeItem('selectedProduct')} className={s.product__price__btn__section1}>
+                <button className={s.product__price__btn__section1}>
                   В корзину
                 </button>
                 <Link to="/straight" onClick={() => setSelectedProduct(product)} className={s.product__price__btn__section2}>
