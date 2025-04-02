@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 export const productDetails = create((set) => ({
   product: null,
   isFetch: false,
+  selectedProducts: null,
   getDefineProduct: async (id) => {
     try {
       set({isFetch: true})
@@ -16,5 +17,6 @@ export const productDetails = create((set) => ({
     } finally {
       set({isFetch: false})
     }
-  }
+  },
+  setSelectedProduct: (product) => set({selectedProduct: product}),
 }));
