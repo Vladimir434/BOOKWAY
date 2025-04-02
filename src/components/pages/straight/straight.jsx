@@ -1,17 +1,28 @@
+// Straight.jsx
 import s from "./straight.module.css";
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import BgImage from "../../../assets/image/main-image-1.svg";
 import Art from "../../../assets/image/art.svg";
-import Img1 from "../../../assets/image/1.webp";
 import { productDetails } from "../../../store/product-details/product-details";
 
 const Straight = () => {
   const [quantity, setQuantity] = useState(1);
-  const selectedProduct = productDetails((state) => state.selectedProduct)
+  const selectedProduct = productDetails((state) => state.selectedProduct);
+
   const changeQuantity = (amount) => {
     setQuantity((prev) => Math.max(1, prev + amount));
   };
+
+  useEffect(() => {
+    if (!selectedProduct) {
+      const savedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+      if (savedProduct) {
+        productDetails.getState().setSelectedProduct(savedProduct);
+      }
+    }
+  }, [selectedProduct]);
+
   return (
     <>
       <main style={{ backgroundImage: `url(${BgImage})` }} className={s.main}>
@@ -33,7 +44,7 @@ const Straight = () => {
                 {selectedProduct?.name}
               </h3>
               <p className={s.main__form__description__section2}>
-              Автор : {selectedProduct?.autor}
+                Автор: {selectedProduct?.autor}
               </p>
               <div className={s.main__form__price}>
                 <div className={s.main__form__price__quantity}>
@@ -72,7 +83,7 @@ const Straight = () => {
               <input
                 type="tel"
                 placeholder="Введите ваш номер телефона"
-                className={s.main__form__section__input }
+                className={s.main__form__section__input}
               />
             </div>
             <Link className={s.main__form__button__link} to="/products/1">

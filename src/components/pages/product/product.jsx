@@ -1,3 +1,4 @@
+// Product.jsx
 import s from "./product.module.css";
 import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
@@ -12,14 +13,18 @@ import { Link, useParams } from "react-router-dom";
 import { productDetails } from "../../../store/product-details/product-details";
 
 const Product = () => {
-  const {id} = useParams()
-  const {product, getDefineProduct, setSelectedProduct} = productDetails()
+  const { id } = useParams();
+  const { product, getDefineProduct, setSelectedProduct } = productDetails();
 
   useEffect(() => {
-    getDefineProduct(id)
-  },[id,getDefineProduct])
-  console.log(product);
-  
+    getDefineProduct(id);
+  }, [id, getDefineProduct]);
+
+  useEffect(() => {
+    if (product) {
+      localStorage.setItem('selectedProduct', JSON.stringify(product));
+    }
+  }, [product]);
 
   const images = [Img1, Img2];
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -32,39 +37,45 @@ const Product = () => {
           <div className={s.main__product}>
             <div className={s.main__product__info}>
               <div className={s.main__product__info__swiper}>
-                <Swiper
-                  style={{
-                    "--swiper-navigation-color": "#000",
-                    "--swiper-pagination-color": "#000",
-                    marginBottom: "12px",
-                  }}
-                  loop={true}
-                  spaceBetween={10}
-                  navigation={true}
-                  thumbs={{ swiper: thumbsSwiper }}
-                  modules={[FreeMode, Navigation, Thumbs]}
-                >
-                  {product?.images.map((img, index) => (
-                    <SwiperSlide className={s.img__wrapper} key={index}>
-                      <img className={s.img} src={img.img} alt="no img" />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                <Swiper
-                  onSwiper={setThumbsSwiper}
-                  loop={true}
-                  spaceBetween={10}
-                  slidesPerView={8}
-                  freeMode={true}
-                  watchSlidesProgress={true}
-                  modules={[FreeMode, Navigation, Thumbs]}
-                >
-                  {product?.images.map((img, index) => (
-                    <SwiperSlide className={s.img2__wrapper} key={index}>
-                      <img src={img.img} className={s.img2} alt="no img" />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                {product?.images && product.images.length > 0 ? (
+                  <>
+                    <Swiper
+                      style={{
+                        "--swiper-navigation-color": "#000",
+                        "--swiper-pagination-color": "#000",
+                        marginBottom: "12px",
+                      }}
+                      loop={true}
+                      spaceBetween={10}
+                      navigation={true}
+                      thumbs={{ swiper: thumbsSwiper }}
+                      modules={[FreeMode, Navigation, Thumbs]}
+                    >
+                      {product?.images.map((img, index) => (
+                        <SwiperSlide className={s.img__wrapper} key={index}>
+                          <img className={s.img} src={img.img || img} alt="no img" />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                    <Swiper
+                      onSwiper={setThumbsSwiper}
+                      loop={true}
+                      spaceBetween={10}
+                      slidesPerView={8}
+                      freeMode={true}
+                      watchSlidesProgress={true}
+                      modules={[FreeMode, Navigation, Thumbs]}
+                    >
+                      {product?.images.map((img, index) => (
+                        <SwiperSlide className={s.img2__wrapper} key={index}>
+                          <img src={img.img || img} className={s.img2} alt="no img" />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </>
+                ) : (
+                  <h4>image is not defined</h4>
+                )}
               </div>
             </div>
             <div className={s.main__product__description}>
