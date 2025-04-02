@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import SkeletonCard from "../../skeleton/skeleton";
 
 const CATEGORIES_DATA = [
-  
   {
     name: "Нон-фикшен",
     items: [
@@ -61,7 +60,6 @@ const CATEGORIES_DATA = [
 ];
 
 const FILTERS_DATA = [
-  
   {
     name: "Цена",
     type: "range",
@@ -102,13 +100,16 @@ const Products = () => {
   const [activePanel, setActivePanel] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { product, isFetch, getAllProducts } = useRroductsStore();
+  const [sortOrder, setSortOrder] = useState("");
+  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+
   console.log(product);
-  
+
   const filteredProducts = selectedCategories.length > 0
     ? product.filter(item =>
-      item.category &&
-      item.category.some(cat => selectedCategories.includes(cat))
-    )
+        item.category &&
+        item.category.some(cat => selectedCategories.includes(cat))
+      )
     : product;
 
   const handleCategorySelect = (category) => {
@@ -141,6 +142,40 @@ const Products = () => {
       document.body.style.overflow = "";
     };
   }, [activePanel]);
+
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+
+  const handlePriceChange = (e) => {
+    const { name, value } = e.target;
+    setPriceRange((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const sortProducts = (products) => {
+    switch (sortOrder) {
+      case "price_asc":
+        return [...products].sort((a, b) => a.price - b.price);
+      case "price_desc":
+        return [...products].sort((a, b) => b.price - a.price);
+      case "newest":
+        return [...products].sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+      case "name":
+        return [...products].sort((a, b) => a.name.localeCompare(b.name));
+      default:
+        return products;
+    }
+  };
+
+  const sortedProducts = sortProducts(filteredProducts.filter((item) => {
+    const withinPriceRange =
+      (priceRange.min === "" || item.price >= priceRange.min) &&
+      (priceRange.max === "" || item.price <= priceRange.max);
+    return withinPriceRange;
+  }));
 
   const renderCategories = (categories, offset = 0) => (
     <div className={s.categories__container}>
@@ -194,11 +229,23 @@ const Products = () => {
             filter.type === "range" ? (
               <>
                 <div className={s.filter__item__block_input}>
-                  <input type="number" placeholder={filter.inputs[0].placeholder} />
+                  <input
+                    type="number"
+                    name="min"
+                    value={priceRange.min}
+                    onChange={handlePriceChange}
+                    placeholder={filter.inputs[0].placeholder}
+                  />
                   <div className={s.hyphen}></div>
-                  <input type="number" placeholder={filter.inputs[1].placeholder} />
+                  <input
+                    type="number"
+                    name="max"
+                    value={priceRange.max}
+                    onChange={handlePriceChange}
+                    placeholder={filter.inputs[1].placeholder}
+                  />
                 </div>
-                <button>Применить</button>
+                <button onClick={() => {}}>Применить</button>
               </>
             ) : (
               <ul>
@@ -307,31 +354,32 @@ const Products = () => {
                 ></div>
               )}
 
-              <select className={s.select}>
-                <option value="#">Сортировка</option>
-                <option value="#">По возрастанию цен</option>
-                <option value="#">По убыванию цен</option>
-                <option value="#">Новые</option>
-                <option value="#">По названию</option>
+              <select className={s.select} onChange={handleSortChange}>
+                <option value="">Сортировка</option>
+                <option value="price_asc">По возрастанию цен</option>
+                <option value="price_desc">По убыванию цен</option>
+                <option value="newest">Новые</option>
+                <option value="name">По названию</option>
               </select>
             </div>
 
             <div className={s.container__products}>
               {isFetch ? (
                 Array(8)
-                .fill(null)
-                .map((_, index) => <SkeletonCard key={index}/>)
-              ) : filteredProducts.length > 0 ? (
-                filteredProducts.map((item) => (
+                  .fill(null)
+                  .map((_, index) => <SkeletonCard key={index} />)
+              ) : sortedProducts.length > 0 ? (
+                sortedProducts.map((item) => (
                   <Link to={`/products/${item.id}`} key={item.id}>
-                  <CardProducts
-                    img={item.images[0].img}
-                    presence={item.presence}
-                    article={item.article}
-                    autor={item.autor}
-                    name={item.name}
-                    price={item.price}
-                  /></Link>
+                    <CardProducts
+                      img={item.images[0].img}
+                      presence={item.presence}
+                      article={item.article}
+                      autor={item.autor}
+                      name={item.name}
+                      price={item.price}
+                    />
+                  </Link>
                 ))
               ) : (
                 <h2 className={s.loading}>
