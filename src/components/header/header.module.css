@@ -98,11 +98,16 @@
 .active__panel :link{
   text-decoration: none;
 }
+.active__panel{
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+}
 .active__panel_link{
   display: flex;
   align-items: center;
   color: #664935;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   column-gap: 15px;
 }
@@ -192,7 +197,6 @@
   height: 2px;
   background-color: #FFFFFF;
 }
-
 @media (max-width:850px) {
   .header__top{
     width: 95%;

@@ -1,11 +1,13 @@
 import s from "./header.module.css";
 import Logo from "../../assets/icon/logo-header.svg";
 import Search from "../../assets/icon/search.svg";
-import UserAuth from "../../assets/icon/user.svg";
+import UserAuth from "../../assets/icon/aboutMe.svg";
 import Frame from "../../assets/icon/Frame.svg";
 import Frame2 from "../../assets/icon/Frame2.svg";
 import FistCross from '../../assets/icon/fist-cross.svg'
+import About from "../../assets/icon/about.svg"
 import { auth } from "../../utils/firebase/firebase-config";
+import Book from "../../assets/icon/book.svg"
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -15,6 +17,18 @@ const Header = () => {
   const [user, setUser] = useState(null);
   const [hidden, setHidden] = useState(false)
   const [activePanel, setActivePanel] = useState(false)
+
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,8 +81,8 @@ const Header = () => {
         <Link to="/">
           <img className={s.header__logo} src={Logo} alt="логотип" />
         </Link>
-        <div className={s.search__bar}>
-          <input type="text" placeholder="Поиск по сайту..." />
+        <div nSubmit={handleSearchSubmit}  className={s.search__bar}>
+          <input   onChange={handleSearchChange}  type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
         <Link to={isAdmin === true ? "/admin-panel" : user ? "/profile" : "/login"} className={s.auth__block}>
@@ -108,30 +122,29 @@ const Header = () => {
         <div className={s.block__active_panel}>
           <img src={FistCross} alt="cross" onClick={() => setActivePanel(false)} />
         </div>
-        <h4>О нас</h4>
         <Link to={user ? '/about' : '/login'} className={s.active__panel_link}>
           <div className={s.burger__manu_item}>
-            <img src='#' alt="about" />
+            <img src={About} alt="about" />
           </div>
-          о нас
+          О нас
         </Link>
         <Link to={user ? '/products' : '/login'} className={s.active__panel_link}>
           <div className={s.burger__manu_item}>
-            <img src='#' alt="products" />
+            <img src={Book} alt="products" />
           </div>
-          продукты
+          Товары
         </Link>
         <Link to={user ? '/profile' : '/login'} className={s.active__panel_link}>
           <div className={s.burger__manu_item}>
             <img src={UserAuth} alt="user" />
           </div>
-          профиль
+          Профиль
         </Link>
         <Link to={user ? '/basket' : '/login'} className={s.active__panel_link}>
         <div className={s.burger__manu_item}>
           <img src={Frame2} alt="frame" />
         </div>
-        корзина
+        Корзина
         </Link>
       </motion.div>
 
