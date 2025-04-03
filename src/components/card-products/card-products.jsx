@@ -1,8 +1,9 @@
 import s from './card-products.module.css'
 import Cross from '../../assets/icon/cross.svg'
 import Checkmark from '../../assets/icon/checkmark.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const CardProducts = ({img, article, name, price, autor, presence }) => {
+  const nav = useNavigate()
   return (
     <div className={s.card__container}>
       <div className={s.card__img}>
@@ -35,8 +36,8 @@ const CardProducts = ({img, article, name, price, autor, presence }) => {
         <h3>{price} com</h3>
       </div>
       <div className={s.block__btn}>
-        <Link >В корзину</Link>
-        <Link to="/straight">Купить в 1 клик</Link>
+        <button>В корзину</button>
+        <button onClick={() => nav('/straight')}>Купить в 1 клик</button>
       </div>
     </div>
   )
