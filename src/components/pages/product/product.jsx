@@ -45,7 +45,6 @@ const Product = () => {
                         "--swiper-pagination-color": "#000",
                         marginBottom: "12px",
                       }}
-                      loop={true}
                       spaceBetween={10}
                       navigation={true}
                       thumbs={{ swiper: thumbsSwiper }}
@@ -59,7 +58,6 @@ const Product = () => {
                     </Swiper>
                     <Swiper
                       onSwiper={setThumbsSwiper}
-                      loop={true}
                       spaceBetween={10}
                       slidesPerView={8}
                       freeMode={true}
