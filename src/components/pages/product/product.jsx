@@ -1,24 +1,26 @@
-// Product.jsx
-import s from "./product.module.css";
-import Header from "../../header/header";
-import Reviews from "../../Reviews/reviews";
-import Footer from "../../footer/footer";
-import Art from "../../../assets/image/art.svg";
-import { useEffect, useState } from "react";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import Img1 from "../../../assets/image/1.webp";
-import Img2 from "../../../assets/image/2.webp";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Link, useParams } from "react-router-dom";
-import { productDetails } from "../../../store/product-details/product-details";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useCartStore } from '../../../store/basket-store/basket-store';
+import { productDetails } from '../../../store/product-details/product-details';
+import Header from '../../header/header';
+import Reviews from '../../Reviews/reviews';
+import Footer from '../../footer/footer';
+import Art from '../../../assets/image/art.svg';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import s from './product.module.css';
 
 const Product = () => {
   const { id } = useParams();
   const { product, getDefineProduct, setSelectedProduct } = productDetails();
+  const { cart, fetchCart, addToCard } = useCartStore();
+
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
     getDefineProduct(id);
-  }, [id, getDefineProduct]);
+    fetchCart(); // Загружаем корзину при загрузке компонента
+  }, [id, getDefineProduct, fetchCart]);
 
   useEffect(() => {
     if (product) {
@@ -26,8 +28,13 @@ const Product = () => {
     }
   }, [product]);
 
-  const images = [Img1, Img2];
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const isProductInCart = cart.some((item) => item.id === product?.id);
+
+  const handleAddToCard = () => {
+    if (!isProductInCart) {
+      addToCard(product);
+    }
+  };
 
   return (
     <>
@@ -52,7 +59,7 @@ const Product = () => {
                     >
                       {product?.images.map((img, index) => (
                         <SwiperSlide className={s.img__wrapper} key={index}>
-                          <img className={s.img} src={img.img || img} alt="no img" />
+                          <img className={s.img} src={img.img || img} alt="Product" />
                         </SwiperSlide>
                       ))}
                     </Swiper>
@@ -66,30 +73,26 @@ const Product = () => {
                     >
                       {product?.images.map((img, index) => (
                         <SwiperSlide className={s.img2__wrapper} key={index}>
-                          <img src={img.img || img} className={s.img2} alt="no img" />
+                          <img src={img.img || img} className={s.img2} alt="Product" />
                         </SwiperSlide>
                       ))}
                     </Swiper>
                   </>
                 ) : (
-                  <h4>image is not defined</h4>
+                  <h4>Изображение не найдено</h4>
                 )}
               </div>
             </div>
             <div className={s.main__product__description}>
-              <h2 className={s.product__description__title}>
-                {product?.name}
-              </h2>
+              <h2 className={s.product__description__title}>{product?.name}</h2>
               <div className={s.product__description__art}>
                 <label className={s.product__description__art__title}>
-                  <img src={Art} /> В наличии
+                  <img src={Art} alt="Stock" /> В наличии
                 </label>
                 <label>Артикул: {product?.article}</label>
               </div>
               <div className={s.product__description__characteristics}>
-                <h2 className={s.product__description__characteristics__title}>
-                  Характеристики
-                </h2>
+                <h2 className={s.product__description__characteristics__title}>Характеристики</h2>
                 <div className={s.product__description__characteristics__item}>
                   <h3>Автор</h3>
                   <p>{product?.autor}</p>
@@ -101,23 +104,8 @@ const Product = () => {
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
-                  <h3>Жанр</h3>
-                  <p>Художественная литература </p>
-                </div>
-                <hr />
-                <div className={s.product__description__characteristics__item}>
-                  <h3>Тематика</h3>
-                  <p>Проза</p>
-                </div>
-                <hr />
-                <div className={s.product__description__characteristics__item}>
                   <h3>Тип обложки</h3>
                   <p>{product?.binding}</p>
-                </div>
-                <hr />
-                <div className={s.product__description__characteristics__item}>
-                  <h3>Количество страниц</h3>
-                  <p>384</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
@@ -125,20 +113,23 @@ const Product = () => {
                   <p>{product?.age}</p>
                 </div>
                 <hr />
-                <div className={s.product__description__characteristics__item}>
-                  <h3>Год издания </h3>
-                  <p>2022</p>
-                </div>
-                <hr />
               </div>
             </div>
             <div className={s.main__product__price}>
               <h4 className={s.product__price__title}>{product?.price} сом</h4>
               <div className={s.product__price__btn}>
-                <button className={s.product__price__btn__section1}>
-                  В корзину
+                <button
+                  className={s.product__price__btn__section1}
+                  onClick={handleAddToCard}
+                  disabled={isProductInCart}
+                >
+                  {isProductInCart ? 'Уже в корзине' : 'В корзину'}
                 </button>
-                <Link to="/straight" onClick={() => setSelectedProduct(product)} className={s.product__price__btn__section2}>
+                <Link
+                  to="/straight"
+                  onClick={() => setSelectedProduct(product)}
+                  className={s.product__price__btn__section2}
+                >
                   Купить в 1 клик
                 </Link>
               </div>
