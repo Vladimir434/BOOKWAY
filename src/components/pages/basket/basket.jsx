@@ -2,48 +2,38 @@ import s from "./basket.module.css";
 import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Delete from "../../../assets/icon/close cross.svg";
 import Img from "../../../assets/image/1.webp";
 import Rectangle from "../../../assets/icon/Rectangle.svg";
+import { useCartStore } from "../../../store/basket-store/basket-store";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../utils/firebase/firebase-config";
 
 const Basket = () => {
   const deliveryCost = 160;
-
-  const items = [
-    {
-      id: 1,
-      title: "Гордость и предубеждения",
-      author: "Джейн Остин",
-      price: 240,
-      quantity: 1,
-      image: Img,
-    },
-    {
-      id: 2,
-      title: "Гордость и предубеждения",
-      author: "Джейн Остин",
-      price: 240,
-      quantity: 1,
-      image: Img,
-    },
-    {
-      id: 3,
-      title: "Гордость и предубеждения",
-      author: "Джейн Остин",
-      price: 480,
-      quantity: 2,
-      image: Img,
-    },
-  ];
+  const { cart, fetchCart, isFetch, removeFromCart } = useCartStore();
+  const [user, setUser] = useState(null);
   const [clickedItems, setClickedItems] = useState({});
 
-  const total =
-    items.reduce(
-      (sum, item) => (clickedItems[item.id] ? sum + item.price : sum),
-      0
-    ) + deliveryCost;
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUser(user);
+        await fetchCart();
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [fetchCart]);
+
+  const total = cart.reduce(
+    (sum, item) => (clickedItems[item.id] ? sum + item.price : sum),
+    0
+  ) + deliveryCost;
 
   const togglePurchase = (id) => {
     setClickedItems((prev) => ({
@@ -51,6 +41,7 @@ const Basket = () => {
       [id]: !prev[id],
     }));
   };
+
   return (
     <>
       <Header />
@@ -59,60 +50,68 @@ const Basket = () => {
           <p className={s.main__wrapper__title}>Корзина товаров</p>
           <div className={s.main__content}>
             <div className={s.main__content__carts}>
-              {items.map((item) => (
-                <div key={item.id} className={s.main__content__carts__item}>
-                  <button className={s.carts__item__delete}>
-                    <img src={Delete} alt="удалить товар" />
-                  </button>
-                  <div className={s.carts__item__info}>
-                    <img src={item.image} alt="картинка товара" />
-                    <div className={s.carts__item__info__text}>
-                      <label className={s.item__info__text__title}>
-                        {item.title}
-                      </label>
-                      <label className={s.item__info__text__autor}>
-                        Автор : {item.author}
-                      </label>
-                      <label className={s.item__info__text__presence}>
-                        Количество : {item.quantity}
-                      </label>
+              {!user ? (
+                <p className={s.emptyCart}>Войдите, чтобы увидеть корзину</p>
+              ) : isFetch ? (
+                <p className={s.loading}>Загрузка...</p>
+              ) : cart.length > 0 ? (
+                cart.map((item) => (
+                  <div key={item.id} className={s.main__content__carts__item}>
+                    <button
+                      className={s.carts__item__delete}
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      <img src={Delete} alt="удалить товар" />
+                    </button>
+                    <div className={s.carts__item__info}>
+                      <img src={item?.images?.[0]?.img || Img} alt="картинка товара" />
+                      <div className={s.carts__item__info__text}>
+                        <label className={s.item__info__text__title}>{item.title}</label>
+                        <label className={s.item__info__text__autor}>
+                          Автор : {item.author}
+                        </label>
+                        <label className={s.item__info__text__presence}>
+                          Количество : {item.quantity}
+                        </label>
+                      </div>
+                    </div>
+                    <p className={s.carts__item__price}>{item.price} сом</p>
+                    <div className={s.carts__item__btn}>
+                      {!clickedItems[item.id] ? (
+                        <button
+                          onClick={() => togglePurchase(item.id)}
+                          className={s.carts__item__btn__dutton}
+                        >
+                          Купить
+                        </button>
+                      ) : (
+                        <img
+                          onClick={() => togglePurchase(item.id)}
+                          src={Rectangle}
+                          className={s.carts__item__btn__img}
+                          alt="Куплено"
+                        />
+                      )}
                     </div>
                   </div>
-
-                  <p className={s.carts__item__price}>
-                    {item.price} сом
-                  </p>
-                  <div className={s.carts__item__btn}>
-                    {!clickedItems[item.id] ? (
-                      <button
-                        onClick={() => togglePurchase(item.id)}
-                        className={s.carts__item__btn__dutton}
-                      >
-                        Купить
-                      </button>
-                    ) : (
-                      <img
-                        onClick={() => togglePurchase(item.id)}
-                        src={Rectangle}
-                        className={s.carts__item__btn__img}
-                        alt="Куплено"
-                      />
-                    )}
+                ))
+              ) : (
+                <p className={s.emptyCart}>Тут ничего нет</p>
+              )}
+            </div>
+            {user && cart.length > 0 && !isFetch && (
+              <div className={s.main__content__price}>
+                <div className={s.main__content__price__wrapper}>
+                  <div className={s.main__content__price__info}>
+                    <p>Стоимость доставки : {deliveryCost} сом</p>
+                    <p>Итого к оплате : {total} сом</p>
                   </div>
+                  <Link to="/order" className={s.main__content__price__btn}>
+                    Оформить заказ
+                  </Link>
                 </div>
-              ))}
-            </div>
-            <div className={s.main__content__price}>
-              <div className={s.main__content__price__wrapper}>
-                <div className={s.main__content__price__info}>
-                  <p>Стоимость доставки : 160 сом</p>
-                  <p>Итого к оплате : {total} сом</p>
-                </div>
-                <Link to="/order" className={s.main__content__price__btn}>
-                  Оформить заказ
-                </Link>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </main>
