@@ -1,18 +1,24 @@
 .main{
-  width: 100%;
+  max-width: 1500px;
+  width: 90%;
   padding: 69px 32px;
   display: flex;
   background-color: #FFFFFF;
   border-radius: 10px;
-  margin-top: 63px;
-  margin-bottom: 107px;
+  margin: 63px auto 243px;
+  column-gap: 44px;
 }
 .main__image{
-  max-width: 500px;
+  
+  max-width: 377px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.main__image img {
+  object-fit: contain;
+  width: 82%;
 }
 .main__info{
   max-width: 787px;
