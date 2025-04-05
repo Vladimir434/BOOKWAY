@@ -6,6 +6,8 @@ import Profile from "./components/profile/profile";
 import Products from "./components/pages/products/products";
 import Comments from "./components/comments-page/comments-page";
 import ProtectedRoute from "./components/protectedRoute/Protected-route";
+import ProfileInfo from "./components/profile-info/profile-info";
+import ProfileDetails from "./components/profile-details/profile-details";
 
 const Login = lazy(() => import("./components/auth/login/login"));
 const Basket = lazy(() => import("./components/pages/basket/basket"));
@@ -35,6 +37,7 @@ function App() {
         <Route path="/products/:id" element={<Product/>} />
         <Route path="/straight" element={<Straight/>} />
         <Route path="/comments" element={<Comments/>} />
+        <Route path="/ads/:id" element={<ProfileDetails/>}/>
         <Route path="*" element={<Error />} />
         <Route path="/admin-panel" element={<ProtectedRoute><AdminPanel/></ProtectedRoute>}/>
       </Routes>

@@ -19,7 +19,7 @@ const Product = () => {
 
   useEffect(() => {
     getDefineProduct(id);
-    fetchCart(); // Загружаем корзину при загрузке компонента
+    fetchCart();
   }, [id, getDefineProduct, fetchCart]);
 
   useEffect(() => {
