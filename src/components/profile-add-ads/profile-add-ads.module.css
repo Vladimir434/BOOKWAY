@@ -49,6 +49,12 @@
   align-items: center;
   padding: 13px;
 }
+.display {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: #F3F5F7;
+}
 .form__block textarea{
   width: 100%;
   height: 100%;
@@ -66,10 +72,6 @@
   border-radius: 10px;
   outline: none;
   border: none;
-}
-.display{
-  width: 1px;
-  visibility: hidden;
 }
 
 

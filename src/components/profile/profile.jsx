@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import s from "./profile.module.css";
 import Header from "../header/header";
 import Footer from "../footer/footer";
@@ -19,7 +19,16 @@ const Profile = () => {
   const { logoutUser } = userAuth();
   const [activeTab, setActiveTab] = useState("aboutMe");
   const [exchange, setAxchange] = useState("placeAd");
+  const location = useLocation();
 
+useEffect(() => {
+  if (location.state?.from === "exchange") {
+    setActiveTab("exchange");
+    if (location.state?.exchangeTab) {
+      setAxchange(location.state.exchangeTab);
+    }
+  }
+}, [location.state]);
   const handleLogout = () => {
     logoutUser(navigate);
   };
