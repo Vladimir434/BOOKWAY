@@ -60,8 +60,8 @@ const Header = () => {
         <Link to="/">
           <img className={s.header__logo} src={Logo} alt="логотип" />
         </Link>
-        <div nSubmit={handleSearchSubmit}  className={s.search__bar}>
-          <input   onChange={handleSearchChange}  type="text" placeholder="Поиск по сайту..." />
+        <div className={s.search__bar}>
+          <input type="text" placeholder="Поиск по сайту..." />
           <img src={Search} alt="поиск" />
         </div>
         
