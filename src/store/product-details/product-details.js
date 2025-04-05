@@ -1,4 +1,3 @@
-// product-details.js
 import { create } from "zustand";
 import { productsCollectionRef } from "../products-store/products-store";
 import { doc, getDoc } from "firebase/firestore";

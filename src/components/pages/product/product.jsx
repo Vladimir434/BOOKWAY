@@ -9,6 +9,7 @@ import Art from '../../../assets/image/art.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import s from './product.module.css';
+import { getAuth } from 'firebase/auth';
 
 const Product = () => {
   const { id } = useParams();
@@ -18,10 +19,18 @@ const Product = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
-    getDefineProduct(id);
-    fetchCart();
-  }, [id, getDefineProduct, fetchCart]);
-
+    const auth = getAuth()
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if(user) {
+        fetchCart();
+      }
+    })
+    return () => unsubscribe()
+  }, [fetchCart]);
+  
+  useEffect(() => {
+    getDefineProduct(id)
+  },[getDefineProduct,id])
   useEffect(() => {
     if (product) {
       localStorage.setItem('selectedProduct', JSON.stringify(product));
