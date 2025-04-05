@@ -104,12 +104,12 @@ const Product = () => {
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Жанр</h3>
-                  <p>Художественная литература </p>
+                  <p>{product?.category}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Тематика</h3>
-                  <p>Проза</p>
+                  <p>{product?.subcategory}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
@@ -119,7 +119,7 @@ const Product = () => {
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Количество страниц</h3>
-                  <p>384</p>
+                  <p>{product?.pages}</p>
                 </div>
                 <hr />
                 <div className={s.product__description__characteristics__item}>
@@ -129,7 +129,7 @@ const Product = () => {
                 <hr />
                 <div className={s.product__description__characteristics__item}>
                   <h3>Год издания </h3>
-                  <p>2022</p>
+                  <p>{product?.yearofpublication}</p>
                 </div>
                 <hr />
               </div>
