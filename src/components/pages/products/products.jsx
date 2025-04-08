@@ -43,7 +43,8 @@ const CATEGORIES_DATA = [
       "Фантастика",
       "Поэзия",
       "Детективы и триллеры",
-      "Мистика"
+      "Мистика",
+      "Манга",
     ]
   },
   {
@@ -378,6 +379,11 @@ const Products = () => {
                       autor={item.autor}
                       name={item.name}
                       price={item.price}
+                      category={item.category}
+                      subcategory={item.subcategory}
+                      pages={item.pages}
+                      yearofpublication={item.yearofpublication}
+                      
                     />
                   </Link>
                 ))

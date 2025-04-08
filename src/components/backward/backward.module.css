@@ -1,0 +1,21 @@
+.btn{
+  position: relative;
+  top: -40px;
+  left: 45px;
+}
+
+.btn :link{
+  text-decoration: none;
+}
+
+.btn__wrapper{
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.btn__title{
+  font-size: 23px;
+  font-weight: 400;
+  color: #664935;
+}

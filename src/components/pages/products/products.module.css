@@ -211,7 +211,7 @@ body {
 }
 .active__panel{
   position: fixed;
-  z-index: 33;
+  z-index: 40;
   top: 0;
   right: 0;
   width: 70%;
@@ -235,6 +235,13 @@ body {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 32;
+}
+.resetButton{
+  font-size: 17px;
+  padding: 3px;
+  border: 0.6px solid #664935;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
 @media (max-width:2500px) {

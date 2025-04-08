@@ -1,11 +1,13 @@
 import s from "./header.module.css";
 import Logo from "../../assets/icon/logo-header.svg";
 import Search from "../../assets/icon/search.svg";
-import UserAuth from "../../assets/icon/user.svg";
+import UserAuth from "../../assets/icon/aboutMe.svg";
 import Frame from "../../assets/icon/Frame.svg";
 import Frame2 from "../../assets/icon/Frame2.svg";
 import FistCross from '../../assets/icon/fist-cross.svg';
+import About from "../../assets/icon/about.svg"
 import { auth, db } from "../../utils/firebase/firebase-config";
+import Book from "../../assets/icon/book.svg"
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -111,18 +113,18 @@ const Header = () => {
         <div className={s.block__active_panel}>
           <img src={FistCross} alt="cross" onClick={() => setActivePanel(false)} />
         </div>
-        <h4>О нас</h4>
-        <Link to="/about" className={s.active__panel_link}>
+        <Link to={user ? '/about' : '/login'} className={s.active__panel_link}>
           <div className={s.burger__manu_item}>
-            <img src="#" alt="about" />
+            <img src={About} alt="about" />
           </div>
+          О нас
           О нас
         </Link>
         <Link to="/products" className={s.active__panel_link}>
           <div className={s.burger__manu_item}>
-            <img src="#" alt="products" />
+            <img src={Book} alt="products" />
           </div>
-          Продукты
+          Товары
         </Link>
         <Link to={user ? "/profile" : "/login"} className={s.active__panel_link}>
           <div className={s.burger__manu_item}>
