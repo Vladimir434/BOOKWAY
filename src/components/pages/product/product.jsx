@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useCartStore } from '../../../store/basket-store/basket-store';
-import { productDetails } from '../../../store/product-details/product-details';
-import Header from '../../header/header';
-import Reviews from '../../Reviews/reviews';
-import Footer from '../../footer/footer';
-import Art from '../../../assets/image/art.svg';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import s from './product.module.css';
-import { getAuth } from 'firebase/auth';
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useCartStore } from "../../../store/basket-store/basket-store";
+import { productDetails } from "../../../store/product-details/product-details";
+import Header from "../../header/header";
+import Reviews from "../../Reviews/reviews";
+import Footer from "../../footer/footer";
+import Art from "../../../assets/image/art.svg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import s from "./product.module.css";
+import { getAuth } from "firebase/auth";
+import Backward from "../../backward/backward";
 
 const Product = () => {
   const { id } = useParams();
@@ -19,21 +20,21 @@ const Product = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => {
-    const auth = getAuth()
+    const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if(user) {
+      if (user) {
         fetchCart();
       }
-    })
-    return () => unsubscribe()
+    });
+    return () => unsubscribe();
   }, [fetchCart]);
-  
+
   useEffect(() => {
-    getDefineProduct(id)
-  },[getDefineProduct,id])
+    getDefineProduct(id);
+  }, [getDefineProduct, id]);
   useEffect(() => {
     if (product) {
-      localStorage.setItem('selectedProduct', JSON.stringify(product));
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
     }
   }, [product]);
 
@@ -49,6 +50,7 @@ const Product = () => {
     <>
       <Header />
       <main className={s.main}>
+      <Backward to="/products"/>
         <div className={s.main__wrapper}>
           <div className={s.main__product}>
             <div className={s.main__product__info}>
@@ -68,7 +70,11 @@ const Product = () => {
                     >
                       {product?.images.map((img, index) => (
                         <SwiperSlide className={s.img__wrapper} key={index}>
-                          <img className={s.img} src={img.img || img} alt="Product" />
+                          <img
+                            className={s.img}
+                            src={img.img || img}
+                            alt="Product"
+                          />
                         </SwiperSlide>
                       ))}
                     </Swiper>
@@ -82,7 +88,11 @@ const Product = () => {
                     >
                       {product?.images.map((img, index) => (
                         <SwiperSlide className={s.img2__wrapper} key={index}>
-                          <img src={img.img || img} className={s.img2} alt="Product" />
+                          <img
+                            src={img.img || img}
+                            className={s.img2}
+                            alt="Product"
+                          />
                         </SwiperSlide>
                       ))}
                     </Swiper>
@@ -101,7 +111,9 @@ const Product = () => {
                 <label>Артикул: {product?.article}</label>
               </div>
               <div className={s.product__description__characteristics}>
-                <h2 className={s.product__description__characteristics__title}>Характеристики</h2>
+                <h2 className={s.product__description__characteristics__title}>
+                  Характеристики
+                </h2>
                 <div className={s.product__description__characteristics__item}>
                   <h3>Автор</h3>
                   <p>{product?.autor}</p>
@@ -147,7 +159,7 @@ const Product = () => {
                   onClick={handleAddToCard}
                   disabled={isProductInCart}
                 >
-                  {isProductInCart ? 'Уже в корзине' : 'В корзину'}
+                  {isProductInCart ? "Уже в корзине" : "В корзину"}
                 </button>
                 <Link
                   to="/straight"
