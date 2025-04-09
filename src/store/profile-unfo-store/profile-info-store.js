@@ -1,45 +1,42 @@
 import { create } from 'zustand';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { db } from '../../utils/firebase/firebase-config';  
 
-const db = getFirestore();
-
-const useUserStore = create((set) => ({
-  userInfo: null,
+export const useProfileStore = create((set) => ({
+  userInfo: JSON.parse(localStorage.getItem('userInfo')) || null,
   isFetch: false,
-  setUserInfo: (data) => set({ userInfo: data }),
-  setIsFetch: (status) => set({ isFetch: status }),
 
-  fetchUserInfo: async () => {
-    const user = getAuth().currentUser;
-    if (user) {
-      set({ isFetch: true });
-      const userDocRef = doc(db, 'users', user.uid);
-      const docSnap = await getDoc(userDocRef);
+  getUserProfile: async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) return;
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        if (data.userInfo) {
-          set({ userInfo: data.userInfo });
-        } else {
-          set({ userInfo: null });
-        }
-      }
-      set({ isFetch: false });
+    set({ isFetch: true });
+
+    const userDocRef = doc(collection(db, 'users'), user.uid);
+    const userSnap = await getDoc(userDocRef);
+
+    if (userSnap.exists()) {
+      const data = userSnap.data().userInfo;
+      set({ userInfo: data });
+      localStorage.setItem('userInfo', JSON.stringify(data)); 
+    } else {
+      set({ userInfo: null });
+      localStorage.removeItem('userInfo');
     }
+
+    set({ isFetch: false });
   },
 
-  saveUserInfo: async (data) => {
-    const user = getAuth().currentUser;
-    if (user) {
-      set({ isFetch: true });
-      const userDocRef = doc(db, 'users', user.uid);
-      
-      await setDoc(userDocRef, { userInfo: data }, { merge: true });
+  saveUserProfile: async (formData) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) return;
 
-      set({ userInfo: data, isFetch: false });
-    }
-  },
+    const userDocRef = doc(collection(db, 'users'), user.uid);
+    await setDoc(userDocRef, { userInfo: formData }, { merge: true });
+    set({ userInfo: formData });
+    localStorage.setItem('userInfo', JSON.stringify(formData)); 
+  }
 }));
-
-export default useUserStore;
