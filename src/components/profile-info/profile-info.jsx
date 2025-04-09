@@ -1,103 +1,60 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import s from './profile-info.module.css';
-import useUserStore from '../../store/profile-unfo-store/profile-info-store';
-import { getAuth } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../utils/firebase/firebase-config';
+import { useProfileStore } from '../../store/profile-unfo-store/profile-info-store';
 
 const ProfileInfo = () => {
-  const { userInfo, saveUserInfo, isFetch, setUserInfo, setIsFetch } = useUserStore();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
-  const [home, setHome] = useState('');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const {
+    userInfo,
+    isFetch,
+    getUserProfile,
+    saveUserProfile
+  } = useProfileStore();
 
-  const clearForm = () => {
-    setName('');
-    setEmail('');
-    setPhone('');
-    setCity('');
-    setStreet('');
-    setHome('');
-    localStorage.removeItem('userInfo');
-    setIsButtonDisabled(false);
-  };
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    street: '',
+    home: ''
+  });
 
   useEffect(() => {
-    const user = getAuth().currentUser;
-
-    if (!user) {
-      clearForm();
-      return;
+    if (!userInfo) {
+      getUserProfile();
     }
-
-    const userId = user.uid;
-    const savedUserInfo = localStorage.getItem(`userInfo-${userId}`);
-
-    if (savedUserInfo) {
-      try {
-        const parsedUserInfo = JSON.parse(savedUserInfo);
-        setName(parsedUserInfo.name || '');
-        setEmail(parsedUserInfo.email || '');
-        setPhone(parsedUserInfo.phone || '');
-        setCity(parsedUserInfo.city || '');
-        setStreet(parsedUserInfo.street || '');
-        setHome(parsedUserInfo.home || '');
-        setIsButtonDisabled(true); 
-      } catch (error) {
-        console.error('Ошибка при парсинге данных из localStorage:', error);
-      }
-    } else {
-      setIsFetch(true);
-      const userDocRef = doc(db, 'users', user.uid);
-      getDoc(userDocRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setUserInfo(data.userInfo); 
-          localStorage.setItem(`userInfo-${userId}`, JSON.stringify(data.userInfo)); 
-          setName(data.userInfo.name || '');
-          setEmail(data.userInfo.email || '');
-          setPhone(data.userInfo.phone || '');
-          setCity(data.userInfo.city || '');
-          setStreet(data.userInfo.street || '');
-          setHome(data.userInfo.home || '');
-          setIsButtonDisabled(true); 
-        }
-        setIsFetch(false);
-      });
-    }
-  }, [setUserInfo, setIsFetch]);
+  }, [userInfo, getUserProfile]);
 
   useEffect(() => {
     if (userInfo) {
-      setName(userInfo.name || '');
-      setEmail(userInfo.email || '');
-      setPhone(userInfo.phone || '');
-      setCity(userInfo.city || '');
-      setStreet(userInfo.street || '');
-      setHome(userInfo.home || '');
-      setIsButtonDisabled(true); 
+      setForm({
+        name: userInfo.name || '',
+        email: userInfo.email || '',
+        phone: userInfo.phone || '',
+        city: userInfo.city || '',
+        street: userInfo.street || '',
+        home: userInfo.home || ''
+      });
     }
   }, [userInfo]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = { name, email, phone, city, street, home };
-
-    await saveUserInfo(formData);
-
-    const userId = getAuth().currentUser.uid;
-    localStorage.setItem(`userInfo-${userId}`, JSON.stringify(formData));
-
-    setIsButtonDisabled(true);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  if (isFetch) {
-    return <p>Загрузка...</p>;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await saveUserProfile(form); 
+    await getUserProfile(); 
+    setIsEditing(false);
+  };
+
+  if (isFetch) return <div className={s.loading}>Загрузка...</div>;
+
+  const noData = !userInfo;
 
   return (
     <main className={s.profile__info_wrapper}>
@@ -107,79 +64,66 @@ const ProfileInfo = () => {
           <div className={s.form__block}>
             <h3 className={s.form__title}>Данные покупателя</h3>
             <div className={s.form__block_inputs}>
-              <div className={s.form__field}>
-                <label className={s.form__label}>Имя</label>
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className={s.form__input}
-                  type="text"
-                />
-              </div>
-              <div className={s.form__field}>
-                <label className={s.form__label}>E-mail</label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className={s.form__input}
-                  type="email"
-                />
-              </div>
-              <div className={s.form__field}>
-                <label className={s.form__label}>Телефон</label>
-                <input
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                  className={s.form__input}
-                  type="tel"
-                />
-              </div>
+              <Field label="Имя" name="name" value={form.name} onChange={handleChange} editable={isEditing || noData} />
+              <Field label="E-mail" name="email" value={form.email} onChange={handleChange} editable={isEditing || noData} type="email" />
+              <Field label="Телефон" name="phone" value={form.phone} onChange={handleChange} editable={isEditing || noData} type="tel" />
             </div>
           </div>
+
           <div className={s.form__block}>
             <h3 className={s.form__title}>Адрес получателя</h3>
             <div className={s.form__block_inputs}>
-              <div className={s.form__field}>
-                <label className={s.form__label}>Город</label>
-                <input
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  required
-                  className={s.form__input}
-                  type="text"
-                />
-              </div>
-              <div className={s.form__field}>
-                <label className={s.form__label}>Улица</label>
-                <input
-                  value={street}
-                  onChange={(e) => setStreet(e.target.value)}
-                  required
-                  className={s.form__input}
-                  type="text"
-                />
-              </div>
-              <div className={s.form__field}>
-                <label className={s.form__label}>Дом/Квартира</label>
-                <input
-                  value={home}
-                  onChange={(e) => setHome(e.target.value)}
-                  required
-                  className={s.form__input}
-                  type="text"
-                />
-              </div>
+              <Field label="Город" name="city" value={form.city} onChange={handleChange} editable={isEditing || noData} />
+              <Field label="Улица" name="street" value={form.street} onChange={handleChange} editable={isEditing || noData} />
+              <Field label="Дом/Квартира" name="home" value={form.home} onChange={handleChange} editable={isEditing || noData} />
             </div>
           </div>
         </div>
-        <button type="submit" className={s.form__button} disabled={isButtonDisabled}>
-          Сохранить изменения
-        </button>
+
+        {(isEditing || noData) ? (
+          <div className={s.buttons}>
+            <button type="submit" className={s.form__button}>Сохранить изменения</button>
+            {!noData && (
+              <button
+                type="button"
+                className={s.form__button_cancel}
+                onClick={() => setIsEditing(false)}
+              >
+                Отмена
+              </button>
+            )}
+          </div>
+        ) : (
+          <button
+            type="button"
+            className={s.form__button}
+            onClick={() => setIsEditing(true)}
+          >
+            Редактировать
+          </button>
+        )}
       </form>
     </main>
+  );
+};
+
+const Field = ({ label, name, value, onChange, editable, type = 'text' }) => {
+  return (
+    <div className={s.form__field}>
+      <label className={s.form__label}>{label}</label>
+      {editable ? (
+        <input
+          className={s.form__input}
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          required
+        />
+      ) : (
+        <div className={s.form__text}>{value || '—'}</div>
+      )}
+    </div>
   );
 };
 

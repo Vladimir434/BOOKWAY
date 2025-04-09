@@ -1,7 +1,9 @@
 .btn{
   position: relative;
   top: -40px;
-  left: 45px;
+  width: 90%;
+  max-width: 1500px;
+  padding-left: 45px;
 }
 
 .btn :link{
