@@ -37,13 +37,16 @@ const Straight = () => {
       autor:selectedProduct?.autor,
       quantity:quantity,
       totalPrice: totalPrice,
-      name:'Viltor',
-      email:'Leon'
+      name,
+      phone,
     }
     
     try {
       await addProductInOrders(dataProduct)
       toast('Вы успешно заказали товар')
+      setName('')
+      setPhone('')
+      setQuantity(1)
     } catch (error) {
       console.log(error);
       toast('Ошибка при добавлении заказа');
@@ -96,7 +99,7 @@ const Straight = () => {
             </div>
           </div>
 
-          <form className={s.main__form}>
+          <form onSubmit={handleAddOrder} className={s.main__form}>
             <div className={s.main__form__section}>
               <h4>Имя</h4>
               <input
@@ -119,7 +122,7 @@ const Straight = () => {
                 className={s.main__form__section__input}
               />
             </div>
-            <button className={s.main__form__button__link} onClick={handleAddOrder}>
+            <button className={s.main__form__button__link}>
               {isFetchAddOrder ? 'добавляем...' : 'Оформить заказ'}
             </button>
           </form>
