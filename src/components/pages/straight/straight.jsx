@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 const Straight = () => {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate()
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
   const selectedProduct = productDetails((state) => state.selectedProduct);
   const addProductInOrders = productDetails((state) => state.addProductInOrders)
   const isFetchAddOrder = productDetails((state) => state.isFetchAddOrder)
@@ -98,6 +100,9 @@ const Straight = () => {
             <div className={s.main__form__section}>
               <h4>Имя</h4>
               <input
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 placeholder="Введите ваше имя"
                 className={s.main__form__section__input}
@@ -106,6 +111,9 @@ const Straight = () => {
             <div className={s.main__form__section}>
               <h4>Телефон</h4>
               <input
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 type="tel"
                 placeholder="Введите ваш номер телефона"
                 className={s.main__form__section__input}
