@@ -1,15 +1,17 @@
-// Straight.jsx
 import s from "./straight.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BgImage from "../../../assets/image/main-image-1.svg";
 import Art from "../../../assets/image/art.svg";
 import { productDetails } from "../../../store/product-details/product-details";
+import { toast } from "react-toastify";
 
 const Straight = () => {
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate()
   const selectedProduct = productDetails((state) => state.selectedProduct);
-
+  const addProductInOrders = productDetails((state) => state.addProductInOrders)
+  const isFetchAddOrder = productDetails((state) => state.isFetchAddOrder)
   const changeQuantity = (amount) => {
     setQuantity((prev) => Math.max(1, prev + amount));
   };
@@ -23,11 +25,34 @@ const Straight = () => {
     }
   }, [selectedProduct]);
 
+  const handleAddOrder = async (e) => {
+    e.preventDefault();
+
+    const totalPrice = selectedProduct?.price * quantity;
+
+    const dataProduct = {
+      img:selectedProduct?.images[0].img,
+      autor:selectedProduct?.autor,
+      quantity:quantity,
+      totalPrice: totalPrice,
+      name:'Viltor',
+      email:'Leon'
+    }
+    
+    try {
+      await addProductInOrders(dataProduct)
+      toast('Вы успешно заказали товар')
+    } catch (error) {
+      console.log(error);
+      toast('Ошибка при добавлении заказа');
+    }
+  }
   return (
     <>
       <main style={{ backgroundImage: `url(${BgImage})` }} className={s.main}>
         <div className={s.main__wrapper}></div>
         <div className={s.main__form__wrapper}>
+        <button onClick={() => navigate(-1)}>Back</button>
           <h1 className={s.main__form__title}>Купить в 1 клик</h1>
           <div className={s.main__form__inner}>
             <div className={s.form__inner__img__wrapper}>
@@ -86,9 +111,9 @@ const Straight = () => {
                 className={s.main__form__section__input}
               />
             </div>
-            <Link className={s.main__form__button__link} to="/products/1">
-              Оформить заказ
-            </Link>
+            <button className={s.main__form__button__link} onClick={handleAddOrder}>
+              {isFetchAddOrder ? 'добавляем...' : 'Оформить заказ'}
+            </button>
           </form>
         </div>
       </main>
