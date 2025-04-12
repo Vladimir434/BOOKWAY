@@ -1,9 +1,10 @@
 import { collection, getDocs } from "firebase/firestore";
 import { create } from "zustand";
 import { db } from "../../utils/firebase/firebase-config";
+
 export const productsCollectionRef = collection(db, "products2");
 
-export const useRroductsStore = create((set) => ({
+export const useRroductsStore = create((set, get) => ({
   product: [],
   isFetch: false,
 
@@ -11,17 +12,21 @@ export const useRroductsStore = create((set) => ({
     try {
       set({ isFetch: true });
       const querySnapshot = await getDocs(productsCollectionRef);      
-      const producrsData = querySnapshot.docs.map((doc) => {
-        return{
-          id: doc.id,
-          ...doc.data(),
-        }
-      });
-      set({ product: producrsData });
+      const productsData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      set({ product: productsData });
     } catch (error) {
       console.error(error);
-    } finally{
+    } finally {
       set({ isFetch: false });
     }
+  },
+
+  searchProductsByName: (name) => {
+    return get().product.filter(product => 
+      product.name.toLowerCase().includes(name.toLowerCase())
+    );
   },
 }));
