@@ -5,7 +5,8 @@ import s from "./products.module.css";
 import Arrow from "../../../assets/icon/arrow.svg";
 import FistCross from "../../../assets/icon/fist-cross.svg";
 import CardProducts from "../../card-products/card-products";
-import { useRroductsStore } from "../../../store/products-store/products-store";
+import { useRroductsStore } from "../../../store/products-store/products-store"; 
+import { useSearchStore } from "../../../store/search-store/search-store"; 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -100,18 +101,29 @@ const Products = () => {
   const [visibleLists, setVisibleLists] = useState(Array(8).fill(false));
   const [activePanel, setActivePanel] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const { product, isFetch, getAllProducts } = useRroductsStore();
+  const { product, isFetch, getAllProducts, searchProductsByName } = useRroductsStore();
+  const { searchQuery, clearSearchQuery } = useSearchStore();
   const [sortOrder, setSortOrder] = useState("");
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
 
-  console.log(product);
-
-  const filteredProducts = selectedCategories.length > 0
-    ? product.filter(item =>
+  const getFilteredProducts = () => {
+    let filtered = product;
+    
+    if (searchQuery) {
+      filtered = searchProductsByName(searchQuery);
+    }
+    
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter(item =>
         item.category &&
         item.category.some(cat => selectedCategories.includes(cat))
-      )
-    : product;
+      );
+    }
+    
+    return filtered;
+  };
+
+  const filteredProducts = getFilteredProducts();
 
   const handleCategorySelect = (category) => {
     setSelectedCategories(prev =>
@@ -131,7 +143,10 @@ const Products = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, [getAllProducts]);
+    return () => {
+      clearSearchQuery();
+    };
+  }, [getAllProducts, clearSearchQuery]);
 
   useEffect(() => {
     if (activePanel !== null) {
@@ -274,6 +289,11 @@ const Products = () => {
             Сбросить все категории
           </button>
         )}
+        {searchQuery && (
+          <div className={s.searchResultsInfo}>
+            Результаты поиска по запросу: "{searchQuery}"
+          </div>
+        )}
         <div className={s.wrapper__categories__products}>
           <div className={s.container__categories__filters}>
             {renderCategories(CATEGORIES_DATA)}
@@ -383,15 +403,16 @@ const Products = () => {
                       subcategory={item.subcategory}
                       pages={item.pages}
                       yearofpublication={item.yearofpublication}
-                      
                     />
                   </Link>
                 ))
               ) : (
                 <h2 className={s.loading}>
-                  {selectedCategories.length > 0
-                    ? "Товаров по выбранным категориям не найдено"
-                    : "Тут нет товаров"}
+                  {searchQuery 
+                    ? "Товаров по вашему запросу не найдено"
+                    : selectedCategories.length > 0
+                      ? "Товаров по выбранным категориям не найдено"
+                      : "Тут нет товаров"}
                 </h2>
               )}
             </div>

@@ -12,13 +12,28 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSearchStore } from "../../store/search-store/search-store";
 
 const Header = () => { 
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
   const [hidden, setHidden] = useState(false);
   const [activePanel, setActivePanel] = useState(false);
+  const { searchQuery, setSearchQuery, clearSearchQuery } = useSearchStore();
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate("/products");
+    }
+  };
+
+  const handleClaarQuary = () => {
+    clearSearchQuery()
+  }
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,23 +76,39 @@ const Header = () => {
           <img className={s.header__logo} src={Logo} alt="логотип" />
         </Link>
         <div className={s.search__bar}>
-          <input type="text" placeholder="Поиск по сайту..." />
-          <img src={Search} alt="поиск" />
+          <form className={s.search__bar} onSubmit={handleSearch}>
+            <input 
+              type="text" 
+              placeholder="Поиск по сайту..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <div
+              className={s.clear__btn}
+              onClick={handleClaarQuary}
+              >
+                <div className={`${s.clear_item_1} ${s.clear}`}></div>
+                <div className={`${s.clear_item_2} ${s.clear}`}></div>
+              </div>
+            )}
+            <button className={s.search_btn} type="submit">
+              <img src={Search} alt="поиск" />
+            </button>
+          </form>
         </div>
         
-          {/* Кнопка "Личный кабинет" */}
-          <Link to={user ? "/profile" : "/login"} className={s.auth__block}>
-            <img src={UserAuth} alt="пользователь" />
-            <h3>{user ? "Личный кабинет" : "Войти"}</h3>
-          </Link>
+        <Link to={user ? "/profile" : "/login"} className={s.auth__block}>
+          <img src={UserAuth} alt="пользователь" />
+          <h3>{user ? "Личный кабинет" : "Войти"}</h3>
+        </Link>
 
-          {/* Кнопка "Админ-панель" (только для админов) */}
-          {isAdmin && (
-            <Link to="/admin-panel" className={s.auth__block}>
-              <img src={UserAuth} alt="админ" />
-              <h3>Админ-панель</h3>
-            </Link>
-          )}
+        {isAdmin && (
+          <Link to="/admin-panel" className={s.auth__block}>
+            <img src={UserAuth} alt="админ" />
+            <h3>Админ-панель</h3>
+          </Link>
+        )}
 
         <div className={s.burger__menu}>
           <div onClick={() => setActivePanel(true)} className={s.burger__manu_item_cross}>
@@ -117,7 +148,6 @@ const Header = () => {
           <div className={s.burger__manu_item}>
             <img src={About} alt="about" />
           </div>
-          О нас
           О нас
         </Link>
         <Link to="/products" className={s.active__panel_link}>
