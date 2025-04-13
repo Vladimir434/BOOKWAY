@@ -31,8 +31,11 @@ const Basket = () => {
   }, [fetchCart]);
 
   const total = cart.reduce(
-    (sum, item) => (clickedItems[item.id] ? sum + item.price : sum),
-    0
+    (sum, item) => { 
+    if(!clickedItems[item.id]) return  sum;
+    const price = Number(item.price);
+    return isNaN(price) ? sum : sum + price
+    },0
   ) + deliveryCost;
 
   const togglePurchase = (id) => {
