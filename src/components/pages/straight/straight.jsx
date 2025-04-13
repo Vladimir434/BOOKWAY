@@ -57,7 +57,9 @@ const Straight = () => {
       <main style={{ backgroundImage: `url(${BgImage})` }} className={s.main}>
         <div className={s.main__wrapper}></div>
         <div className={s.main__form__wrapper}>
-        <button onClick={() => navigate(-1)}>Back</button>
+          <div className={s.back_block}>
+            <button className={s.back_btn} onClick={() => navigate(-1)}>Назад</button>
+          </div>
           <h1 className={s.main__form__title}>Купить в 1 клик</h1>
           <div className={s.main__form__inner}>
             <div className={s.form__inner__img__wrapper}>

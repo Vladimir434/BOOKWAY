@@ -58,7 +58,7 @@ export const productDetails = create((set) => ({
     try {
       await updateDoc(userDocRef, {
         orders: arrayUnion({
-          productData,
+          productData:productData,
           date:`${formattedDate}-${formattedTime}`,
           userInfo,
         })
