@@ -13,6 +13,7 @@ button {
 .main__content {
   display: flex;
   justify-content: space-between;
+  column-gap: 15px;
 }
 .main__wrapper__title {
   font-size: 46px;
@@ -40,6 +41,7 @@ button {
 .carts__item__info {
   display: flex;
   column-gap: 35px;
+  width: 100%;
 }
 .carts__item__info img {
   max-width: 80px;
@@ -57,6 +59,7 @@ button {
 }
 .carts__item__price {
   font-size: 18px;
+  min-width: 90px;
 }
 .carts__item__btn {
   padding: 15px 30px;
