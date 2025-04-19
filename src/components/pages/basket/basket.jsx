@@ -3,19 +3,27 @@ import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Delete from "../../../assets/icon/close cross.svg";
 import Img from "../../../assets/image/1.webp";
 import Rectangle from "../../../assets/icon/Rectangle.svg";
 import { useCartStore } from "../../../store/basket-store/basket-store";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../utils/firebase/firebase-config";
+import { toast } from "react-toastify";
 
 const Basket = () => {
   const deliveryCost = 160;
-  const { cart, fetchCart, isFetch, removeFromCart } = useCartStore();
+  const { cart, fetchCart, isFetch, removeFromCart, addProductOrder } = useCartStore();
   const [user, setUser] = useState(null);
   const [clickedItems, setClickedItems] = useState({});
+  const [quantitys, setQuantitys] = useState({});
+
+  const changeQuantity = (id, amount) => {
+    setQuantitys(prev => ({
+      ...prev,
+      [id]: Math.max(1, (prev[id] || 1) + amount)
+    }))
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -31,11 +39,12 @@ const Basket = () => {
   }, [fetchCart]);
 
   const total = cart.reduce(
-    (sum, item) => { 
-    if(!clickedItems[item.id]) return  sum;
-    const price = Number(item.price);
-    return isNaN(price) ? sum : sum + price
-    },0
+    (sum, item) => {
+      if (!clickedItems[item.id]) return sum;
+      const price = Number(item.price);
+      const quantity = quantitys[item.id] || 1;
+      return isNaN(price) ? sum : sum + (price * quantity)
+    }, 0
   ) + deliveryCost;
 
   const togglePurchase = (id) => {
@@ -43,6 +52,41 @@ const Basket = () => {
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  const handleAddOrder = async () => {
+    if (!user) return;
+
+    const selectedProducts = cart
+      .filter(item => clickedItems[item.id])
+      .map(item => {
+        const quantity = quantitys[item.id] || 1;
+        const price = Number(item.price);
+        return {
+          name: item.name,
+          img: item?.images?.[0]?.img,
+          autor: item?.autor,
+          quantity: quantity,
+          totalPrice: price * quantity,
+          price: price, 
+          article:item?.article,
+        }
+      });
+
+    if (selectedProducts.length === 0) {
+      toast("Выберите товары для заказа");
+      return;
+    }
+
+    try {
+      await addProductOrder(selectedProducts);
+      toast.success("Заказ успешно оформлен!");
+      
+      setClickedItems({});
+      setQuantitys({});
+    } catch (error) {
+      toast.error("Ошибка при оформлении заказа");
+    }
   };
 
   return (
@@ -69,12 +113,17 @@ const Basket = () => {
                     <div className={s.carts__item__info}>
                       <img src={item?.images?.[0]?.img || Img} alt="картинка товара" />
                       <div className={s.carts__item__info__text}>
-                        <label className={s.item__info__text__title}>{item.title}</label>
+                        <label className={s.item__info__text__title}>{item.name}</label>
                         <label className={s.item__info__text__autor}>
-                          Автор : {item.author}
+                          Автор : {item.autor}
                         </label>
                         <label className={s.item__info__text__presence}>
-                          Количество : {item.quantity}
+                          Количество : 
+                          <div className={s.block__presence}>
+                            <button onClick={() => changeQuantity(item.id, -1)}>-</button> 
+                            {quantitys[item.id] || 1} 
+                            <button onClick={() => changeQuantity(item.id, 1)}>+</button>
+                          </div>
                         </label>
                       </div>
                     </div>
@@ -109,9 +158,12 @@ const Basket = () => {
                     <p>Стоимость доставки : {deliveryCost} сом</p>
                     <p>Итого к оплате : {total} сом</p>
                   </div>
-                  <Link to="/order" className={s.main__content__price__btn}>
+                  <button 
+                    className={s.main__content__price__btn}
+                    onClick={handleAddOrder}
+                  >
                     Оформить заказ
-                  </Link>
+                  </button>
                 </div>
               </div>
             )}

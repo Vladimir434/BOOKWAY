@@ -50,7 +50,7 @@ const Product = () => {
     <>
       <Header />
       <main className={s.main}>
-      <Backward to="/products"/>
+      <Backward link={'/products'}/>
         <div className={s.main__wrapper}>
           <div className={s.main__product}>
             <div className={s.main__product__info}>

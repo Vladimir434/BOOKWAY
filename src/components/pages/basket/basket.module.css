@@ -68,6 +68,28 @@ button {
   color: #fff;
   background-color: #664935;
 }
+.item__info__text__presence{
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+.block__presence{
+  display: flex;
+  width: 68px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #664935;
+  color: #fff;
+  align-items: center;
+}
+.block__presence button{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #664935;
+}
 .main__content__price {
   max-width: 27%;
   color: #664935;

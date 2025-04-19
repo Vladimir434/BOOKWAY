@@ -32,14 +32,18 @@ const Straight = () => {
 
     const totalPrice = selectedProduct?.price * quantity;
 
-    const dataProduct = {
+    const dataProduct = [{
+      name:selectedProduct?.name,
       img:selectedProduct?.images[0].img,
       autor:selectedProduct?.autor,
       quantity:quantity,
       totalPrice: totalPrice,
-      name,
-      phone,
-    }
+      price: selectedProduct.price,
+      article:selectedProduct.article,
+
+      cuctomerName: name,
+      customerPhone:phone,
+    }];
     
     try {
       await addProductInOrders(dataProduct)
