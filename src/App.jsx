@@ -14,7 +14,7 @@ const Basket = lazy(() => import("./components/pages/basket/basket"));
 const MainPage = lazy(() => import("./components/pages/main-page/main-page"));
 const Registr = lazy(() => import("./components/auth/registr/registr"));
 const About = lazy(() => import("./components/pages/about/about"));
-const Order = lazy(() => import("./components/pages/order/order"));
+// const Order = lazy(() => import("./components/pages/order/order"));
 const Error = lazy(() => import("./components/error/error"));
 const Product = lazy(() => import("./components/pages/product/product"));
 const Straight = lazy(() => import("./components/pages/straight/straight"));
@@ -23,24 +23,25 @@ const AdminPanel = lazy(() => import("./components/admin/admin-panel"));
 function App() {
   return (
     <>
-      <Suspense fallback={<h1>загруска</h1>}></Suspense>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registr" element={<Registr />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/basket" element={<Basket />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/products" element={<Products/>} />
-        <Route path="/products/:id" element={<Product/>} />
-        <Route path="/straight" element={<Straight/>} />
-        <Route path="/comments" element={<Comments/>} />
-        <Route path="/ads/:id" element={<ProfileDetails/>}/>
-        <Route path="*" element={<Error />} />
-        <Route path="/admin-panel" element={<ProtectedRoute><AdminPanel/></ProtectedRoute>}/>
-      </Routes>
+      <Suspense fallback={<h1>загруска</h1>}>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registr" element={<Registr />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/basket" element={<Basket />} />
+          {/* <Route path="/order" element={<Order />} /> */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<Product />} />
+          <Route path="/straight" element={<Straight />} />
+          <Route path="/comments" element={<Comments />} />
+          <Route path="/ads/:id" element={<ProfileDetails />} />
+          <Route path="*" element={<Error />} />
+          <Route path="/admin-panel" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

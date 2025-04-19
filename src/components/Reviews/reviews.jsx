@@ -6,13 +6,21 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Bgimage from '../../assets/image/main-image-1.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const Reviews = () => {
   const comments = useStore((state) => state.comments);
   const loadComments = useStore((state) => state.loadComments);
-
+  const navigate = useNavigate()
+  const auth = getAuth()
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if(!user) {
+        navigate('/login')
+        return;
+      }
+    })
     loadComments();
   }, [loadComments]);
 

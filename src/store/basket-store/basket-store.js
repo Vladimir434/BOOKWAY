@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { db } from "../../utils/firebase/firebase-config";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { toast } from "react-toastify";
 
 export const useCartStore = create((set) => ({
   cart: [],
   isFetch: false,
+  isFetchAddOrder: false,
 
   fetchCart: async () => {
     try {
@@ -82,6 +83,43 @@ export const useCartStore = create((set) => ({
       toast("Товар удален из корзины!");
     } catch (error) {
       toast.error("Ошибка при удалении товара", error);
+    }
+  },
+  addProductOrder: async (productData) => {
+    const auth = getAuth()
+    const user = auth.currentUser;
+    if(!user) return;
+
+    const userDocRef = doc(db,'users', user.uid)
+    const userSnap = await getDoc(userDocRef)
+
+    const userInfo = userSnap.exists() ? userSnap.data().userInfo : null;
+
+    if(!userInfo) {
+      toast('заполните форму в профиле перед оформлением заказа')
+      return;
+    }
+    set({isFetchAddOrder: true});
+
+    const now = new Date();
+
+    const formattedDate = now.toLocaleDateString('ru-RU',{
+      day:'2-digit',
+      month:'2-digit',
+      year:'2-digit'
+    });
+    try {
+      await updateDoc(userDocRef,{
+        orders: arrayUnion({
+          productData:Array.isArray(productData) ? productData : [productData],
+          date:`${formattedDate}`,
+          userInfo,  
+        })
+      })
+    } catch (error) {
+      toast('Ошибка при добавлении заказа',error)
+    } finally {
+      set({isFetchAddOrder:false})
     }
   },
 }));

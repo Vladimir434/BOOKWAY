@@ -76,6 +76,19 @@
   font-weight: 500;
   margin-top: 49px;
 }
+.form__button_cancel{
+  display: block;
+  width: 100%;
+  height: 46px;
+  background: #664935;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 19px;
+}
 
 @media screen and (max-width: 1030px) {
   .title {

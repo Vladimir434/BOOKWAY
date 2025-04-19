@@ -51,15 +51,11 @@ export const productDetails = create((set) => ({
       month:'2-digit',
       year:'2-digit'
     })
-    const formattedTime = now.toLocaleTimeString('ru-RU', {
-      hour:'2-digit',
-      minute:'2-digit'
-    })
     try {
       await updateDoc(userDocRef, {
         orders: arrayUnion({
-          productData:productData,
-          date:`${formattedDate}-${formattedTime}`,
+          productData:Array.isArray(productData) ? productData : [productData],
+          date:`${formattedDate}`,
           userInfo,
         })
       })      
