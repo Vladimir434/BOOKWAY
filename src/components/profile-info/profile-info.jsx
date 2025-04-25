@@ -47,9 +47,10 @@ const ProfileInfo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await saveUserProfile(form); 
-    await getUserProfile(); 
+    await saveUserProfile(form);
     setIsEditing(false);
+    
+    useProfileStore.setState({ userInfo: form });
   };
 
   if (isFetch) return <div className={s.loading}>Загрузка...</div>;

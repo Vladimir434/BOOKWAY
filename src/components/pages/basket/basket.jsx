@@ -17,6 +17,7 @@ const Basket = () => {
   const [user, setUser] = useState(null);
   const [clickedItems, setClickedItems] = useState({});
   const [quantitys, setQuantitys] = useState({});
+  const [isOrderProcessing, setIsOrderProcessing] = useState(false);
 
   const changeQuantity = (id, amount) => {
     setQuantitys(prev => ({
@@ -77,8 +78,9 @@ const Basket = () => {
       toast("Выберите товары для заказа");
       return;
     }
-
+    setIsOrderProcessing(true)
     try {
+      console.log("Отправляемые товары:", selectedProducts);
       await addProductOrder(selectedProducts);
       toast.success("Заказ успешно оформлен!");
       
@@ -86,6 +88,8 @@ const Basket = () => {
       setQuantitys({});
     } catch (error) {
       toast.error("Ошибка при оформлении заказа");
+    } finally{
+      setIsOrderProcessing(false)
     }
   };
 
@@ -148,7 +152,7 @@ const Basket = () => {
                   </div>
                 ))
               ) : (
-                <p className={s.emptyCart}>Тут ничего нет</p>
+                <p className={s.emptyCart}>Тут пока нет заказов</p>
               )}
             </div>
             {user && cart.length > 0 && !isFetch && (
@@ -161,8 +165,9 @@ const Basket = () => {
                   <button 
                     className={s.main__content__price__btn}
                     onClick={handleAddOrder}
+                    disabled={isOrderProcessing}
                   >
-                    Оформить заказ
+                    {isOrderProcessing ? 'Оформляем...' : 'Оформить заказ'}
                   </button>
                 </div>
               </div>

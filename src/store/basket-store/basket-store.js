@@ -108,12 +108,20 @@ export const useCartStore = create((set) => ({
       month:'2-digit',
       year:'2-digit'
     });
+    const generateOrderNumber = () => {
+      const datePart = now.getTime().toString().slice(-6);
+      const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return `ORD-${datePart}-${randomPart}`;
+    };
+
     try {
+      const orderNumber = generateOrderNumber();
       await updateDoc(userDocRef,{
         orders: arrayUnion({
           productData:Array.isArray(productData) ? productData : [productData],
           date:`${formattedDate}`,
           userInfo,  
+          numberOrder:orderNumber,
         })
       })
     } catch (error) {

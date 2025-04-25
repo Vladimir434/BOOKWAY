@@ -143,7 +143,7 @@ body {
   font-weight: 400;
   cursor: pointer;
 }
-.categories__item ul>li.selected__сategory {
+.selected__сategory {
   color: #ff0000 !important;
   font-weight: bold !important;
 }.wrapper__categories__products {

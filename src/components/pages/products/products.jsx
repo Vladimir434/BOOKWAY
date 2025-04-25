@@ -105,6 +105,25 @@ const Products = () => {
   const { searchQuery, clearSearchQuery } = useSearchStore();
   const [sortOrder, setSortOrder] = useState("");
   const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+  const [selectedFilters, setSelectedFilters] = useState({
+    publishing: [],
+    binding: [],
+    author: []
+  });
+
+  const handleFilterSelect = (filterType, value) => {
+    setSelectedFilters(prev => {
+      const currentValues = prev[filterType];
+      const newValues = currentValues.includes(value)
+        ? currentValues.filter(item => item !== value)
+        : [...currentValues, value];
+      
+      return {
+        ...prev,
+        [filterType]: newValues
+      };
+    });
+  };
 
   const getFilteredProducts = () => {
     let filtered = product;
@@ -117,6 +136,24 @@ const Products = () => {
       filtered = filtered.filter(item =>
         item.category &&
         item.category.some(cat => selectedCategories.includes(cat))
+      );
+    }
+    
+    if (selectedFilters.publishing.length > 0) {
+      filtered = filtered.filter(item =>
+        selectedFilters.publishing.includes(item.publishing)
+      );
+    }
+    
+    if (selectedFilters.binding.length > 0) {
+      filtered = filtered.filter(item =>
+        selectedFilters.binding.includes(item.binding)
+      );
+    }
+    
+    if (selectedFilters.author.length > 0) {
+      filtered = filtered.filter(item =>
+        selectedFilters.author.includes(item.autor)
       );
     }
     
@@ -188,10 +225,31 @@ const Products = () => {
 
   const sortedProducts = sortProducts(filteredProducts.filter((item) => {
     const withinPriceRange =
-      (priceRange.min === "" || item.price >= priceRange.min) &&
-      (priceRange.max === "" || item.price <= priceRange.max);
+      (priceRange.min === "" || item.price >= Number(priceRange.min)) &&
+      (priceRange.max === "" || item.price <= Number(priceRange.max));
     return withinPriceRange;
   }));
+
+  const resetAllFilters = () => {
+    setSelectedCategories([]);
+    setSelectedFilters({
+      publishing: [],
+      binding: [],
+      author: []
+    });
+    setPriceRange({ min: "", max: "" });
+  };
+
+  const hasActiveFilters = () => {
+    return (
+      selectedCategories.length > 0 ||
+      selectedFilters.publishing.length > 0 ||
+      selectedFilters.binding.length > 0 ||
+      selectedFilters.author.length > 0 ||
+      priceRange.min !== "" ||
+      priceRange.max !== ""
+    );
+  };
 
   const renderCategories = (categories, offset = 0) => (
     <div className={s.categories__container}>
@@ -261,13 +319,29 @@ const Products = () => {
                     placeholder={filter.inputs[1].placeholder}
                   />
                 </div>
-                <button onClick={() => {}}>Применить</button>
               </>
             ) : (
               <ul>
-                {filter.items.map(item => (
-                  <li key={item}>{item}</li>
-                ))}
+                {filter.items.map(item => {
+                  let filterType = '';
+                  if (filter.name === "Издательство") filterType = 'publishing';
+                  if (filter.name === "Тип обложки") filterType = 'binding';
+                  if (filter.name === "Автор") filterType = 'author';
+                  
+                  return (
+                    <li 
+                      key={item}
+                      onClick={() => handleFilterSelect(filterType, item)}
+                      className={
+                        selectedFilters[filterType]?.includes(item) 
+                          ? s.selected__сategory
+                          : ""
+                      }
+                    >
+                      {item}
+                    </li>
+                  );
+                })}
               </ul>
             )
           )}
@@ -281,12 +355,12 @@ const Products = () => {
       <Header />
       <main className={s.main__container}>
         <h1 className={s.main__title}>Категории</h1>
-        {selectedCategories.length > 0 && (
+        {hasActiveFilters() && (
           <button
-            onClick={() => setSelectedCategories([])}
+            onClick={resetAllFilters}
             className={s.resetButton}
           >
-            Сбросить все категории
+            Сбросить все фильтры
           </button>
         )}
         {searchQuery && (
@@ -410,8 +484,8 @@ const Products = () => {
                 <h2 className={s.loading}>
                   {searchQuery 
                     ? "Товаров по вашему запросу не найдено"
-                    : selectedCategories.length > 0
-                      ? "Товаров по выбранным категориям не найдено"
+                    : hasActiveFilters()
+                      ? "Товаров по выбранным фильтрам не найдено"
                       : "Тут нет товаров"}
                 </h2>
               )}
