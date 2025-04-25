@@ -41,7 +41,12 @@
   flex-direction: column;
   row-gap: 35px;
 }
-
+.fomr__checkbox{
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  margin-right: 12px;
+}
 .display{
   width: 1px;
   visibility: hidden;

@@ -58,26 +58,31 @@ const MainPage = () => {
       </div>
       <div className={s.container__categories}>
         <Link to="/products" className={s.categories__item}>
+        <div className={s.categories__item_blur}></div>
           <div className={s.categories__item_text}>
             <h2>Фантастика</h2>
           </div>
         </Link>
         <Link to="/products" className={s.categories__item}>
+        <div className={s.categories__item_blur}></div>
           <div className={s.categories__item_text}>
             <h2>Психология и саморозвитие</h2>
-          </div>
+        </div>
         </Link>
         <Link to="/products" className={s.categories__item}>
+        <div className={s.categories__item_blur}></div>
           <div className={s.categories__item_text}>
             <h2>Художественная литература</h2>
           </div>
         </Link>
         <Link to="/products" className={s.categories__item}>
+        <div className={s.categories__item_blur}></div>
           <div className={s.categories__item_text}>
             <h2>Филосифия</h2>
           </div>
         </Link>
         <Link to="/products" className={s.categories__item}>
+        <div className={s.categories__item_blur}></div>
           <div className={s.categories__item_text}>
             <h2>IT</h2>
           </div>

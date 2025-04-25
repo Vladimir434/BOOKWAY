@@ -1,32 +1,35 @@
 import { create } from 'zustand';
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { db } from '../../utils/firebase/firebase-config';  
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { db } from '../../utils/firebase/firebase-config';
 
 export const useProfileStore = create((set) => ({
-  userInfo: JSON.parse(localStorage.getItem('userInfo')) || null,
+  userInfo: null,
   isFetch: false,
 
   getUserProfile: async () => {
     const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) return;
 
     set({ isFetch: true });
 
-    const userDocRef = doc(collection(db, 'users'), user.uid);
-    const userSnap = await getDoc(userDocRef);
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        set({ isFetch: false, userInfo: null });
+        return;
+      }
 
-    if (userSnap.exists()) {
-      const data = userSnap.data().userInfo;
-      set({ userInfo: data });
-      localStorage.setItem('userInfo', JSON.stringify(data)); 
-    } else {
-      set({ userInfo: null });
-      localStorage.removeItem('userInfo');
-    }
+      const userDocRef = doc(collection(db, 'users'), user.uid);
+      const userSnap = await getDoc(userDocRef);
 
-    set({ isFetch: false });
+      if (userSnap.exists()) {
+        const data = userSnap.data().userInfo;
+        set({ userInfo: data });
+      } else {
+        set({ userInfo: null });
+      }
+
+      set({ isFetch: false });
+    });
   },
 
   saveUserProfile: async (formData) => {
@@ -37,6 +40,5 @@ export const useProfileStore = create((set) => ({
     const userDocRef = doc(collection(db, 'users'), user.uid);
     await setDoc(userDocRef, { userInfo: formData }, { merge: true });
     set({ userInfo: formData });
-    localStorage.setItem('userInfo', JSON.stringify(formData)); 
   }
 }));

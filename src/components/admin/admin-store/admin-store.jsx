@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
-import { useRroductsStore } from "../../../store/products-store/products-store";
 import OrderContentsCard from "../../order-contents-card/order-contents-card";
 import s from "./admin-store.module.css";
 import Arrow from "../../../assets/icon/arrow.svg";
+import { getDataAllUsers } from "../../../store/admin-store/admin-store";
 
 const AdminStore = () => {
-  const { getAllProducts, product } = useRroductsStore();
-  useEffect(() => {
-    getAllProducts();
-  }, [getAllProducts]);
+  const [allOrders, setAllOrders] = useState([]);
+  const [visibleLists, setVisibleLists] = useState([]);
 
-  const [visibleLists, setVisibleLists] = useState(Array(1).fill(false));
+  const { getAllUsers, users, isFetch } = getDataAllUsers();
+
+  useEffect(() => {
+    getAllUsers();
+  }, [getAllUsers]);
+
+  useEffect(() => {
+    if (users.length > 0) {
+      const orders = users
+        .filter(user => user.orders) 
+        .flatMap(user => user.orders);
+      setAllOrders(orders);
+      setVisibleLists(Array(orders.length).fill(false));
+    }
+  }, [users]);
+
   const toggleListVisibility = (index) => {
     setVisibleLists((prev) => {
       const newVisibleLists = [...prev];
@@ -19,43 +32,49 @@ const AdminStore = () => {
     });
   };
 
+  if (allOrders.length === 0) {
+    return <p>Нет доступных заказов</p>;
+  }
   return (
     <>
       <main className={s.main}>
-        <div className={s.story__wrapper}>
+        {isFetch ? (
+          <h4>Загрузка...</h4>
+        ) : allOrders.map((order, index) => (
+        <div key={order.id || index} className={s.story__wrapper}>
           <div className={s.story__info}>
             <div className={s.stoey__info_text_info}>
               <div className={s.stoey__info_text}>
                 <p>Дата:</p>
-                <h4>34567890-</h4>
+                <h4>{order.date || ''}</h4>
               </div>
               <div className={s.stoey__info_text}>
                 <p>Номер заказа:</p>
-                <h4>949485</h4>
+                <h4>{order.numberOrder || 'не указан'}</h4>
               </div>
               <div className={s.stoey__info_text}>
                 <p>Кол-во товаров:</p>
-                <h4>3</h4>
+                <h4>{order.productData.reduce((total, product) => total + product.quantity, 0)}</h4>
               </div>
               <div className={s.stoey__info_text}>
                 <p>На сумму:</p>
-                <h4>8000 сом</h4>
+                <h4>{order.productData.reduce((sum, product) => sum + product.totalPrice, 0)}</h4>
               </div>
               <div className={s.stoey__info_text}>
                 <p>Статус:</p>
-                <p></p>
+                <p>В обработке</p>
               </div>
               <div
                 className={s.stoey__info_text}
-                onClick={() => toggleListVisibility(0)}
+                onClick={() => toggleListVisibility(index)}
               >
                 <img
                   src={Arrow}
-                  className={visibleLists[0] ? s.rotate : s.noyrotate}
+                  className={visibleLists[index] ? s.rotate : s.noyrotate}
                 />
               </div>
             </div>
-            {visibleLists[0] && (
+            {visibleLists[index] && (
               <div className={s.story__data}>
                 <div className={s.story__info_order}>
                   <div className={s.information}>
@@ -65,15 +84,15 @@ const AdminStore = () => {
                     <div className={s.information__block}>
                       <div className={s.information__block_item}>
                         <p>Номер заказа:</p>
-                        <h4>11366 от 11.01.2025, 20:56:40</h4>
+                        <h4>{order.numberOrder}</h4>
                       </div>
                       <div className={s.information__block_item}>
                         <p>Адрес:</p>
-                        <h4>Г. Кара-Балта , Косманавтов 62</h4>
+                        <h4>{order.userInfo.city}-{order.userInfo.street}</h4>
                       </div>
                       <div className={s.information__block_item}>
                         <p>Сумма заказа:</p>
-                        <h4>1080 сом</h4>
+                        <h4>{order.productData.reduce((sum, product) => sum + product.totalPrice, 0)}</h4>
                       </div>
                     </div>
                   </div>
@@ -82,15 +101,15 @@ const AdminStore = () => {
                     <div className={s.information__block}>
                       <div className={s.information__block_item}>
                         <p>ФИ</p>
-                        <h4>Кальнева Ангелина </h4>
+                        <h4>{order.userInfo.name || 'не указан'}</h4>
                       </div>
                       <div className={s.information__block_item}>
                         <p>Телефон</p>
-                        <h4>+996708107436</h4>
+                        <h4>{order.userInfo.phone || 'не указан'}</h4>
                       </div>
                       <div className={s.information__block_item}>
                         <p>Эл. почта</p>
-                        <h4>linakalneva@gmail.com</h4>
+                        <h4>{order.userInfo.email || 'не указан'}</h4>
                       </div>
                     </div>
                   </div>
@@ -107,40 +126,18 @@ const AdminStore = () => {
                       </div>
                     </div>
                     <div className={s.content__cards}>
-                      {product.map((item, index) => (
-                        <>
-                          <OrderContentsCard
-                            key={index}
-                            img={item.image}
-                            article={"2343242"}
-                            autor={item.autor}
-                            price={item.price}
-                            quantity={"4"}
-                            result={3456}
-                            title={item.name}
+                      {order.productData.map((product, index) => (
+                          <OrderContentsCard 
+                          key={product.id || index}
+                          article={product.article}
+                          autor={product.autor}
+                          price={product.price}
+                          quantity={product.quantity}
+                          result={product.totalPrice}
+                          title={product.name}
+                          img={product.img}
                           />
-                          <OrderContentsCard
-                            key={index}
-                            img={item.image}
-                            article={"2343242"}
-                            autor={item.autor}
-                            price={item.price}
-                            quantity={"4"}
-                            result={3456}
-                            title={item.name}
-                          />
-                          <OrderContentsCard
-                            key={index}
-                            img={item.image}
-                            article={"2343242"}
-                            autor={item.autor}
-                            price={item.price}
-                            quantity={"4"}
-                            result={3456}
-                            title={item.name}
-                          />
-                        </>
-                      ))}
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -156,6 +153,7 @@ const AdminStore = () => {
             )}
           </div>
         </div>
+        )) }
       </main>
     </>
   );

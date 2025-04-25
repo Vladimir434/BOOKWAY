@@ -6,6 +6,7 @@ import Header from "../../header/header";
 import Reviews from "../../Reviews/reviews";
 import Footer from "../../footer/footer";
 import Art from "../../../assets/image/art.svg";
+import Cross from '../../../assets/icon/cross.svg'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import s from "./product.module.css";
@@ -106,7 +107,16 @@ const Product = () => {
               <h2 className={s.product__description__title}>{product?.name}</h2>
               <div className={s.product__description__art}>
                 <label className={s.product__description__art__title}>
-                  <img src={Art} alt="Stock" /> В наличии
+                  {product.presence && 
+                  <>
+                    <img src={Art} alt="Stock" /> В наличии
+                  </>
+                  }
+                  {!product.presence && 
+                  <>
+                  <img src={Cross} alt="cross" />нет в наличии
+                  </>
+                  }
                 </label>
                 <label>Артикул: {product?.article}</label>
               </div>
