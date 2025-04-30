@@ -90,7 +90,7 @@ const Product = () => {
                       {product?.images.map((img, index) => (
                         <SwiperSlide className={s.img2__wrapper} key={index}>
                           <img
-                            src={img.img || img}
+                            src={img?.img || img}
                             className={s.img2}
                             alt="Product"
                           />
@@ -107,16 +107,16 @@ const Product = () => {
               <h2 className={s.product__description__title}>{product?.name}</h2>
               <div className={s.product__description__art}>
                 <label className={s.product__description__art__title}>
-                  {product.presence && 
+                  {product?.presence ? (
                   <>
                     <img src={Art} alt="Stock" /> В наличии
                   </>
-                  }
-                  {!product.presence && 
+                  ) : (
                   <>
                   <img src={Cross} alt="cross" />нет в наличии
                   </>
-                  }
+                  )
+                }
                 </label>
                 <label>Артикул: {product?.article}</label>
               </div>

@@ -71,6 +71,7 @@
   display: flex;
   column-gap: 20px;
   justify-content: center;
+  align-items: center;
   margin-bottom: 50px;
 }
 
@@ -134,20 +135,19 @@
   }
 }
 
-@media screen and (max-width: 490px) {
-  .main__form__btn__link {
-    padding: 13px 45px;
+@media (max-width:550px) {
+  .main__form{
+    width: 90%;
+    padding: 0 15px;
   }
-}
-
-@media screen and (max-width: 450px) {
-  .main__form__btn__link {
-    padding: 13px 20px;
+  .main__form__inner{
+    row-gap: 0;
+  } 
+  .main__form__remember{
+    margin-bottom: 20px;
   }
-}
-
-@media screen and (max-width: 390px) {
-  .main__form__btn__link {
-    padding: 13px 5px;
+  .main__form__remember input{
+    width: 20px;
+    height: 20px;
   }
 }

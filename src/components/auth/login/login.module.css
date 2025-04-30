@@ -70,6 +70,7 @@
   display: flex;
   column-gap: 20px;
   justify-content: center;
+  align-items: center;
   margin-bottom: 50px;
 }
 
@@ -124,7 +125,7 @@
     padding: 13px 200px;
   }
   .main__form {
-    width: 80%;
+    width: 90%;
     padding: 0 40px;
   }
 }
@@ -134,9 +135,32 @@
     padding: 13px 100px;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .main__form__btn__link {
-    padding: 13px 60px;
+@media (max-width:550px) {
+  .main__form__inner{
+    row-gap: 0px;
+  }
+  .main__form__remember{
+    margin-bottom: 20px;
+  }
+  .main__form__remember input {
+    width: 20px;
+    height: 20px;
+  }
+  .main__form{
+    padding: 0 15px;
+  }
+  .main__form__btn button{
+    margin-bottom: 15px;
+  }
+  .main__form__btn__link{
+    padding: 0 0;
+  }
+  .main__form__button__link{
+    margin-bottom: 0;
+  }
+}
+@media (max-width:300px) {
+  .main__form__button{
+    flex-direction: column;
   }
 }

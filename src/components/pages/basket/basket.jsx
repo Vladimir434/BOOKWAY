@@ -117,9 +117,9 @@ const Basket = () => {
                     <div className={s.carts__item__info}>
                       <img src={item?.images?.[0]?.img || Img} alt="картинка товара" />
                       <div className={s.carts__item__info__text}>
-                        <label className={s.item__info__text__title}>{item.name}</label>
+                        <label className={s.item__info__text__title}>{item?.name}</label>
                         <label className={s.item__info__text__autor}>
-                          Автор : {item.autor}
+                          Автор : {item?.autor}
                         </label>
                         <label className={s.item__info__text__presence}>
                           Количество : 
@@ -131,7 +131,7 @@ const Basket = () => {
                         </label>
                       </div>
                     </div>
-                    <p className={s.carts__item__price}>{item.price} сом</p>
+                    <p className={s.carts__item__price}>{item?.price} сом</p>
                     <div className={s.carts__item__btn}>
                       {!clickedItems[item.id] ? (
                         <button
