@@ -38,8 +38,8 @@ const Straight = () => {
       autor:selectedProduct?.autor,
       quantity:quantity,
       totalPrice: totalPrice,
-      price: selectedProduct.price,
-      article:selectedProduct.article,
+      price: selectedProduct?.price,
+      article:selectedProduct?.article,
 
       cuctomerName: name,
       customerPhone:phone,

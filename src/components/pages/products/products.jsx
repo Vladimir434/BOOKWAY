@@ -467,16 +467,16 @@ const Products = () => {
                 sortedProducts.map((item) => (
                   <Link to={`/products/${item.id}`} key={item.id}>
                     <CardProducts
-                      img={item.images[0].img}
-                      presence={item.presence}
-                      article={item.article}
-                      autor={item.autor}
-                      name={item.name}
-                      price={item.price}
-                      category={item.category}
-                      subcategory={item.subcategory}
-                      pages={item.pages}
-                      yearofpublication={item.yearofpublication}
+                      img={item?.images[0]?.img}
+                      presence={item?.presence}
+                      article={item?.article}
+                      autor={item?.autor}
+                      name={item?.name}
+                      price={item?.price}
+                      category={item?.category}
+                      subcategory={item?.subcategory}
+                      pages={item?.pages}
+                      yearofpublication={item?.yearofpublication}
                     />
                   </Link>
                 ))
